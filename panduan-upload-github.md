@@ -372,7 +372,7 @@ git push
 
 Situs Anda dilayani di domain sendiri: **`tokopapuaonline.com`**. Seluruh file dalam paket ini sudah dikonfigurasi untuk domain tersebut — yang perlu Anda kerjakan tinggal mengatur DNS di registrar lalu mengaktifkannya di GitHub.
 
-### 9.1 Urutan yang benar — DNS dulu, baru GitHub
+### 10.1 Urutan yang benar — DNS dulu, baru GitHub
 
 **Langkah 1 — atur DNS di registrar** (di dashboard tempat domain dibeli):
 
@@ -398,7 +398,7 @@ Kalau memakai **Cloudflare**, set **Proxy status = DNS only** (awan abu-abu) unt
 
 > 📘 **Panduan lengkap langkah demi langkah** — cara menambahkan record DNS di Cloudflare & registrar biasa, verifikasi dengan `nslookup`/`dig`, estimasi waktu propagasi, mengaktifkan HTTPS, sampai troubleshooting lengkap — ada di file tersendiri: **`panduan-setup-dns.md`**.
 
-### 9.2 File `CNAME` manual
+### 10.2 File `CNAME` manual
 
 File **`CNAME`** (tanpa ekstensi, huruf besar semua) di root folder harus berisi satu baris:
 
