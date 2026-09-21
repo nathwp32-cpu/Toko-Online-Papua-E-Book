@@ -828,6 +828,73 @@ a.btn-buy:focus-visible{outline:2px solid var(--teal-dark);outline-offset:2px}
   .share-ico svg{width:22px;height:22px}
   .sheet-note{font-size:11px}
 }
+
+/* ============ CHATBOT (widget chat melayang, aditif) ============ */
+/* Dock selebar kolom mobile (mengikuti .tabbar) agar widget tidak keluar dari
+   kolom 480px pada layar sedang, dan melebar ke sudut kanan pada desktop. */
+.chatdock{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:100%;max-width:480px;z-index:58;pointer-events:none}
+.chatdock>*{pointer-events:auto}
+.chat-fab{position:absolute;right:12px;bottom:74px;width:54px;height:54px;padding:0;border:0;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 26px -8px rgba(16,24,40,.5);transition:transform .18s ease,background .18s ease}
+.chat-fab:hover{background:var(--teal-dark)}
+.chat-fab:focus-visible{outline:2px solid var(--teal-dark);outline-offset:3px}
+.chat-fab svg{width:24px;height:24px}
+.chat-fab .ico-close{display:none}
+.chat-fab.is-on .ico-chat{display:none}
+.chat-fab.is-on .ico-close{display:block}
+.chat-fab-dot{position:absolute;top:0;right:0;width:13px;height:13px;border-radius:50%;background:#ef4444;border:2px solid #fff}
+.chat-fab.is-on .chat-fab-dot{display:none}
+.chat-panel{position:absolute;left:12px;right:12px;bottom:138px;max-height:min(520px,calc(100vh - 210px));max-height:min(520px,calc(100dvh - 210px));display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow-pop);overflow:hidden;opacity:0;visibility:hidden;transform:translateY(14px) scale(.98);transition:opacity .22s ease,transform .22s ease,visibility .22s ease}
+.chat-panel.is-on{opacity:1;visibility:visible;transform:none}
+.chat-head{display:flex;align-items:center;gap:10px;padding:11px 12px;background:var(--teal);color:#fff;flex:0 0 auto}
+.chat-avatar{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.22);display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.chat-avatar svg{width:18px;height:18px}
+.chat-id{flex:1 1 auto;min-width:0}
+.chat-id h3{font-size:12.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chat-id p{font-size:10px;opacity:.92;display:flex;align-items:center;gap:5px;margin-top:1px}
+.chat-dot{width:6px;height:6px;border-radius:50%;background:#7ee787;flex:0 0 auto}
+.chat-x{width:30px;height:30px;flex:0 0 auto;border:0;border-radius:50%;background:rgba(255,255,255,.16);color:#fff;display:flex;align-items:center;justify-content:center}
+.chat-x:hover{background:rgba(255,255,255,.32)}
+.chat-x:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.chat-x svg{width:15px;height:15px}
+.chat-log{flex:1 1 auto;min-height:150px;overflow-y:auto;overscroll-behavior:contain;padding:12px;background:var(--soft);display:flex;flex-direction:column;gap:8px}
+.msg{max-width:88%;padding:9px 12px;border-radius:14px;font-size:12px;line-height:1.55;word-break:break-word}
+.msg.bot{align-self:flex-start;background:#fff;border:1px solid var(--line);color:var(--ink-2);border-bottom-left-radius:5px}
+.msg.me{align-self:flex-end;background:var(--teal);color:#fff;border-bottom-right-radius:5px;white-space:pre-wrap}
+.msg b{color:var(--ink);font-weight:700}
+.msg a{color:var(--teal-dark);font-weight:600;text-decoration:underline;word-break:break-all}
+.msg-typing{display:flex;gap:4px;align-items:center;padding:11px 13px}
+.tdot{width:6px;height:6px;border-radius:50%;background:var(--gray-l);animation:tdot 1s infinite ease-in-out}
+.tdot:nth-child(2){animation-delay:.16s}
+.tdot:nth-child(3){animation-delay:.32s}
+@keyframes tdot{0%,80%,100%{opacity:.3;transform:translateY(0)}40%{opacity:1;transform:translateY(-3px)}}
+.chat-follow{display:flex;flex-wrap:wrap;gap:6px;align-self:flex-start;max-width:100%}
+.chip-q{border:1px solid var(--teal-line);background:var(--teal-soft);color:var(--teal-dark);font-size:11px;font-weight:700;padding:6px 10px;border-radius:999px;line-height:1.2;transition:background .15s ease}
+.chip-q:hover{background:rgba(53,168,177,.2)}
+.chip-q:focus-visible{outline:2px solid var(--teal-dark);outline-offset:2px}
+.chat-quick{flex:0 0 auto;display:flex;flex-wrap:wrap;gap:6px;padding:9px 12px;border-top:1px solid var(--line-soft);background:#fff}
+.chat-form{flex:0 0 auto;display:flex;align-items:center;gap:8px;padding:9px 12px 11px;border-top:1px solid var(--line);background:#fff}
+.chat-in{flex:1 1 auto;min-width:0;height:38px;border:1px solid var(--line);border-radius:999px;padding:0 14px;font-size:12.5px;color:var(--ink);background:#fff;outline:none;transition:border-color .15s ease,box-shadow .15s ease}
+.chat-in:focus{border-color:var(--teal);box-shadow:0 0 0 3px var(--teal-soft)}
+.chat-send{flex:0 0 auto;width:38px;height:38px;border:0;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center}
+.chat-send:hover{background:var(--teal-dark)}
+.chat-send:focus-visible{outline:2px solid var(--teal-dark);outline-offset:2px}
+.chat-send svg{width:17px;height:17px}
+
+@media (min-width:768px){
+  /* left:0 + right:0 -> dock selebar layar pada desktop.
+     Tanpa right:0 lebarnya kolaps menjadi 0 sehingga tombol chat berada
+     di luar layar (koordinat x negatif) dan tidak dapat diklik. */
+  .chatdock{left:0;right:0;transform:none;max-width:none;width:auto}
+  .chat-fab{right:26px;bottom:26px;width:58px;height:58px}
+  .chat-fab svg{width:26px;height:26px}
+  .chat-panel{left:auto;right:26px;bottom:98px;width:380px;max-height:min(600px,calc(100vh - 150px));max-height:min(600px,calc(100dvh - 150px));border-radius:18px}
+  .chat-id h3{font-size:14px}
+  .chat-id p{font-size:10.5px}
+  .chat-log{padding:14px}
+  .msg{font-size:12.5px}
+  .chat-quick{padding:10px 14px}
+  .chat-form{padding:10px 14px 13px}
+}
 </style>
 </head>
 <body>
@@ -855,6 +922,8 @@ a.btn-buy:focus-visible{outline:2px solid var(--teal-dark);outline-offset:2px}
   <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></symbol>
   <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
   <symbol id="i-share" viewBox="0 0 24 24"><circle cx="18" cy="5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="19" r="2.6"/><path d="m8.4 13.3 7.2 4.2"/><path d="m15.6 6.5-7.2 4.2"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/></symbol>
+  <symbol id="i-bot" viewBox="0 0 24 24"><path d="M12 2v3"/><rect x="4" y="6" width="16" height="13" rx="3"/><circle cx="9" cy="12.5" r="1.1"/><circle cx="15" cy="12.5" r="1.1"/><path d="M9.5 16h5"/><path d="M2 11v3"/><path d="M22 11v3"/></symbol>
   <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2zm0 18.13c-1.53 0-3.03-.41-4.34-1.19l-.31-.18-3.12.82.83-3.04-.2-.32a8.2 8.2 0 0 1-1.26-4.31c0-4.54 3.7-8.23 8.24-8.23 4.53 0 8.22 3.69 8.22 8.23 0 4.54-3.69 8.22-8.22 8.22zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.16.25-.64.81-.79.98-.14.16-.29.19-.53.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.15.16-.25.25-.41.08-.16.04-.31-.02-.43-.06-.12-.55-1.33-.75-1.82-.2-.48-.4-.41-.55-.42h-.47c-.16 0-.43.06-.65.31-.22.25-.85.83-.85 2.02 0 1.19.87 2.34.99 2.5.12.16 1.71 2.61 4.14 3.66.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.1.47-.07 1.44-.59 1.64-1.16.2-.57.2-1.06.14-1.16-.06-.1-.22-.16-.47-.28z"/></symbol>
   <symbol id="i-fb" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.5 1.5-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.45 2.91h-2.33V22C18.34 21.24 22 17.08 22 12.06z"/></symbol>
   <symbol id="i-tw" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M17.53 3h3.02l-6.6 7.54L21.75 21h-5.9l-4.62-6.04L5.95 21H2.93l7.05-8.06L2.25 3h6.05l4.18 5.52L17.53 3zm-1.06 16.2h1.67L7.6 4.72H5.81l10.66 14.48z"/></symbol>
@@ -1119,6 +1188,36 @@ a.btn-buy:focus-visible{outline:2px solid var(--teal-dark);outline-offset:2px}
 <!-- ===== TOAST ===== -->
 <div class="toast" id="toast" role="status" aria-live="polite">
   <svg aria-hidden="true"><use href="#i-check"/></svg><span id="toastText">Selesai</span>
+</div>
+
+<!-- ===== CHATBOT (widget chat melayang) ===== -->
+<div class="chatdock" id="chatDock">
+  <section class="chat-panel" id="chatPanel" role="dialog" aria-labelledby="chatTitle" aria-hidden="true">
+    <div class="chat-head">
+      <span class="chat-avatar" aria-hidden="true"><svg><use href="#i-bot"/></svg></span>
+      <div class="chat-id">
+        <h3 id="chatTitle">Asisten Toko Papua Online</h3>
+        <p><span class="chat-dot" aria-hidden="true"></span>Online &middot; siap membantu</p>
+      </div>
+      <button class="chat-x" id="chatClose" type="button" aria-label="Tutup chat bantuan">
+        <svg aria-hidden="true"><use href="#i-x"/></svg>
+      </button>
+    </div>
+    <div class="chat-log" id="chatLog" role="log" aria-live="polite" aria-label="Percakapan dengan asisten toko"></div>
+    <div class="chat-quick" id="chatQuick" aria-label="Pilihan cepat"></div>
+    <form class="chat-form" id="chatForm" autocomplete="off">
+      <label class="sr-only" for="chatIn">Tulis pertanyaan Anda</label>
+      <input class="chat-in" id="chatIn" type="text" placeholder="Tulis pertanyaan Anda..." autocomplete="off">
+      <button class="chat-send" id="chatSend" type="submit" aria-label="Kirim pesan">
+        <svg aria-hidden="true"><use href="#i-send"/></svg>
+      </button>
+    </form>
+  </section>
+  <button class="chat-fab" id="chatFab" type="button" aria-label="Buka chat bantuan" aria-expanded="false" aria-controls="chatPanel">
+    <svg class="ico-chat" aria-hidden="true"><use href="#i-chat"/></svg>
+    <svg class="ico-close" aria-hidden="true"><use href="#i-x"/></svg>
+    <span class="chat-fab-dot" aria-hidden="true"></span>
+  </button>
 </div>
 
 <script>
@@ -1553,9 +1652,420 @@ a.btn-buy:focus-visible{outline:2px solid var(--teal-dark);outline-offset:2px}
     restart();
   }
 
+  /* ============ CHATBOT (widget chat melayang) ============ */
+  /* Chatbot ini bekerja SEPENUHNYA di dalam berkas ini: tanpa API eksternal,
+     tanpa kunci API, dan tanpa layanan pihak ketiga. Pertanyaan pengguna
+     dicocokkan dengan kata kunci pada objek CHAT_KB di bawah, lalu dijawab.
+     Mengubah daftar pertanyaan/jawaban = cukup sunting CHAT_KB (lihat README.md).
+     Ucapan terima kasih memakai daftar kata kunci CHAT_THANKS_KEYS di bawah. */
+
+  /* Opsional - isi bila ingin jawaban "Hubungi admin" memuat tautan langsung.
+     Kosongkan ('') bila belum tersedia; chatbot tetap mengarahkan ke kontak. */
+  var CHAT_WA_ADMIN = '';
+  var CHAT_MAIL_ADMIN = '';
+
+  function chatLink(url, text) {
+    return '<a href="' + esc(url) + '" target="_blank" rel="noopener noreferrer">' + esc(text || url) + '</a>';
+  }
+  function chatDigits(s) { return String(s == null ? '' : s).replace(/[^0-9]/g, ''); }
+
+  /* Blok kontak admin yang dipakai bersama oleh beberapa jawaban */
+  function chatAdminLines() {
+    var out = 'Bagian <b>Kontak &amp; dukungan</b> ada di halaman toko ini:<br>' + chatLink(PAGE_URL, PAGE_URL);
+    var w = chatDigits(CHAT_WA_ADMIN);
+    if (w) { out += '<br>WhatsApp admin: ' + chatLink('https://wa.me/' + w, 'chat WhatsApp admin'); }
+    if (CHAT_MAIL_ADMIN) { out += '<br>Email admin: ' + chatLink('mailto:' + CHAT_MAIL_ADMIN, CHAT_MAIL_ADMIN); }
+    out += '<br>Saat menghubungi admin, sebutkan judul buku yang dicari, jumlah, serta nama dan email Anda agar diproses lebih cepat.';
+    return out;
+  }
+
+  function chatProductLines() {
+    var s = '';
+    for (var i = 0; i < PRODUCTS.length; i++) {
+      s += '<br>&bull; ' + esc(PRODUCTS[i].short) + ' - ' + rupiah(PRODUCTS[i].price);
+    }
+    return s;
+  }
+
+  /* ---------- UCAPAN TERIMA KASIH ---------- */
+  /* Daftar kata kunci ucapan terima kasih. Tambah atau ubah di sini saja -
+     balasan dan saran lanjutannya otomatis ikut memakai daftar ini.
+     Contoh: 'terima kasih', 'makasih', 'thanks', 'thank you', 'thx', 'tq', 'syukron'. */
+  var CHAT_THANKS_KEYS = [
+    'terima kasih', 'terima kasih banyak', 'terimakasih', 'terimakasih banyak',
+    'makasih', 'makasih banyak', 'mksh', 'thanks', 'thank you', 'thankyou',
+    'thx', 'tks', 'tq', 'syukron', 'syukran', 'jazakallah', 'jazakallahu khairan',
+    'sudah dibantu', 'sudah membantu', 'sangat membantu', 'membantu sekali',
+    'sangat terbantu', 'sudah cukup', 'cukup jelas', 'jelas sekali',
+    'oke terima kasih', 'ok terima kasih', 'baik terima kasih', 'terima kasih ya',
+    'oke thanks', 'oke makasih', 'mantap terima kasih'
+  ];
+  /* Saran lanjutan yang tampil setelah ucapan terima kasih */
+  var CHAT_THANKS_FOLLOW = ['beli', 'cari', 'pesan', 'admin'];
+
+  /* Kalimat penutup ucapan terima kasih pada akhir alur bantuan
+     (Cara membeli, Cara mencari buku, Cara memesan). */
+  var CHAT_THANKS_CLOSE = '<br><br>Terima kasih telah memilih <b>Toko Papua Online</b> - bila masih ada yang ingin ditanyakan, silakan hubungi admin kami ya.';
+
+  /* Balasan ucapan terima kasih (satu sumber, dipakai semua pemicunya) */
+  function chatThanksBody() {
+    return '<b>Terima kasih banyak!</b> Senang bisa membantu Anda di <b>Toko Papua Online</b>.<br>' +
+      'Semoga e-book yang Anda pilih bermanfaat. Bila masih ada yang ingin ditanyakan, admin kami siap membantu.<br><br>' +
+      'Halaman toko: ' + chatLink(PAGE_URL, PAGE_URL);
+  }
+  /* Apakah pesan pengguna berupa ucapan terima kasih? */
+  function chatGrateful(raw) {
+    var text = chatNorm(raw);
+    if (!text) { return false; }
+    for (var i = 0; i < CHAT_THANKS_KEYS.length; i++) {
+      var k = chatNorm(CHAT_THANKS_KEYS[i]);
+      if (!k) { continue; }
+      if (k.indexOf(' ') >= 0) {
+        if (text.indexOf(k) >= 0) { return true; }
+      } else if (chatHasWord(text, k)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /* ---------- BASIS PENGETAHUAN CHATBOT ---------- */
+  var CHAT_KB = [
+    {
+      id: 'halo', label: 'Mulai',
+      keys: ['halo', 'hai', 'hi', 'hello', 'hallo', 'pagi', 'siang', 'sore', 'malam', 'assalamualaikum', 'permisi', 'mulai', 'bantuan', 'help', 'tanya', 'siapa kamu', 'apa ini'],
+      follow: ['beli', 'cari', 'pesan', 'bayar', 'admin'],
+      answer: '<b>Halo! Saya asisten Toko Papua Online.</b><br>Saya bisa membantu Anda soal:<br>&bull; cara membeli buku<br>&bull; cara mencari buku<br>&bull; cara memesan buku, termasuk pesanan khusus<br>&bull; metode pembayaran, format berkas, dan cara unduh<br>Tekan tombol pilihan cepat di bawah, atau langsung tulis pertanyaan Anda.'
+    },
+    {
+      id: 'beli', label: 'Cara membeli',
+      keys: ['cara membeli', 'cara beli', 'bagaimana cara beli', 'gimana cara beli', 'membeli buku', 'beli buku', 'cara membeli buku', 'cara beli buku', 'pembelian', 'membeli', 'beli', 'beli e-book', 'beli ebook', 'checkout', 'check out', 'transaksi', 'cara order', 'cara pesan buku', 'proses beli', 'langkah beli', 'tutorial beli', 'panduan beli'],
+      follow: ['cari', 'bayar', 'unduh', 'admin'],
+      answer: '<b>Cara membeli buku</b><br>' +
+        '1. Buka halaman toko, lalu pilih produk - klik kartunya untuk melihat detail.<br>' +
+        '2. Tekan tombol <b>Beli</b> pada kartu produk, atau <b>Beli Sekarang</b> di jendela detail produk.<br>' +
+        '3. Anda diarahkan ke halaman <b>checkout OrderHero</b> di tab baru.<br>' +
+        '4. Isi nama, email, dan nomor WhatsApp aktif pada formulir checkout.<br>' +
+        '5. Pilih metode pembayaran, lalu selesaikan pembayaran.<br>' +
+        '6. Setelah pembayaran terkonfirmasi, tautan unduhan PDF dikirim ke email yang Anda isi saat checkout.<br><br>' +
+        'Bisa juga lewat keranjang: tambahkan produk ke <b>Keranjang</b>, lalu tekan <b>Lanjut ke Pembelian</b>.<br>' +
+        'Catatan: biaya transaksi (di luar harga produk) dihitung saat checkout.<br><br>' +
+        'Halaman toko: ' + chatLink(PAGE_URL, PAGE_URL) + '<br>' +
+        'Contoh halaman checkout: ' + chatLink(CHECKOUT_BELANDA_IRIAN_JAYA, 'checkout OrderHero') +
+        CHAT_THANKS_CLOSE
+    },
+    {
+      id: 'cari', label: 'Cara mencari buku',
+      keys: ['cara mencari buku', 'cara mencari', 'cara cari buku', 'mencari buku', 'cari buku', 'mencari', 'pencarian', 'kolom pencarian', 'search', 'temukan', 'menemukan', 'filter', 'kategori', 'katalog', 'daftar produk', 'lihat semua', 'urutkan', 'sortir'],
+      follow: ['beli', 'pesan', 'produk'],
+      answer: '<b>Cara mencari buku</b><br>' +
+        '1. <b>Kolom pencarian</b> ada di bagian atas halaman (ikon kaca pembesar). Ketik judul, nama penulis, atau kata kunci seperti Papua, Kekerasan, atau Irian Jaya - daftar produk menyaring otomatis saat Anda mengetik.<br>' +
+        '2. <b>Filter kategori</b> tepat di bawah banner: Semua, Promo, Terlaris, dan Baru.<br>' +
+        '3. <b>Katalog produk</b> ada pada bagian katalog - semua judul yang tersedia tampil di sana.<br>' +
+        '4. Di HP, tombol <b>Produk</b> pada bilah bawah langsung melompat ke katalog.<br>' +
+        '5. Klik kartu produk untuk membaca deskripsi lengkap sebelum membeli.<br><br>' +
+        'Halaman toko: ' + chatLink(PAGE_URL, PAGE_URL) +
+        CHAT_THANKS_CLOSE
+    },
+    {
+      id: 'pesan', label: 'Cara memesan',
+      keys: ['cara memesan', 'cara pesan', 'memesan buku', 'pemesanan', 'pesan buku', 'pesanan khusus', 'order khusus', 'pre order', 'preorder', 'buku belum tersedia', 'belum tersedia', 'tidak tersedia', 'stok habis', 'stok', 'jumlah banyak', 'beli banyak', 'grosir', 'bulk', 'institusi', 'perusahaan', 'sekolah', 'kampus', 'kantor', 'invoice', 'faktur', 'request buku', 'buku langka'],
+      follow: ['beli', 'admin', 'bayar'],
+      answer: '<b>Cara memesan buku</b><br>' +
+        '&bull; <b>Buku yang sudah tersedia:</b> lakukan pembelian seperti biasa (lihat Cara membeli).<br>' +
+        '&bull; <b>Buku yang belum tersedia atau pesanan khusus:</b> hubungi admin dengan menyebutkan judul, penulis, dan tahun terbit yang Anda cari. Tim kami akan mencarikan dan memberi tahu estimasi waktunya.<br>' +
+        '&bull; <b>Jumlah banyak atau pembelian institusi</b> (kampus, sekolah, kantor, komunitas): hubungi admin untuk harga khusus dan penerbitan invoice.<br>' +
+        '&bull; <b>Judul di luar katalog:</b> kirimkan judulnya, kami usahakan menyediakannya.<br><br>' +
+        '<b>Kontak admin</b><br>' + chatAdminLines() +
+        CHAT_THANKS_CLOSE
+    },
+    {
+      id: 'bayar', label: 'Metode pembayaran',
+      keys: ['metode pembayaran', 'cara bayar', 'cara pembayaran', 'pembayaran', 'bayar', 'transfer', 'virtual account', 'qris', 'e wallet', 'ewallet', 'dana', 'ovo', 'gopay', 'shopeepay', 'kartu', 'bank', 'cod', 'cicil'],
+      follow: ['beli', 'unduh', 'admin'],
+      answer: '<b>Metode pembayaran</b><br>' +
+        'Pilihan metode tampil otomatis di halaman <b>checkout OrderHero</b> dan bisa Anda pilih langsung di sana - umumnya berupa transfer bank atau virtual account, e-wallet/QRIS, dan gerai ritel.<br>' +
+        'Cara melihatnya: tekan <b>Beli</b> pada produk, lalu pilih metode pada langkah pembayaran di halaman checkout.<br>' +
+        'Bila metode yang Anda inginkan tidak muncul, hubungi admin agar dibantu.<br><br>' +
+        'Contoh halaman checkout: ' + chatLink(CHECKOUT_BELANDA_IRIAN_JAYA, 'checkout OrderHero') + '<br>' +
+        'Halaman toko: ' + chatLink(PAGE_URL, PAGE_URL)
+    },
+    {
+      id: 'file', label: 'Format berkas',
+      keys: ['format file', 'format berkas', 'format', 'pdf', 'apakah pdf', 'file pdf', 'berkas pdf', 'formatnya pdf', 'ebook pdf', 'epub', 'jenis file', 'tipe file', 'bentuk file', 'ekstensi'],
+      follow: ['unduh', 'hp', 'beli'],
+      answer: '<b>Format berkas</b><br>' +
+        'Semua produk berupa <b>e-book PDF</b>, hasil digitalisasi literatur langka dan laporan riset.<br>' +
+        '&bull; Dapat dibuka di komputer, laptop, tablet, maupun ponsel.<br>' +
+        '&bull; Berkas digital - tidak ada pengiriman fisik, jadi tidak ada biaya kirim.<br>' +
+        '&bull; Tautan unduhan dikirim setelah pembayaran terkonfirmasi.'
+    },
+    {
+      id: 'unduh', label: 'Cara mengunduh',
+      keys: ['cara unduh', 'mengunduh', 'unduh', 'download', 'tautan unduhan', 'link unduhan', 'cara download', 'setelah bayar', 'setelah pembayaran', 'dapat file', 'menerima file', 'kirim file', 'dikirim ke mana', 'email masuk'],
+      follow: ['gagal', 'file', 'admin'],
+      answer: '<b>Cara mengunduh e-book setelah bayar</b><br>' +
+        '1. Setelah pembayaran terkonfirmasi, tautan unduhan PDF dikirim ke <b>email</b> yang Anda isi saat checkout.<br>' +
+        '2. Buka email dari Toko Papua Online, lalu klik tautan unduhannya.<br>' +
+        '3. Berkas PDF akan terbuka atau terunduh - simpanlah ke perangkat Anda.<br>' +
+        '4. Simpan juga email atau tautannya, agar berkas mudah dibuka kembali kapan saja.<br><br>' +
+        'Belum menerimanya? Lihat jawaban <b>Tautan unduhan belum diterima</b>.'
+    },
+    {
+      id: 'hp', label: 'Bisa dibaca di HP',
+      keys: ['hp', 'ponsel', 'handphone', 'android', 'iphone', 'ios', 'tablet', 'mobile', 'baca di hp', 'bisa dibaca', 'komputer', 'laptop', 'pc', 'perangkat', 'aplikasi', 'pembaca pdf'],
+      follow: ['file', 'unduh', 'beli'],
+      answer: '<b>Apakah bisa dibaca di HP?</b><br>' +
+        'Bisa. Semua produk berbentuk PDF, sehingga dapat dibuka di:<br>' +
+        '&bull; <b>Ponsel atau tablet</b> - Android maupun iPhone, memakai pembaca PDF bawaan atau aplikasi gratis seperti Adobe Acrobat Reader, Google Drive, atau WPS Office.<br>' +
+        '&bull; <b>Komputer atau laptop</b> - cukup dibuka dengan browser atau aplikasi pembaca PDF.<br>' +
+        'Tampilan bisa di-zoom, dan layar bisa diputar bila halaman terasa kecil.'
+    },
+    {
+      id: 'gagal', label: 'Tautan unduhan belum diterima',
+      keys: ['tidak diterima', 'belum menerima', 'tidak menerima', 'belum menerima tautan', 'belum saya terima', 'belum saya menerima', 'tidak saya terima', 'belum terima', 'belum saya dapat', 'tautan unduhan belum', 'belum menerima tautan unduhan', 'tautan tidak', 'link tidak', 'belum dikirim', 'tidak terkirim', 'gagal', 'tidak masuk', 'belum masuk', 'tidak ada tautan', 'email tidak', 'spam', 'kendala', 'error', 'masalah'],
+      follow: ['admin', 'unduh'],
+      answer: '<b>Tautan unduhan belum diterima</b><br>' +
+        'Coba langkah berikut lebih dulu:<br>' +
+        '1. Periksa folder <b>Spam</b>, <b>Promosi</b>, atau <b>Junk</b> pada email Anda.<br>' +
+        '2. Pastikan alamat email yang Anda isi saat checkout sudah benar dan aktif.<br>' +
+        '3. Tunggu 5 sampai 10 menit - email bisa sedikit terlambat.<br>' +
+        '4. Muat ulang kotak masuk Anda.<br><br>' +
+        'Bila tautan tetap tidak diterima, hubungi admin dengan menyertakan <b>nomor pesanan</b>, <b>tanggal transaksi</b>, <b>bukti pembayaran</b>, dan <b>email</b> yang Anda pakai:<br>' + chatAdminLines()
+    },
+    {
+      id: 'admin', label: 'Hubungi admin',
+      keys: ['hubungi admin', 'kontak admin', 'chat admin', 'wa admin', 'whatsapp admin', 'email admin', 'customer service', 'hubungi', 'kontak', 'dukungan', 'support', 'komplain', 'keluhan', 'bantuan admin', 'admin'],
+      follow: ['beli', 'pesan', 'gagal'],
+      answer: '<b>Hubungi admin</b><br>' + chatAdminLines()
+    },
+    {
+      id: 'harga', label: 'Harga',
+      keys: ['harga', 'berapa', 'biaya', 'tarif', 'mahal', 'murah', 'biaya transaksi', 'biaya tambahan', 'admin fee', 'total'],
+      follow: ['beli', 'promo', 'produk'],
+      build: function () {
+        return '<b>Harga dan biaya</b><br>Harga setiap produk tampil pada kartunya di katalog. Produk yang tersedia:' + chatProductLines() + '<br><br>Harga tersebut untuk berkas PDF digital.<br><b>Biaya transaksi</b> (di luar harga produk) dihitung saat checkout dan tampil jelas sebelum Anda membayar.<br><br>Halaman toko: ' + chatLink(PAGE_URL, PAGE_URL);
+      }
+    },
+    {
+      id: 'promo', label: 'Promo',
+      keys: ['promo', 'diskon', 'potongan', 'voucher', 'kupon', 'kode promo', 'cashback', 'sale', 'obral'],
+      follow: ['beli', 'harga', 'produk'],
+      answer: '<b>Promo</b><br>' +
+        'Produk bertanda <b>Promo</b> bisa dilihat dengan filter kategori Promo di halaman toko.<br>' +
+        'Caranya: buka halaman toko, lalu tekan filter <b>Promo</b> tepat di bawah banner.<br>' +
+        'Bila ada kode voucher atau potongan tambahan, diisi pada halaman checkout.<br><br>' +
+        'Halaman toko: ' + chatLink(PAGE_URL, PAGE_URL)
+    },
+    {
+      id: 'keamanan', label: 'Keamanan transaksi',
+      keys: ['aman', 'keamanan', 'terpercaya', 'penipuan', 'garansi', 'refund', 'uang kembali', 'pembatalan', 'batal'],
+      follow: ['bayar', 'admin'],
+      answer: '<b>Keamanan transaksi</b><br>' +
+        'Pembayaran diproses melalui <b>OrderHero</b>, halaman checkout resmi toko ini.<br>' +
+        '&bull; Isi data hanya pada halaman checkout yang terbuka dari tombol <b>Beli</b> di halaman toko.<br>' +
+        '&bull; Anda tidak perlu mengirim data pribadi atau bukti pembayaran lewat kolom chat ini.<br>' +
+        '&bull; Bila ada kendala setelah membayar, hubungi admin dengan bukti pembayaran.<br><br>' +
+        'Halaman toko: ' + chatLink(PAGE_URL, PAGE_URL)
+    },
+    {
+      id: 'produk', label: 'Produk tersedia',
+      keys: ['produk apa', 'buku apa', 'buku apa saja', 'daftar buku', 'daftar produk', 'koleksi', 'tersedia', 'jual apa', 'judul buku', 'katalog produk', 'jenis buku', 'macam buku', 'produk'],
+      follow: ['beli', 'cari', 'harga'],
+      build: function () {
+        return '<b>Produk yang tersedia saat ini</b>' + chatProductLines() + '<br><br>Klik kartu produk di katalog untuk membaca deskripsi lengkapnya, lalu tekan <b>Beli</b>.<br>Halaman toko: ' + chatLink(PAGE_URL, PAGE_URL);
+      }
+    }
+  ];
+
+  var CHAT_FALLBACK = {
+    id: 'fallback',
+    follow: ['beli', 'cari', 'pesan', 'admin'],
+    answer: '<b>Maaf, saya belum menemukan jawaban yang pas.</b><br>' +
+      'Saya bisa membantu soal: cara membeli, cara mencari buku, cara memesan, format berkas dan cara unduh, metode pembayaran, serta kontak admin.<br><br>' +
+      'Untuk pertanyaan lain, silakan hubungi admin melalui bagian <b>Kontak &amp; dukungan</b> di halaman toko:<br>' + chatLink(PAGE_URL, PAGE_URL) +
+      '<br><br>Coba tulis pertanyaan Anda dengan kata kunci lain, atau tekan tombol pilihan cepat di bawah.'
+  };
+
+  /* ---------- mesin pencocokan kata kunci ---------- */
+  function chatNorm(s) {
+    var t = String(s == null ? '' : s).toLowerCase().replace(/[^a-z0-9]+/g, ' ');
+    return t.replace(/^ +| +$/g, '');
+  }
+  function chatHasWord(text, k) {
+    return new RegExp('(^|[^a-z0-9])' + k + '([^a-z0-9]|$)').test(text);
+  }
+  function chatScore(text, keys) {
+    var score = 0;
+    for (var i = 0; i < keys.length; i++) {
+      var k = chatNorm(keys[i]);
+      if (!k) { continue; }
+      if (k.indexOf(' ') >= 0) {
+        if (text.indexOf(k) >= 0) { score += 7; }
+      } else if (k.length <= 3) {
+        if (chatHasWord(text, k)) { score += 3; }
+      } else if (text.indexOf(k) >= 0) {
+        score += 2;
+        if (chatHasWord(text, k)) { score += 3; }
+      }
+    }
+    return score;
+  }
+  function chatById(id) {
+    for (var i = 0; i < CHAT_KB.length; i++) { if (CHAT_KB[i].id === id) { return CHAT_KB[i]; } }
+    return null;
+  }
+  function chatMatch(raw) {
+    var text = chatNorm(raw);
+    if (!text) { return null; }
+    var best = null, bestScore = 0;
+    for (var i = 0; i < CHAT_KB.length; i++) {
+      var it = CHAT_KB[i];
+      var s = chatScore(text, it.keys);
+      if (chatNorm(it.label) === text) { s += 10; }
+      if (s > bestScore) { bestScore = s; best = it; }
+    }
+    return (best && bestScore >= 4) ? best : null;
+  }
+
+  /* ---------- elemen widget ---------- */
+  var chatDock = $('chatDock'), chatPanel = $('chatPanel'), chatLog = $('chatLog');
+  var chatFab = $('chatFab'), chatQuickEl = $('chatQuick'), chatFormEl = $('chatForm'), chatInEl = $('chatIn');
+  var chatIsOpen = false, chatReady = false;
+  var chatReduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var chatWide = !!(window.matchMedia && window.matchMedia('(min-width: 768px)').matches);
+
+  function chatBot(html) {
+    var d = document.createElement('div');
+    d.className = 'msg bot';
+    d.innerHTML = html;
+    chatLog.appendChild(d);
+    chatLog.scrollTop = chatLog.scrollHeight;
+    return d;
+  }
+  function chatMe(txt) {
+    var d = document.createElement('div');
+    d.className = 'msg me';
+    d.textContent = txt;
+    chatLog.appendChild(d);
+    chatLog.scrollTop = chatLog.scrollHeight;
+  }
+  function chatChip(label, q) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'chip-q';
+    b.setAttribute('data-q', q);
+    b.textContent = label;
+    return b;
+  }
+  /* Tombol pilihan cepat tetap (selalu tersedia) */
+  var CHAT_QUICK = [
+    ['Cara membeli', 'Cara membeli'],
+    ['Cara mencari buku', 'Cara mencari buku'],
+    ['Cara memesan', 'Cara memesan'],
+    ['Metode pembayaran', 'Metode pembayaran'],
+    ['Hubungi admin', 'Hubungi admin']
+  ];
+  for (var cq = 0; cq < CHAT_QUICK.length; cq++) {
+    chatQuickEl.appendChild(chatChip(CHAT_QUICK[cq][0], CHAT_QUICK[cq][1]));
+  }
+  /* Saran lanjutan setelah setiap jawaban bot */
+  function chatFollow(ids) {
+    if (!ids || !ids.length) { return; }
+    var row = document.createElement('div');
+    row.className = 'chat-follow';
+    for (var i = 0; i < ids.length; i++) {
+      var it = chatById(ids[i]);
+      if (it && it.label) { row.appendChild(chatChip(it.label, it.label)); }
+    }
+    if (row.children.length) {
+      chatLog.appendChild(row);
+      chatLog.scrollTop = chatLog.scrollHeight;
+    }
+  }
+  function chatRespond(raw) {
+    var it = chatMatch(raw);
+    var html, follow;
+    if (it) {
+      html = (typeof it.build === 'function') ? it.build() : it.answer;
+      follow = it.follow;
+    } else if (chatGrateful(raw)) {
+      /* Ucapan terima kasih - dicek SETELAH topik lain, supaya pertanyaan yang
+         kebetulan memuat kata "terima kasih" tetap dijawab sesuai topiknya. */
+      html = chatThanksBody();
+      follow = CHAT_THANKS_FOLLOW;
+    } else {
+      html = CHAT_FALLBACK.answer;
+      follow = CHAT_FALLBACK.follow;
+    }
+    var typing = document.createElement('div');
+    typing.className = 'msg bot msg-typing';
+    typing.innerHTML = '<span class="tdot"></span><span class="tdot"></span><span class="tdot"></span>';
+    chatLog.appendChild(typing);
+    chatLog.scrollTop = chatLog.scrollHeight;
+    setTimeout(function () {
+      if (typing.parentNode) { typing.parentNode.removeChild(typing); }
+      chatBot(html);
+      chatFollow(follow);
+    }, chatReduce ? 0 : 430);
+  }
+  function chatAsk(raw) {
+    var q = String(raw == null ? '' : raw).replace(/^ +| +$/g, '');
+    if (!q) { return; }
+    chatMe(q);
+    chatRespond(q);
+  }
+  function chatBoot() {
+    chatBot('<b>Halo! Selamat datang di Toko Papua Online.</b><br>Saya asisten toko yang siap membantu Anda soal:<br>&bull; cara membeli e-book<br>&bull; cara mencari buku<br>&bull; cara memesan buku khusus<br>&bull; pembayaran dan cara unduh berkas<br><br>Tekan tombol pilihan di bawah, atau langsung tulis pertanyaan Anda.');
+    chatBot('Halaman toko: ' + chatLink(PAGE_URL, PAGE_URL));
+  }
+  function openChat() {
+    chatIsOpen = true;
+    chatPanel.classList.add('is-on');
+    chatPanel.setAttribute('aria-hidden', 'false');
+    chatFab.classList.add('is-on');
+    chatFab.setAttribute('aria-expanded', 'true');
+    chatFab.setAttribute('aria-label', 'Tutup chat bantuan');
+    if (!chatReady) { chatReady = true; chatBoot(); }
+    if (chatWide) { setTimeout(function () { try { chatInEl.focus(); } catch (err) {} }, 240); }
+  }
+  function closeChat() {
+    if (!chatIsOpen) { return; }
+    chatIsOpen = false;
+    chatPanel.classList.remove('is-on');
+    chatPanel.setAttribute('aria-hidden', 'true');
+    chatFab.classList.remove('is-on');
+    chatFab.setAttribute('aria-expanded', 'false');
+    chatFab.setAttribute('aria-label', 'Buka chat bantuan');
+  }
+
+  /* ---------- interaksi chatbot ---------- */
+  chatFab.addEventListener('click', function () { if (chatIsOpen) { closeChat(); } else { openChat(); } });
+  $('chatClose').addEventListener('click', closeChat);
+  chatFormEl.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var v = chatInEl.value;
+    chatInEl.value = '';
+    chatAsk(v);
+  });
+  chatQuickEl.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-q]');
+    if (b) { chatAsk(b.getAttribute('data-q')); }
+  });
+  chatLog.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-q]');
+    if (b) { chatAsk(b.getAttribute('data-q')); }
+  });
+  /* Klik di luar area chat menutup panel (tombol Beli/Bagikan tetap bekerja) */
+  document.addEventListener('click', function (e) {
+    if (!chatIsOpen) { return; }
+    if (chatDock.contains(e.target)) { return; }
+    closeChat();
+  });
+
   /* ---------- escape ---------- */
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') { closeShare(); closeAll(); }
+    if (e.key === 'Escape') { closeShare(); closeAll(); closeChat(); }
   });
 
   /* ---------- init ---------- */

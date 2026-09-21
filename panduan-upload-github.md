@@ -21,9 +21,9 @@ tidak perlu menjalankan perintah terminal (metode A sepenuhnya klik-klik di brow
 - [Bagian 3 — Upload Berkas ke Repositori](#bagian-3--upload-berkas-ke-repositori)
 - [Bagian 4 — Commit & Periksa Hasil Upload](#bagian-4--commit--periksa-hasil-upload)
 - [Bagian 5 — Aktifkan GitHub Pages](#bagian-5--aktifkan-github-pages)
-- [Bagian 6 — Tunggu & Verifikasi Situs Live](#bagian-6--tunggu--verifikasi-situs-live)
-- [Bagian 7 — Memperbarui Situs di Kemudian Hari](#bagian-7--memperbarui-situs-di-kemudian-hari)
-- [Bagian 8 — Pemecahan Masalah (Troubleshooting)](#bagian-8--pemecahan-masalah-troubleshooting)
+- [Bagian 6 — Tunggu & Verifikasi Situs Live](#bagian-6--tunggu--verifikasi-situs-live) · [6.6 robots/sitemap](#66-memverifikasi-robotstxt--sitemapxml) · [6.7 tombol Bagikan](#67-memverifikasi-tombol-bagikan-share) · [6.8 chatbot](#68-memverifikasi-chatbot-widget-chat-melayang) · [6.9 ucapan terima kasih](#69-memverifikasi-ucapan-terima-kasih-chatbot)
+- [Bagian 7 — Memperbarui Situs di Kemudian Hari](#bagian-7--memperbarui-situs-di-kemudian-hari) · [7.5 robots/sitemap](#75-memperbarui-robotstxt--sitemapxml) · [7.6 tombol Bagikan](#76-mengubah-teks--tautan-pada-tombol-bagikan) · [7.7 isi chatbot](#77-mengubah-daftar-pertanyaan--jawaban-chatbot) · [7.8 ucapan terima kasih](#78-mengubah-ucapan-terima-kasih-chatbot)
+- [Bagian 8 — Pemecahan Masalah (Troubleshooting)](#bagian-8--pemecahan-masalah-troubleshooting) · [8.11 robots/sitemap](#811-robotstxt-atau-sitemapxml-bermasalah) · [8.12 tombol Bagikan](#812-tombol-bagikan-bermasalah) · [8.13 chatbot](#813-chatbot-bermasalah) · [8.14 ucapan terima kasih](#814-ucapan-terima-kasih-bermasalah)
 - [Bagian 9 — FAQ & Daftar Periksa](#bagian-9--faq--daftar-periksa)
 
 ---
@@ -40,6 +40,8 @@ tidak perlu menjalankan perintah terminal (metode A sepenuhnya klik-klik di brow
 | 6 | Tunggu 1–2 menit, buka situs, verifikasi | [Bagian 6](#bagian-6--tunggu--verifikasi-situs-live) |
 | 7 | Periksa `robots.txt` & `sitemap.xml` (alamat sudah terisi, siap pakai) | [Bagian 6.6](#66-memverifikasi-robotstxt--sitemapxml) |
 | 8 | Uji tombol **Bagikan** pada kartu produk (WhatsApp, Facebook, X, Telegram, salin tautan) | [Bagian 6.7](#67-memverifikasi-tombol-bagikan-share) |
+| 9 | Uji **chatbot** — buka widget, coba tombol pilihan cepat, tutup dengan Esc/klik luar | [Bagian 6.8](#68-memverifikasi-chatbot-widget-chat-melayang) |
+| 10 | Uji **ucapan terima kasih** chatbot + penutup alur bantuan | [Bagian 6.9](#69-memverifikasi-ucapan-terima-kasih-chatbot) |
 
 > **Inti yang paling sering salah:** pastikan berkas `index.html` berada **di tingkat paling
 > atas** repositori (sejajar dengan folder `images/`), **bukan** di dalam subfolder. Ini
@@ -55,9 +57,9 @@ Paket ZIP bernama **`toko-papua-online-store-paket-github.zip`** berisi **11 ber
 
 | # | Berkas | Keterangan | Ukuran |
 |---|---|---|---|
-| 1 | `index.html` | Halaman toko utama (mobile + desktop, satu berkas) — termasuk tombol **Beli** dan tombol **Bagikan** pada setiap kartu produk | ± 62 KB |
-| 2 | `README.md` | Ringkasan proyek | ± 11 KB |
-| 3 | `panduan-upload-github.md` | Berkas panduan ini | ± 58 KB |
+| 1 | `index.html` | Halaman toko utama (mobile + desktop, satu berkas) — termasuk tombol **Beli**, tombol **Bagikan** pada setiap kartu produk, dan **chatbot** (widget chat melayang) | ± 94 KB |
+| 2 | `README.md` | Ringkasan proyek | ± 20 KB |
+| 3 | `panduan-upload-github.md` | Berkas panduan ini | ± 75 KB |
 | 4 | `.nojekyll` | Berkas kosong (0 byte) penanda untuk GitHub Pages | 0 byte |
 | 5 | `images/logo.webp` | Logo toko (header & footer) | ± 112 KB |
 | 6 | `images/banner-1.webp` | Banner promo carousel 1 | ± 44 KB |
@@ -545,6 +547,12 @@ Buka situs Anda dan periksa satu per satu:
 | 11 | **`sitemap.xml` terbuka** | `https://tokopapuaonline.github.io/Toko-Online-Papua-E-Book/sitemap.xml` tampil sebagai XML valid |
 | 12 | **Tombol Bagikan tampil** | Ikon bagikan muncul di **setiap** kartu produk, tepat di samping tombol Beli |
 | 13 | **Klik tombol Bagikan** | Panel muncul dengan 5 pilihan: **WhatsApp, Facebook, X/Twitter, Telegram, Salin tautan** |
+| 14 | **Tombol chatbot tampil** | Tombol bulat berisi ikon balon percakapan di **pojok kanan bawah** layar |
+| 15 | **Klik tombol chatbot** | Panel chat terbuka berisi sapaan + **5 tombol pilihan cepat**: Cara membeli, Cara mencari buku, Cara memesan, Metode pembayaran, Hubungi admin |
+| 16 | **Panel chatbot tidak menutupi** | Di HP, bottom tab bar dan tombol Beli/Bagikan tetap terlihat & dapat diklik |
+| 17 | **Ucapan terima kasih chatbot** | Ketik `terima kasih` → bot membalas terima kasih, menyebut **Toko Papua Online**, memuat tautan halaman toko |
+| 18 | **Saran lanjutan terima kasih** | Setelah balasan terima kasih muncul 4 tombol: Cara membeli, Cara mencari buku, Cara memesan, Hubungi admin |
+| 19 | **Penutup alur bantuan** | Jawaban **Cara membeli**, **Cara mencari buku**, **Cara memesan** diakhiri kalimat terima kasih |
 
 ### 6.3 Memverifikasi tombol "Beli" mengarah ke link checkout
 
@@ -698,6 +706,110 @@ toko Anda.
 
 Ketiganya harus menutup panel. Setelah panel tertutup, pastikan tombol
 **🛒 Beli** tetap berfungsi seperti biasa (buka halaman checkout di tab baru).
+
+---
+
+### 6.8 Memverifikasi chatbot (widget chat melayang)
+
+Halaman toko dilengkapi **asisten toko** berupa widget chat melayang. Widget ini bekerja
+sepenuhnya di dalam `index.html` — **tanpa API eksternal, tanpa kunci API, dan tanpa
+layanan pihak ketiga** — sehingga tidak ada pengaturan tambahan yang perlu Anda lakukan
+setelah upload.
+
+**A. Pastikan tombolnya tampil**
+
+1. Buka situs Anda.
+2. Lihat **pojok kanan bawah** layar.
+   - **Diharapkan:** ada tombol bulat berwarna **toska** berisi **ikon balon percakapan**,
+     sedikit di atas tepi bawah (di HP tepat di atas bilah navigasi bawah).
+   - Pada tombol ada **titik merah kecil** sebagai penanda.
+
+**B. Uji membuka & menutup**
+
+| Cara | Yang dilakukan | Yang diharapkan |
+|---|---|---|
+| Buka | Klik tombol bulat toska | Panel chat terbuka dari bawah |
+| Tombol yang sama | Klik tombol bulat sekali lagi | Panel tertutup; ikon berubah kembali menjadi balon percakapan |
+| Tombol **×** | Klik silang di kepala panel | Panel tertutup |
+| Tombol **Esc** | Tekan `Esc` di papan tombol | Panel tertutup |
+| Klik di luar | Klik area halaman di luar panel chat | Panel tertutup |
+
+**C. Uji kelima tombol pilihan cepat**
+
+Setelah panel terbuka, di bawah area percakapan tersedia lima tombol. Klik satu per satu:
+
+| Tombol | Jawaban yang diharapkan |
+|---|---|
+| **Cara membeli** | Enam langkah pembelian: pilih produk → klik **Beli** → halaman **checkout OrderHero** → isi data → bayar → terima tautan unduhan PDF. Disertai tautan halaman toko dan contoh halaman checkout. |
+| **Cara mencari buku** | Kolom pencarian di header, filter kategori (Semua/Promo/Terlaris/Baru), katalog produk, dan tombol **Produk** di bilah bawah HP. |
+| **Cara memesan** | Langkah pemesanan, penanganan **buku yang belum tersedia**, pesanan khusus, pembelian **jumlah banyak/institusi**, dan arahan ke kontak admin. |
+| **Metode pembayaran** | Pilihan metode tampil di halaman checkout OrderHero. |
+| **Hubungi admin** | Arahan ke bagian **Kontak & dukungan** di halaman toko + hal yang perlu disertakan saat menghubungi admin. |
+
+**D. Uji pertanyaan bebas**
+
+Ketik pertanyaan di kolom paling bawah, lalu tekan **Enter** atau tombol kirim. Coba:
+
+| Yang diketik | Jawaban yang diharapkan |
+|---|---|
+| `bisa dibaca di hp?` | Jawaban PDF dapat dibuka di Android/iPhone maupun komputer |
+| `berapa harganya` | Daftar produk beserta harga + catatan biaya transaksi |
+| `tautan unduhan belum saya terima` | Langkah cek folder Spam, lalu arahan hubungi admin |
+| `resep rendang enak` | **Jawaban cadangan** — daftar topik yang tersedia + arahan ke kontak admin |
+
+> Bila jawaban cadangan muncul, itu memang perilaku yang benar: chatbot mengarahkan
+> pengguna ke admin alih-alih diam.
+
+**E. Uji kenyamanan pemakaian di HP (`390 × 844`)**
+
+1. Pastikan panel chat tidak menempel ke tepi (ada jarak kecil di kiri/kanan).
+2. Pastikan **bottom tab bar** dan tombol **Beli/Bagikan** pada kartu produk tetap
+   terlihat dan bisa diklik saat panel terbuka.
+3. Pastikan tidak muncul **scroll horizontal** pada halaman.
+4. Tutup panel, lalu pastikan tombol **🛒 Beli** masih membuka halaman checkout.
+
+---
+
+### 6.9 Memverifikasi ucapan terima kasih chatbot
+
+Fitur ini memastikan percakapan ditutup dengan ramah, bukan menggantung begitu saja.
+Ujinya singkat — cukup di panel chat yang sudah Anda buka.
+
+**A. Ucapan terima kasih langsung**
+
+1. Buka panel chat, lalu **ketik** salah satu dari ini dan tekan kirim:
+   `terima kasih` · `makasih` · `thanks` · `thank you` · `thx` · `tq` · `syukron`
+2. Yang diharapkan muncul:
+   - kalimat **“Terima kasih banyak!”**;
+   - nama toko, yaitu **Toko Papua Online**;
+   - ajakan menghubungi admin bila masih ada pertanyaan;
+   - tautan halaman toko `https://tokopapuaonline.github.io/Toko-Online-Papua-E-Book/`.
+3. Di bawah balasan itu harus muncul **4 tombol saran lanjutan**: **Cara membeli**,
+   **Cara mencari buku**, **Cara memesan**, dan **Hubungi admin**.
+4. Bisa juga dicoba dengan kalimat panjang, mis. `oke terima kasih banyak ya` atau
+   `sudah dibantu, sangat membantu` — balasannya sama.
+
+**B. Penutup alur bantuan**
+
+1. Klik **Cara membeli** → jawaban enam langkah muncul **dan diakhiri** kalimat
+   *“Terima kasih telah memilih Toko Papua Online …”*.
+2. Ulangi untuk **Cara mencari buku** dan **Cara memesan** — keduanya juga ditutup
+   dengan kalimat terima kasih.
+3. Bandingkan dengan **Metode pembayaran**, **Format berkas**, atau **Hubungi admin** —
+   ketiganya **tidak** ditambahi penutup tersebut, karena hanya tiga alur bantuan utama
+   yang perlu penutup. Ini memang disengaja.
+
+**C. Memastikan tidak ada gangguan**
+
+1. Ketik **`resep rendang`** (di luar topik) → tetap muncul **jawaban cadangan** seperti
+   semula, bukan balasan terima kasih.
+2. Ketik **`cara membeli`** → tetap dijawab sebagai topik pembelian (dengan penutup),
+   bukan dianggap ucapan terima kasih. Urutan pemeriksaan sudah diatur: topik lebih dulu,
+   ucapan terima kasih menyusul.
+3. Tutup panel dengan **×**, **Esc**, lalu **klik di luar** — semuanya harus tetap bekerja.
+
+> Bila balasan terima kasih tidak muncul, lihat
+> [Bagian 8.14](#814-ucapan-terima-kasih-bermasalah).
 
 ---
 
@@ -862,6 +974,133 @@ dipakai oleh JavaScript.
 
 > **Catatan:** tombol Bagikan **tidak menambah berkas baru** ke paket. Seluruh ikonnya
 > memakai inline SVG sprite yang sudah ada di `index.html`.
+
+### 7.7 Mengubah daftar pertanyaan & jawaban chatbot
+
+Seluruh isi chatbot berada di dalam `index.html`, pada **satu objek bernama `CHAT_KB`**.
+Mengubah daftar pertanyaan/jawaban berarti menyunting objek itu — tidak ada berkas lain
+yang perlu disentuh, dan tidak ada layanan luar yang perlu diperbarui.
+
+**Bentuk satu entri:**
+
+```js
+{
+  id: 'beli', label: 'Cara membeli',
+  keys: ['cara membeli', 'cara beli', 'beli', 'checkout', ...],
+  follow: ['cari', 'bayar', 'unduh', 'admin'],
+  answer: '<b>Cara membeli buku</b><br>1. Buka halaman toko, lalu pilih produk ... '
+}
+```
+
+| Bagian | Fungsinya |
+|---|---|
+| `id` | Nama unik topik (dirujuk oleh `follow`) |
+| `label` | Teks tombol saran lanjutan, dan dicocokkan langsung bila pengguna mengkliknya |
+| `keys` | Daftar kata kunci/frasa yang memicu jawaban ini |
+| `answer` | Isi jawaban — boleh memuat HTML sederhana (`<b>`, `<br>`, `&bull;`, tautan) |
+| `build` | *Opsional* — fungsi pembangun jawaban (dipakai topik **Harga** & **Produk tersedia** agar daftar produk ikut diperbarui otomatis) |
+| `follow` | Daftar `id` yang muncul sebagai tombol saran setelah jawaban |
+
+**Cara menambah topik baru:** salin satu entri, ubah `id`, `label`, `keys`, dan `answer`.
+
+**Tombol pilihan cepat** yang selalu tampil di bawah panel diatur pada array `CHAT_QUICK`,
+dan **jawaban cadangan** (saat pertanyaan tidak dikenali) pada objek `CHAT_FALLBACK`.
+
+**Menambah kontak admin yang bisa diklik.** Isi dua baris berikut agar jawaban
+“Hubungi admin” memuat tautan WhatsApp/email siap klik. Kosongkan kembali dengan `''`
+bila tidak ingin menampilkannya:
+
+```js
+var CHAT_WA_ADMIN = '62812xxxxxxx';    // nomor WhatsApp admin
+var CHAT_MAIL_ADMIN = 'admin@toko.id'; // email admin
+```
+
+**Cara menerapkan perubahan:** buka `index.html` di repositori → ikon **pensil** →
+**Ctrl + F** cari `CHAT_KB` → sunting → **Commit changes** → tunggu 1–2 menit →
+**hard refresh** → uji lewat **Bagian 6.8**.
+
+> ⚠️ **Hati-hati saat menyunting:** jangan mengetik tanda kutip `'` di dalam `answer`
+tanpa di-escape (`\'`), dan jangan menghapus tanda koma atau kurung kurawal penutup.
+Satu kesalahan kecil dapat membuat **seluruh JavaScript gagal diurai**, sehingga chatbot
+maupun tombol keranjang tidak berfungsi. Cara aman: kembalikan berkas dari ZIP paket,
+lalu sunting lagi dengan hati-hati — atau tanyakan kepada penyusun paket ini.
+
+**Mengubah posisi/ukuran tombol chat.** Aturan tampilannya ada di blok CSS
+`/* ===== CHATBOT ... ===== */` dalam `index.html` (kelas `.chatdock`, `.chat-fab`,
+`.chat-panel`). Baris `@media (min-width:768px)` di dalam blok itu mengatur tampilan
+desktop.
+
+### 7.8 Mengubah ucapan terima kasih chatbot
+
+Semua teks ucapan terima kasih terkumpul di **empat tempat** di dalam `index.html`,
+berdekatan dengan `CHAT_KB`. Tidak perlu menyentuh bagian lain.
+
+**A. Daftar kata kunci pemicu** — `CHAT_THANKS_KEYS`
+
+```js
+var CHAT_THANKS_KEYS = [
+  'terima kasih', 'terima kasih banyak', 'terimakasih', 'terimakasih banyak',
+  'makasih', 'makasih banyak', 'mksh', 'thanks', 'thank you', 'thankyou',
+  'thx', 'tks', 'tq', 'syukron', 'syukran', 'jazakallah', 'jazakallahu khairan',
+  'sudah dibantu', 'sudah membantu', 'sangat membantu', 'membantu sekali',
+  'sangat terbantu', 'sudah cukup', 'cukup jelas', 'jelas sekali',
+  'oke terima kasih', 'ok terima kasih', 'baik terima kasih', 'terima kasih ya',
+  'oke thanks', 'oke makasih', 'mantap terima kasih'
+];
+```
+
+- **Menambah pemicu:** tambahkan teks baru di antara tanda kutip, dipisahkan koma.
+  Contoh untuk menambahkan sapaan daerah: tambahkan `'nuhun'` atau `'matur nuwun'`.
+- **Menghapus pemicu:** hapus teksnya beserta komanya. Pastikan tersisa minimal satu.
+- Frasa yang mengandung **spasi** dicocokkan sebagai frasa utuh; kata tunggal pendek
+  (mis. `tq`, `thx`) hanya cocok bila berdiri sendiri sebagai kata.
+- Huruf besar/kecil **tidak berpengaruh** — `Terima Kasih` sama dengan `terima kasih`.
+
+**B. Saran lanjutan** — `CHAT_THANKS_FOLLOW`
+
+```js
+var CHAT_THANKS_FOLLOW = ['beli', 'cari', 'pesan', 'admin'];
+```
+
+Isinya adalah `id` dari entri `CHAT_KB` (lihat
+[Bagian 7.7](#77-mengubah-daftar-pertanyaan--jawaban-chatbot)). Ganti, tambah, kurangi,
+atau urutkan ulang sesuai keinginan — empat tombol itu akan mengikuti. **Jangan** memakai
+`id` yang tidak ada, karena tombolnya tidak akan muncul.
+
+**C. Kalimat balasan** — `chatThanksBody()`
+
+```js
+function chatThanksBody() {
+  return '<b>Terima kasih banyak!</b> Senang bisa membantu Anda di <b>Toko Papua Online</b>.<br>' +
+    'Semoga e-book yang Anda pilih bermanfaat. Bila masih ada yang ingin ditanyakan, admin kami siap membantu.<br><br>' +
+    'Halaman toko: ' + chatLink(PAGE_URL, PAGE_URL);
+}
+```
+
+Ubah teksnya sesuka Anda. **Pertahankan** bagian `chatLink(PAGE_URL, PAGE_URL)` bila ingin
+tautan halaman toko tetap ikut ditampilkan. Baris yang diakhiri `+` harus tetap berakhir
+`+` kecuali baris terakhir.
+
+**D. Penutup alur bantuan** — `CHAT_THANKS_CLOSE`
+
+```js
+var CHAT_THANKS_CLOSE = '<br><br>Terima kasih telah memilih <b>Toko Papua Online</b> - bila masih ada yang ingin ditanyakan, silakan hubungi admin kami ya.';
+```
+
+- **Mengubah kalimatnya:** sunting teks di antara tanda kutip.
+- **Menghapus penutup dari semua alur bantuan:** ubah nilainya menjadi `var CHAT_THANKS_CLOSE = '';`
+- Penutup ini dipakai oleh tiga entri `CHAT_KB` — **`beli`**, **`cari`**, dan **`pesan`**.
+  Bagian `+ CHAT_THANKS_CLOSE` ada di akhir `answer` masing-masing. Bila ingin penutup hanya
+  pada sebagian topik, hapus `+ CHAT_THANKS_CLOSE` dari entri yang tidak ingin ditutup.
+
+> ⚠️ **Sama seperti 7.7:** jangan mengetik tanda kutip `'` di dalam teks tanpa di-escape
+> (`\'`), dan jangan menghapus koma atau kurung kurawal penutup. Satu kesalahan kecil dapat
+> membuat **seluruh JavaScript gagal diurai** — chatbot, keranjang, dan tombol Bagikan ikut
+> mati. Cara aman: kembalikan `index.html` dari ZIP paket, lalu sunting lagi dengan teliti.
+
+Setelah menyunting, unggah ulang `index.html` (lihat
+[Bagian 7.4](#74-memastikan-perubahan-sudah-terbit)), lalu uji dengan langkah pada
+[Bagian 6.9](#69-memverifikasi-ucapan-terima-kasih-chatbot).
 
 ---
 
@@ -1070,6 +1309,12 @@ memastikan apakah masalahnya benar-benar di situs Anda atau hanya cache.
 | Tombol Beli tidak berfungsi | Blokir pop-up aktif di browser | Izinkan pop-up untuk situs Anda, lalu klik ulang |
 | Tombol Bagikan tidak tampil | `index.html` versi lama masih di cache repositori | Unggah ulang `index.html` terbaru, lalu hard refresh (Bagian 8.12) |
 | Panel Bagikan tidak terbuka | JavaScript diblokir / berkas rusak saat disunting | Aktifkan JS; muat ulang berkas dari ZIP (Bagian 8.12) |
+| Tombol chatbot tidak muncul | `index.html` versi lama masih di repositori/cache | Unggah ulang `index.html` terbaru, lalu hard refresh (Bagian 8.13) |
+| Panel chat tidak terbuka saat diklik | JavaScript diblokir atau berkas rusak saat disunting | Aktifkan JS; kembalikan `index.html` dari ZIP (Bagian 8.13) |
+| Chatbot selalu menjawab "belum menemukan jawaban" | Kata kunci (`keys`) terlalu sempit, atau JavaScript gagal diurai | Perluas `keys`; periksa sintaks (Bagian 8.13) |
+| `terima kasih` dijawab dengan jawaban cadangan | `index.html` versi lama masih terunggah / di cache | Unggah ulang `index.html` terbaru, lalu hard refresh (Bagian 8.14) |
+| Balasan terima kasih tanpa tombol saran lanjutan | `id` pada `CHAT_THANKS_FOLLOW` tidak cocok dengan `CHAT_KB` | Perbaiki `id`-nya (Bagian 7.8) |
+| Ucapan terima kasih tidak muncul di akhir alur bantuan | `CHAT_THANKS_CLOSE` kosong, atau bagian `+ CHAT_THANKS_CLOSE` terhapus | Kembalikan `index.html` dari ZIP (Bagian 8.14) |
 
 ### 8.11 `robots.txt` atau `sitemap.xml` bermasalah
 
@@ -1158,6 +1403,106 @@ atau browser Anda masih menampilkan versi dari cache.
 2. Klik sekali lagi di area halaman, lalu coba tombol **Salin tautan** kembali.
 3. Bila tetap gagal, salin manual: klik kanan pada kartu produk → *Copy link address*, atau
    tempel alamat situs yang tertulis di [Bagian 6](#bagian-6--tunggu--verifikasi-situs-live).
+
+---
+
+### 8.13 Chatbot bermasalah
+
+**Gejala A — tombol chat di pojok kanan bawah tidak muncul**
+
+Berarti `index.html` di repositori masih versi lama (sebelum fitur chatbot ditambahkan),
+atau browser masih menampilkan versi dari cache.
+
+1. Buka halaman repositori di GitHub → klik **`index.html`**.
+2. Tekan **Ctrl + F** / **Cmd + F**, cari teks `chatFab`.
+   - **Bila ditemukan:** berkas di repositori sudah benar → masalahnya **cache browser**.
+     Lakukan **hard refresh** (**Ctrl + Shift + R** / **Cmd + Shift + R**) atau buka di
+     **mode incognito** — lihat [Bagian 8.9](#89-cara-memeriksa-lewat-mode-incognito).
+   - **Bila tidak ditemukan:** berkas masih lama → unggah ulang `index.html` dari ZIP
+     paket terbaru, lalu tunggu 1–2 menit.
+3. Di HP, gulir ke bawah lalu naik lagi — tombol berada di atas bilah navigasi bawah.
+
+**Gejala B — tombol tampak, tetapi panel chat tidak terbuka saat diklik**
+
+Panel chat digerakkan JavaScript. Bila tidak bereaksi, hampir selalu karena berkasnya
+rusak saat disunting atau JavaScript diblokir.
+
+1. Pastikan **JavaScript aktif** di browser (lihat [Bagian 8.3](#83-css--javascript-tidak-jalan-halaman-tampil-polos-tanpa-gaya)).
+2. Kembalikan `index.html` dari ZIP paket: **Add file ▾ → Upload files** → unggah
+   `index.html` yang baru → **Commit changes**.
+3. Tunggu 1–2 menit lalu **hard refresh**.
+
+**Gejala C — chatbot menutup sendiri saat pengguna mengklik di halaman**
+
+Itu perilaku yang memang dirancang: **klik di luar area chat** menutup panel. Cukup klik
+tombol bulat toska sekali lagi untuk membukanya kembali.
+
+**Gejala D — chatbot selalu menjawab “belum menemukan jawaban yang pas”**
+
+Berarti pertanyaan pengguna tidak cocok dengan kata kunci mana pun di `CHAT_KB`.
+
+1. Pastikan berkasnya utuh: cari `CHAT_KB` di `index.html` — bila ada, sintaksnya kemungkinan
+   rusak. Uji cepat dengan membuka situs lalu periksa apakah **tombol keranjang** masih
+   berfungsi. Bila keranjang juga mati, seluruh JavaScript gagal diurai → kembalikan
+   `index.html` dari ZIP.
+2. Bila JS sehat, perluas daftar kata kunci topik terkait pada `keys` — lihat
+   [Bagian 7.7](#77-mengubah-daftar-pertanyaan--jawaban-chatbot).
+3. Sementara itu, pengguna tetap diarahkan ke **kontak admin**, jadi tidak akan menemui
+   jalan buntu.
+
+**Gejala E — jawaban chatbot tidak memuat nomor WhatsApp admin**
+
+Nomor tersebut memang **belum diisi** pada paket ini. Isi `CHAT_WA_ADMIN` dan/atau
+`CHAT_MAIL_ADMIN` seperti dijelaskan pada
+[Bagian 7.7](#77-mengubah-daftar-pertanyaan--jawaban-chatbot), dan chatbot akan menampilkan
+tautannya.
+
+**Gejala F — chatbot rapi di PC tetapi sempit/terpotong di HP**
+
+Lakukan **hard refresh** di HP (kotak dialog browser biasanya punya opsi *Refresh*/*Muat
+ulang dengan membuang cache*). Bila tetap, pastikan `index.html` yang terunggah adalah
+versi terbaru dari ZIP paket — blok CSS chatbot mengatur tata letak HP dan desktop
+tersendiri (lihat [Bagian 7.7](#77-mengubah-daftar-pertanyaan--jawaban-chatbot)).
+
+### 8.14 Ucapan terima kasih bermasalah
+
+**Gejala A — mengetik `terima kasih` tetapi muncul jawaban cadangan**
+
+Artinya `index.html` yang terunggah adalah **versi lama** (sebelum fitur ini ada), atau
+berkasnya belum terunggah ulang. Pastikan versi terbaru dari ZIP paket sudah diunggah,
+lalu lakukan **hard refresh** (lihat [Bagian 8.8](#88-cache-browser-menampilkan-versi-lama)).
+Bila sudah benar tetapi tetap muncul jawaban cadangan, periksa
+[Bagian 8.3](#83-css--javascript-tidak-jalan-halaman-tampil-polos-tanpa-gaya) — biasanya ada
+kesalahan sintaks JavaScript akibat suntingan sebelumnya.
+
+**Gejala B — balasan terima kasih muncul, tetapi tidak ada tombol saran lanjutan**
+
+Saran lanjutan diambil dari daftar `CHAT_THANKS_FOLLOW`. Periksa bahwa setiap isinya
+merupakan `id` yang benar-benar ada di `CHAT_KB` (`beli`, `cari`, `pesan`, `admin`). `id`
+yang salah ketik akan dilewati tanpa pesan kesalahan, sehingga tombolnya tidak muncul —
+lihat [Bagian 7.8](#78-mengubah-ucapan-terima-kasih-chatbot).
+
+**Gejala C — jawaban Cara membeli / mencari / memesan tidak lagi diakhiri kalimat terima kasih**
+
+Periksa variabel `CHAT_THANKS_CLOSE`. Bila nilainya `''` (kosong), penutup memang sengaja
+dimatikan. Bila ada teksnya tetapi tetap tidak muncul, kemungkinan tiga entri `CHAT_KB`
+(`beli`, `cari`, `pesan`) kehilangan bagian `+ CHAT_THANKS_CLOSE` di akhir `answer`-nya.
+Kembalikan `index.html` dari ZIP paket bila perlu.
+
+**Gejala D — pertanyaan biasa tiba-tiba dijawab dengan ucapan terima kasih**
+
+Ini tidak akan terjadi pada paket asli, karena topik selalu diperiksa **lebih dulu**
+daripada ucapan terima kasih. Bila terjadi, kemungkinan urutan pemeriksaan pada fungsi
+`chatRespond()` pernah diubah. Susunannya harus: `chatMatch` → `chatGrateful` → cadangan.
+
+**Gejala E — satu kata pemicu tidak dikenali (mis. bahasa daerah)**
+
+Tambahkan kata tersebut ke `CHAT_THANKS_KEYS` — daftar bawaannya memang berisi Bahasa
+Indonesia, Inggris, dan beberapa ungkapan Arab, belum mencakup semua bahasa daerah.
+Caranya ada di [Bagian 7.8](#78-mengubah-ucapan-terima-kasih-chatbot).
+
+> Ucapan terima kasih berjalan sepenuhnya di dalam berkas — tidak ada koneksi jaringan,
+> akun, atau kunci API yang bisa menjadi penyebab kegagalan.
 
 ---
 
@@ -1250,7 +1595,7 @@ J: Bisa. Nama repo hanya mempengaruhi bagian akhir URL situs Anda. Ikuti aturan 
 di [Bagian 2.2](#22-membuat-repositori-baru).
 
 **T: Berapa ukuran total paket?**
-J: Sekitar 440 KB setelah diekstrak — sangat ringan dan cepat dibuka.
+J: Sekitar 533 KB setelah diekstrak — sangat ringan dan cepat dibuka.
 
 **T: Apakah `README.md` dan `panduan-upload-github.md` akan tampil di situs?**
 J: Tidak. Keduanya hanya berkas dokumentasi di repositori dan tidak dipanggil oleh
@@ -1259,6 +1604,46 @@ J: Tidak. Keduanya hanya berkas dokumentasi di repositori dan tidak dipanggil ol
 **T: Apakah perlu berkas konfigurasi tambahan?**
 J: Tidak. Situs diterbitkan langsung pada alamat bawaan GitHub Pages (`github.io`), jadi
 seluruh berkas konfigurasi tambahan tidak diperlukan — paket ini sudah lengkap apa adanya.
+
+**T: Ada tombol bulat di pojok kanan bawah layar. Apa itu?**
+J: Itu **chatbot / asisten toko**. Klik untuk membuka panel percakapan berisi panduan
+**cara membeli**, **cara mencari buku**, **cara memesan**, format berkas & cara unduh,
+metode pembayaran, dan kontak admin. Ada lima tombol pilihan cepat sehingga pengunjung
+bisa menelusuri topik tanpa mengetik. Cara memeriksanya:
+[Bagian 6.8](#68-memverifikasi-chatbot-widget-chat-melayang).
+
+**T: Apakah chatbot perlu API, kunci API, akun, atau layanan berbayar?**
+J: Tidak sama sekali. Chatbot bekerja **sepenuhnya di dalam `index.html`** dengan
+pencocokan kata kunci; tidak ada panggilan ke layanan luar, tidak ada biaya, dan tidak
+ada yang bisa rusak karena jaringan.
+
+**T: Bagaimana cara mengubah pertanyaan & jawaban chatbot?**
+J: Semua isinya ada pada satu objek bernama `CHAT_KB` di dalam `index.html`. Langkah
+lengkapnya ada di [Bagian 7.7](#77-mengubah-daftar-pertanyaan--jawaban-chatbot).
+
+**T: Kalau pengunjung menanyakan sesuatu yang tidak dikenali, chatbot diam saja?**
+J: Tidak. Chatbot menampilkan **jawaban cadangan** yang menyebutkan topik yang tersedia
+dan mengarahkan pengunjung ke **kontak admin** — tidak pernah membiarkan pengguna
+menemui jalan buntu.
+
+**T: Apakah chatbot bisa menjawab kalau saya mengetik "terima kasih"?**
+J: Bisa. Chatbot mengenali **32 variasi** ucapan terima kasih — termasuk `terima kasih`,
+`makasih`, `thanks`, `thank you`, `thx`, `tq`, `syukron`, `sudah dibantu`, dan
+`sangat membantu`. Balasannya ramah, menyebut nama toko, mengajak menghubungi admin bila
+masih ada pertanyaan, dan menampilkan 4 tombol saran lanjutan
+(lihat [Bagian 6.9](#69-memverifikasi-ucapan-terima-kasih-chatbot)).
+
+**T: Bagaimana cara mengubah kalimat terima kasihnya?**
+J: Ada empat tempat yang bisa disunting: daftar pemicu `CHAT_THANKS_KEYS`, saran lanjutan
+`CHAT_THANKS_FOLLOW`, kalimat balasan `chatThanksBody()`, dan penutup alur bantuan
+`CHAT_THANKS_CLOSE`. Langkahnya ada di
+[Bagian 7.8](#78-mengubah-ucapan-terima-kasih-chatbot).
+
+**T: Apakah penambahan ucapan terima kasih mengubah jawaban yang sudah ada?**
+J: Tidak. Urutan pemeriksaannya sengaja dibuat: **topik diperiksa lebih dulu**, ucapan
+terima kasih menyusul. Jadi pertanyaan biasa tetap dijawab seperti semula; hanya tiga alur
+bantuan (Cara membeli, Cara mencari buku, Cara memesan) yang kini **ditutup** dengan
+kalimat terima kasih, sesuai permintaan.
 
 **T: Bolehkah saya memperbarui isi situs nanti?**
 J: Ya, kapan saja — lihat [Bagian 7](#bagian-7--memperbarui-situs-di-kemudian-hari).
@@ -1336,6 +1721,25 @@ J: Ya, kapan saja — lihat [Bagian 7](#bagian-7--memperbarui-situs-di-kemudian-
 - [ ] **Klik Salin tautan** → muncul notifikasi *"Tautan produk disalin"*.
 - [ ] Panel Bagikan dapat ditutup lewat **klik di luar area**, tombol **×**, dan tombol **Esc**.
 - [ ] Setelah panel Bagikan ditutup, tombol **🛒 Beli** tetap berfungsi seperti biasa.
+- [ ] Tombol **chatbot** (bulat toska berisi ikon balon percakapan) terlihat di **pojok kanan bawah**.
+- [ ] **Klik tombol chatbot** → panel chat terbuka dengan sapaan + **5 tombol pilihan cepat**
+      (Cara membeli, Cara mencari buku, Cara memesan, Metode pembayaran, Hubungi admin).
+- [ ] **Klik "Cara membeli"** → muncul jawaban enam langkah pembelian beserta tautan halaman toko.
+- [ ] **Ketik pertanyaan bebas** (mis. `bisa dibaca di hp?`) → chatbot menjawab sesuai topik.
+- [ ] **Ketik pertanyaan di luar topik** (mis. `resep rendang`) → muncul **jawaban cadangan**
+      yang mengarahkan ke kontak admin.
+- [ ] Panel chat dapat ditutup lewat **tombol ×**, tombol **Esc**, dan **klik di luar area**.
+- [ ] Di HP, panel chat **tidak menutupi** bottom tab bar maupun tombol Beli/Bagikan.
+- [ ] **Ketik `terima kasih`** di panel chat → muncul balasan terima kasih yang menyebut
+      **Toko Papua Online**, mengajak menghubungi admin, dan memuat tautan halaman toko.
+- [ ] Setelah balasan terima kasih, muncul **4 tombol saran lanjutan**: Cara membeli,
+      Cara mencari buku, Cara memesan, dan Hubungi admin.
+- [ ] Coba juga variasi: `makasih`, `thanks`, `thx`, `tq`, `syukron` → balasan tetap muncul.
+- [ ] **Klik "Cara membeli"** → jawaban diakhiri kalimat terima kasih; sama untuk
+      **Cara mencari buku** dan **Cara memesan**.
+- [ ] **Ketik `resep rendang`** → tetap muncul **jawaban cadangan** seperti semula
+      (bukan balasan terima kasih).
+- [ ] **Ketik `cara membeli`** → tetap dijawab sebagai topik pembelian, bukan ucapan terima kasih.
 
 ---
 

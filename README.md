@@ -79,6 +79,13 @@ overflow horizontal pada keduanya.
 - **Keranjang** — panel samping (drawer) dengan penambahan/pengurangan jumlah,
   hapus item, subtotal, dan tombol lanjut ke pembelian.
 - **Notifikasi (toast)** — umpan balik saat produk masuk keranjang.
+- **Chatbot (widget chat melayang)** — tombol bulat di pojok kanan bawah yang membuka
+  panel percakapan berisi panduan **cara membeli**, **cara mencari buku**, **cara memesan**,
+  format berkas & cara unduh, metode pembayaran, serta kontak admin. Dilengkapi tombol
+  pilihan cepat dan dapat menjawab pertanyaan bebas dengan pencocokan kata kunci —
+  **tanpa API eksternal, tanpa kunci API, tanpa layanan pihak ketiga**. Chatbot juga
+  membalas **ucapan terima kasih** dengan ramah dan menutup alur bantuan (cara membeli /
+  mencari / memesan) memakai kalimat terima kasih (lihat **Bagian 9**).
 - **Aksesibilitas** — `aria-label`, `aria-pressed`, `aria-hidden`, `role="status"`,
   navigasi papan tuntas keyboard, dan atribut `lang="id"`.
 
@@ -267,7 +274,150 @@ tombol **Beli** tetap membuka halaman checkout seperti biasa.
 
 ---
 
-## 9. Langkah Selanjutnya — Panduan Upload Lengkap
+## 9. Chatbot (Widget Chat Melayang)
+
+Halaman toko memiliki **asisten toko** berupa widget chat melayang di pojok kanan bawah.
+Widget ini berjalan **sepenuhnya di dalam `index.html`**: tidak ada API eksternal, tidak
+ada kunci API, dan tidak ada layanan pihak ketiga — sehingga tidak ada yang bisa gagal
+karena jaringan atau biaya langganan.
+
+### Cara membuka & menutup
+
+| Aksi | Cara |
+|---|---|
+| Buka | Klik tombol bulat (ikon balon percakapan) di **pojok kanan bawah** |
+| Tutup | Klik tombol **×** di kepala panel, tekan tombol **Esc**, atau klik di luar area chat |
+| Tombol yang sama | Setelah dibuka, tombol bulat berubah menjadi ikon **×** — klik sekali lagi untuk menutup |
+
+Panel chat **tidak menutupi** tombol Beli/Bagikan pada kartu produk maupun bottom tab bar
+di HP: tombolnya diletakkan di atas tab bar (mobile) dan di sudut kanan bawah (desktop).
+
+### Cakupan jawaban
+
+Basis pengetahuan (`CHAT_KB`) berisi 14 topik yang mencakup seluruh kebutuhan yang diminta:
+
+| Topik | Isi jawaban |
+|---|---|
+| **Cara membeli** | Pilih produk → klik **Beli** → diarahkan ke halaman **checkout OrderHero** → isi data → bayar → terima tautan unduhan PDF. Termasuk alur lewat keranjang dan catatan biaya transaksi. |
+| **Cara mencari buku** | Kolom pencarian di header, filter kategori (Semua/Promo/Terlaris/Baru), katalog produk, tombol **Produk** di bilah bawah HP, dan klik kartu untuk deskripsi. |
+| **Cara memesan** | Langkah pemesanan buku yang sudah tersedia, pesanan buku yang **belum tersedia**, pesanan khusus, pembelian **jumlah banyak/institusi** (harga khusus + invoice), serta **kontak admin**. |
+| **Format berkas** | Semua produk e-book **PDF**. |
+| **Cara mengunduh** | Tautan unduhan dikirim ke email setelah pembayaran terkonfirmasi. |
+| **Bisa dibaca di HP** | Ya — PDF dapat dibuka di Android/iPhone maupun komputer. |
+| **Metode pembayaran** | Pilihan tampil di halaman checkout OrderHero. |
+| **Tautan unduhan belum diterima** | Cek folder Spam/Promosi, pastikan email benar, tunggu 5–10 menit, lalu hubungi admin dengan nomor pesanan + bukti pembayaran. |
+| **Hubungi admin** | Mengarahkan ke bagian **Kontak & dukungan** di halaman toko. |
+| **Harga, Promo, Keamanan transaksi, Produk tersedia, Mulai (sapaan)** | Jawaban pelengkap yang ikut memperkaya percakapan. |
+
+### Tombol pilihan cepat (quick replies)
+
+Di bawah area percakapan selalu tersedia lima tombol: **Cara membeli**, **Cara mencari buku**,
+**Cara memesan**, **Metode pembayaran**, dan **Hubungi admin**. Selain itu, setiap jawaban
+bot menampilkan **saran lanjutan** (mis. setelah “Cara membeli” muncul *Cara mencari buku*,
+*Metode pembayaran*, *Cara mengunduh*, *Hubungi admin*), sehingga pengguna bisa menelusuri
+seluruh topik **tanpa mengetik sama sekali**.
+
+### Pertanyaan bebas & jawaban cadangan
+
+Pengguna juga bisa mengetik pertanyaan sendiri. Pertanyaan tersebut dicocokkan dengan
+kata kunci pada `CHAT_KB` memakai skor sederhana (frasa panjang bernilai lebih tinggi,
+kata pendek hanya cocok sebagai kata utuh). Bila tidak ada topik yang cukup cocok,
+chatbot menampilkan **jawaban cadangan** yang menyebutkan topik yang tersedia dan
+mengarahkan pengguna ke **kontak admin** — bukan balasan kosong atau diam.
+
+### Ucapan terima kasih
+
+Chatbot mengenali ucapan terima kasih dan membalasnya dengan ramah — **tanpa mengubah
+topik atau jawaban lain yang sudah ada**.
+
+| Bagian | Nilai |
+|---|---|
+| Pemicu (`CHAT_THANKS_KEYS`) | `terima kasih`, `terima kasih banyak`, `terimakasih`, `makasih`, `mksh`, `thanks`, `thank you`, `thankyou`, `thx`, `tks`, `tq`, `syukron`, `syukran`, `jazakallah`, `sudah dibantu`, `sudah membantu`, `sangat membantu`, `membantu sekali`, `sangat terbantu`, `sudah cukup`, `cukup jelas`, `jelas sekali`, `oke terima kasih`, `ok terima kasih`, `baik terima kasih`, `terima kasih ya`, `oke thanks`, `oke makasih`, `mantap terima kasih` — **32 kata kunci** |
+| Balasan (`chatThanksBody()`) | Menyebut **Toko Papua Online**, berterima kasih, mengajak menghubungi admin bila masih ada pertanyaan, dan menyertakan tautan halaman toko |
+| Saran lanjutan (`CHAT_THANKS_FOLLOW`) | **Cara membeli**, **Cara mencari buku**, **Cara memesan**, **Hubungi admin** |
+| Penutup alur bantuan (`CHAT_THANKS_CLOSE`) | Kalimat terima kasih yang ditambahkan di akhir jawaban **Cara membeli**, **Cara mencari buku**, dan **Cara memesan** |
+
+**Aturan urutan:** ucapan terima kasih dicek **setelah** pencocokan topik. Jadi pertanyaan
+yang kebetulan memuat kata “terima kasih” tetap dijawab sesuai topiknya, sedangkan sapaan
+singkat seperti *“terima kasih”* saja tidak lagi jatuh ke jawaban cadangan.
+
+**Mengubah teksnya:** sunting bagian berikut di dalam `index.html`.
+
+```js
+var CHAT_THANKS_KEYS = ['terima kasih', 'makasih', 'thanks', ...];  // daftar pemicu
+var CHAT_THANKS_FOLLOW = ['beli', 'cari', 'pesan', 'admin'];        // saran lanjutan
+var CHAT_THANKS_CLOSE = '<br><br>Terima kasih telah memilih <b>Toko Papua Online</b> ...';
+function chatThanksBody() { return '<b>Terima kasih banyak!</b> ...'; }
+```
+
+- **Menambah pemicu** → tambahkan string baru ke `CHAT_THANKS_KEYS`.
+- **Mengubah kalimat balasan** → sunting isi `chatThanksBody()`.
+- **Mengubah atau menghapus penutup** pada alur bantuan → sunting `CHAT_THANKS_CLOSE`
+  (isi `''` bila tidak ingin ada penutup).
+
+### Mengubah daftar pertanyaan/jawaban
+
+Semua jawaban berada pada **satu objek** bernama `CHAT_KB` di dalam `index.html`. Setiap
+entri berbentuk:
+
+```js
+{
+  id: 'beli', label: 'Cara membeli',
+  keys: ['cara membeli', 'cara beli', 'beli', 'checkout', ...],
+  follow: ['cari', 'bayar', 'unduh', 'admin'],
+  answer: '<b>Cara membeli buku</b><br>1. Buka halaman toko ... '
+}
+```
+
+| Bagian | Fungsinya |
+|---|---|
+| `id` | Nama unik topik (dipakai oleh `follow`) |
+| `label` | Teks tombol saran lanjutan + dicocokkan langsung bila pengguna klik tombol itu |
+| `keys` | Daftar kata kunci/frasa yang memicu jawaban ini |
+| `answer` | Isi jawaban (boleh berisi HTML sederhana: `<b>`, `<br>`, `&bull;`, tautan) |
+| `build` | *Opsional* — fungsi yang membangun jawaban saat dipanggil (dipakai topik **Harga** dan **Produk tersedia** agar daftar produk otomatis ikut diperbarui) |
+| `follow` | Daftar `id` yang muncul sebagai tombol saran setelah jawaban |
+
+**Menambah topik baru:** salin satu entri, ubah `id`, `label`, `keys`, dan `answer`.
+Tombol pilihan cepat tetap (bawah) diatur di array `CHAT_QUICK`, jawaban cadangan di
+objek `CHAT_FALLBACK`, dan ucapan terima kasih di `CHAT_THANKS_KEYS` + `chatThanksBody()`.
+
+
+**Menambah kontak admin langsung:** isi dua baris berikut agar jawaban “Hubungi admin”
+memuat tautan siap klik (kosongkan kembali dengan `''` bila tidak ingin ditampilkan):
+
+```js
+var CHAT_WA_ADMIN = '62812xxxxxxx';   // nomor WhatsApp admin
+var CHAT_MAIL_ADMIN = 'admin@toko.id'; // email admin
+```
+
+**Catatan penting:** jangan mengetikkan garis miring `\` atau tanda kutip `'` di dalam
+`answer` tanpa di-escape (`\'`), karena dapat membuat JavaScript gagal diurai.
+
+### Cara menguji chatbot
+
+1. Buka halaman → klik tombol bulat di pojok kanan bawah.
+2. Sambutan bot muncul, lima tombol pilihan cepat tampil di bawah.
+3. Klik **Cara membeli** → jawaban enam langkah muncul beserta tautan halaman toko dan
+tautan checkout.
+4. Klik **Cara mencari buku**, **Cara memesan**, **Metode pembayaran**, **Hubungi admin** —
+masing-masing harus menjawab topiknya.
+5. Ketik pertanyaan bebas, mis. *"bisa dibaca di HP?"* atau *"berapa harganya?"*.
+6. Ketik pertanyaan di luar topik, mis. *"resep rendang"* → jawaban cadangan + arahan ke admin.
+7. Ketik **terima kasih** (coba juga *makasih*, *thanks*, *tq*, *syukron*) → balasan terima
+   kasih yang menyebut Toko Papua Online, memuat tautan halaman toko, dan menampilkan empat
+   tombol saran lanjutan (Cara membeli / Cara mencari buku / Cara memesan / Hubungi admin).
+8. Klik **Cara membeli** → perhatikan jawaban ditutup dengan kalimat terima kasih; ulangi
+   untuk **Cara mencari buku** dan **Cara memesan**.
+9. Tutup dengan **×**, lalu buka lagi dan tutup dengan **Esc** dan dengan klik di luar panel.
+10. Di HP, pastikan widget tidak menutupi bottom tab bar dan tombol Beli/Bagikan.
+
+> Chatbot **tidak menambah berkas baru** dan tidak memuat pustaka eksternal — seluruh
+> ikon memakai inline SVG sprite yang sudah ada.
+
+---
+
+## 10. Langkah Selanjutnya — Panduan Upload Lengkap
 
 Panduan upload ke GitHub Pages yang **sangat rinci** ada di **`panduan-upload-github.md`**.
 Isinya 9 bagian:
@@ -279,9 +429,9 @@ Isinya 9 bagian:
 | 3 | **Upload berkas** — (a) lewat web GitHub: *Add file ▾ → Upload files*, drag & drop isi folder + memastikan folder `images/` ikut; (b) lewat **GitHub Desktop**: install → sign in → add local repository → publish → push |
 | 4 | **Commit & periksa hasil** — memastikan 11 berkas + folder `images/` tampil di repositori |
 | 5 | **Aktifkan GitHub Pages** — *Settings → Pages → Source: Deploy from a branch → Branch `main` → Folder `/ (root)` → Save*, lalu cara menemukan URL situs |
-| 6 | **Tunggu & verifikasi situs live** — 1–2 menit, cek gambar tampil, cek tombol **Beli** mengarah ke link checkout, cek **tombol Bagikan** membuka lima pilihan media & salin tautan (**Bagian 6.7**), cek tampilan mobile & desktop, dan cek `robots.txt` + `sitemap.xml` **Bagian 6.6** |
+| 6 | **Tunggu & verifikasi situs live** — 1–2 menit, cek gambar tampil, cek tombol **Beli** mengarah ke link checkout, cek **tombol Bagikan** membuka lima pilihan media & salin tautan (**Bagian 6.7**), cek **chatbot** membuka/menutup & menjawab (**Bagian 6.8**), cek tampilan mobile & desktop, dan cek `robots.txt` + `sitemap.xml` **Bagian 6.6** |
 | 7 | **Update di kemudian hari** — edit langsung di GitHub atau unggah ulang, mengganti gambar, menambah produk, memastikan perubahan terbit |
-| 8 | **Troubleshooting lengkap** — 404, gambar tidak muncul, CSS/JS tidak jalan, tampil sebagai kode mentah, `.nojekyll` hilang, repo Private, salah folder root, cache browser, mode incognito |
+| 8 | **Troubleshooting lengkap** — 404, gambar tidak muncul, CSS/JS tidak jalan, tampil sebagai kode mentah, `.nojekyll` hilang, repo Private, salah folder root, cache browser, mode incognito, `robots.txt`/`sitemap.xml`, tombol Bagikan, dan **chatbot** |
 | 9 | **FAQ & daftar periksa** — pertanyaan umum + checklist langkah demi langkah |
 
 ### Ringkasan alur upload
@@ -292,6 +442,7 @@ Isinya 9 bagian:
 4. **Settings → Pages** → *Deploy from a branch* → Branch `main` → Folder `/ (root)` → **Save**.
 5. Tunggu 1–2 menit, situs aktif di `https://tokopapuaonline.github.io/Toko-Online-Papua-E-Book/`.
 6. Uji tombol **Beli** (harus membuka halaman checkout) dan tombol **Bagikan** (lima pilihan media + salin tautan).
+7. Uji **chatbot**: klik tombol bulat di pojok kanan bawah, coba kelima tombol pilihan cepat, lalu tutup dengan **Esc** atau klik di luar panel.
 
 > **Paling sering salah:** pastikan `index.html` berada di tingkat paling atas repositori
 > (sejajar dengan folder `images/`), bukan di dalam subfolder.
