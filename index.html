@@ -991,8 +991,12 @@ a.btn-buy:focus-visible{outline:2px solid var(--teal-dark);outline-offset:2px}
 
   /* ---------- konfigurasi ---------- */
   var CHECKOUT_URL = 'https://tokopapuaonline.orderhero.id/store';
-  /* Tautan checkout per produk. Produk yang belum memiliki halaman checkout
-     sendiri memakai CHECKOUT_URL di atas (lihat helper checkoutUrlFor). */
+  /* Tautan checkout PER PRODUK. Setiap tombol "Beli" pada kartu produk memakai
+     field `url` milik produknya sendiri (lihat helper checkoutUrlFor).
+     Produk yang belum mempunyai halaman checkout khusus sementara diarahkan ke
+     tautan checkout yang sudah tersedia, supaya semua tombol Beli tetap berfungsi.
+     CHECKOUT_URL di atas hanya dipakai sebagai cadangan terakhir dan oleh tombol
+     "Lanjut ke Pembelian" di keranjang. */
   var CHECKOUT_BELANDA_IRIAN_JAYA = 'https://tokopapuaonline.orderhero.id/form/checkout-belanda-irian-jaya';
 
   var PRODUCTS = [
@@ -1013,10 +1017,13 @@ a.btn-buy:focus-visible{outline:2px solid var(--teal-dark);outline-offset:2px}
       title: 'E-Book Laporan Tindak Kekerasan di Papua (Januari 2010 - Maret 2022) - Gugus Tugas UGM',
       short: 'Laporan Tindak Kekerasan di Papua - Gugus Tugas UGM',
       price: 50000,
-      /* Belum ada tautan checkout khusus untuk produk ini -> memakai CHECKOUT_URL.
-         Ganti dengan tautan checkout produk ini begitu tersedia.
-         Tautan cadangan terverifikasi 2026-09-21: HTTP 200 */
-      url: CHECKOUT_URL,
+      /* BELUM ADA tautan checkout khusus untuk produk ini (sudah diuji 2026-09-21:
+         /form/checkout-laporan-tindak-kekerasan-di-papua dan varian slug lain
+         mengarah ke halaman Not Found). Untuk sementara diarahkan ke tautan
+         checkout yang tersedia agar tombol Beli tetap berfungsi.
+         GANTI baris di bawah dengan tautan checkout produk ini begitu tersedia.
+         Terverifikasi 2026-09-21: HTTP 200 */
+      url: CHECKOUT_BELANDA_IRIAN_JAYA,
       img: 'images/produk-2.webp',
       cat: 'Laporan Riset',
       tags: ['baru', 'promo'],
@@ -1089,6 +1096,7 @@ a.btn-buy:focus-visible{outline:2px solid var(--teal-dark);outline-offset:2px}
             '<div class="card-price">' + rupiah(p.price) + '</div>' +
             '<a class="btn-buy" href="' + esc(checkoutUrlFor(p)) + '"' +
               ' target="_blank" rel="noopener noreferrer" data-buy="' + esc(p.id) + '"' +
+              ' data-checkout="' + esc(checkoutUrlFor(p)) + '"' +
               ' aria-label="Beli ' + esc(p.short) + ' (buka halaman checkout di tab baru)">' +
               icon('i-cart') + ' Beli' +
             '</a>' +
