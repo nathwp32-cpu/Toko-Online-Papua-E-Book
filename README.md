@@ -37,7 +37,7 @@ Paket ini siap diunggah langsung ke GitHub Pages tanpa proses build apa pun.
 - **Teknologi:** HTML5 + Tailwind CSS (CDN) + Google Fonts *Plus Jakarta Sans*
 - **Tema warna:** slate gelap (`#070B14`) dengan aksen merah (`#DC2626`) dan amber (`#F59E0B`)
 - **SEO:** `<link rel="canonical">` + meta `description`, `keywords`, `robots`, Open Graph, dan Twitter Card tertanam di `index.html`; dilengkapi `sitemap.xml` + `robots.txt`
-- **Schema.org JSON-LD:** blok `application/ld+json` berisi `Organization` + `WebSite` + node gabungan `["Product", "Book"]` untuk e-book (lihat bagian *Schema.org JSON-LD*)
+- **Schema.org JSON-LD:** blok `application/ld+json` berisi `Organization` + `WebSite` + node gabungan `["Product", "Book"]` untuk e-book, lengkap dengan `offers` harga **Rp 50.000** (lihat bagian *Schema.org JSON-LD*)
 - **Domain:** `https://tokopapuaonline.com/` (file `CNAME` sudah disertakan dalam paket)
 - **Struktur halaman:**
   1. Navbar sticky
@@ -158,28 +158,37 @@ grep -rn "USERNAME\|NAMA-REPO" index.html sitemap.xml robots.txt
 |---------|-----|
 | `Organization` | Toko Papua Online — nama, URL, logo/sampul, bahasa, wilayah layanan |
 | `WebSite` | Situs + relasi ke Organization sebagai publisher |
-| `["Product", "Book"]` | E-book-nya: nama, deskripsi, gambar sampul, URL, brand & publisher **Toko Papua Online**, penulis/penyusun **Gugus Tugas Papua UGM**, `bookFormat` EBook, `inLanguage` id-ID, 135 halaman, cakupan 2010-01/2022-03, serta `BuyAction` ke halaman checkout |
+| `["Product", "Book"]` | E-book-nya: nama, deskripsi, gambar sampul, URL, brand & publisher **Toko Papua Online**, penulis/penyusun **Gugus Tugas Papua UGM**, `bookFormat` EBook, `inLanguage` id-ID, 135 halaman, cakupan 2010-01/2022-03, **`offers` harga Rp 50.000** (`InStock`), serta `BuyAction` ke halaman checkout |
 
-**⚠️ `offers` sengaja belum diisi.** Halaman ini tidak mencantumkan harga (harga hanya tampil di halaman checkout OrderHero), sedangkan Google mewajibkan `price` berupa angka konkret pada `offers`. Menebak harga berisiko menampilkan harga keliru ke calon pembeli, jadi lebih aman dikosongkan sampai harga final diketahui.
-
-Begitu harga sudah pasti, tambahkan blok ini **di dalam** node `["Product", "Book"]` (setelah `"audience"`, beri koma di akhir blok `audience`), lalu ganti `"0"` dengan harga sebenarnya — tulis angka saja, tanpa titik atau koma (misal Rp 99.000 ditulis `"99000"`):
+**✅ `offers` sudah diisi** dengan harga e-book yang benar-benar tertera di halaman checkout OrderHero: **Rp 50.000**. Isi lengkapnya di `index.html`:
 
 ```json
 "offers": {
   "@type": "Offer",
   "url": "https://tokopapuaonline.orderhero.id/landing/laporan-kekerasan-papua",
-  "price": "0",
+  "price": "50000",
   "priceCurrency": "IDR",
   "availability": "https://schema.org/InStock",
-  "itemCondition": "https://schema.org/NewCondition"
+  "itemCondition": "https://schema.org/NewCondition",
+  "seller": {
+    "@type": "Organization",
+    "name": "Toko Papua Online",
+    "url": "https://tokopapuaonline.com/"
+  }
 }
 ```
+
+**Kenapa `50000` dan bukan `52850`?** Di halaman checkout, **Rp 2.850** adalah **Biaya Transaksi**, bukan harga produk. Google meminta harga produk itu sendiri, jadi yang dicantumkan adalah Subtotal — **Rp 50.000**. Memasukkan biaya transaksi akan menampilkan harga yang menyesatkan di hasil pencarian.
+
+**Cara memverifikasi harganya:** buka [halaman checkout](https://tokopapuaonline.orderhero.id/landing/laporan-kekerasan-papua), lalu lihat bagian **Ringkasan Pesanan** — baris produk dan Subtotal sama-sama menampilkan **Rp 50.000** (Total menjadi Rp 52.850 setelah biaya transaksi).
+
+Jika harga produk berubah, perbarui `"price"` di `index.html` (tulis angka saja, tanpa titik/koma: Rp 75.000 → `"75000"`), lalu sinkronkan `index-html-source.txt` dan ZIP paketnya.
 
 **Cara menguji di Google Rich Results Test:**
 
 1. Buka [search.google.com/test/rich-results](https://search.google.com/test/rich-results).
 2. Tempel `https://tokopapuaonline.com/` → klik **Test URL** (atau pilih tab **Code** lalu tempel isi `index.html` untuk menguji sebelum upload).
-3. Yang diharapkan: **Organization** dan **WebSite** terbaca tanpa error. Node **Product/Book** juga terdeteksi; sampai `offers` diisi, Google akan menandai `offers` belum ada — itu wajar dan **tidak** membuat halaman gagal diindeks.
+3. Yang diharapkan: **Organization** dan **WebSite** terbaca tanpa error, dan node **Product/Book** terdeteksi lengkap dengan **harga Rp 50.000 (IDR)** serta status ketersediaan **In stock** — tanda `offers` sudah dibaca Google dengan benar.
 4. Validasi struktur schema.org-nya di [validator.schema.org](https://validator.schema.org) — di sini blok JSON-LD harus lolos tanpa error.
 
 ---

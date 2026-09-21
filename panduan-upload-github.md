@@ -247,23 +247,16 @@ Anda tidak perlu mengubah apa pun di sini kecuali harga produk berubah (lihat ca
 1. Buka **[search.google.com/test/rich-results](https://search.google.com/test/rich-results)**.
 2. Tempel `https://tokopapuaonline.com/` → klik **Test URL**.
    - Belum di-upload? Pilih tab **Code**, lalu tempel seluruh isi `index.html` — hasilnya sama.
-3. Perhatikan hasilnya: **Organization** dan **WebSite** harus terbaca tanpa error. Node **Product/Book** juga akan terdeteksi.
+3. Perhatikan hasilnya: **Organization** dan **WebSite** harus terbaca tanpa error. Node **Product/Book** juga akan terdeteksi, lengkap dengan harga **Rp 50.000 (IDR)** dan status **In stock**.
 4. Untuk memvalidasi struktur schema.org-nya (bukan hanya aturan Google), buka **[validator.schema.org](https://validator.schema.org)** dan tempel URL atau kode yang sama.
 
-**⚠️ Soal `offers` (harga):** blok `offers` sengaja **belum** diisi karena halaman ini tidak mencantumkan harga — harga hanya tampil di halaman checkout OrderHero. Google mewajibkan `price` berupa angka konkret, dan menebak harga bisa menampilkan harga keliru ke calon pembeli. Rich Results Test akan menandai `offers` belum ada; itu **wajar** dan tidak menghalangi halaman diindeks.
+**✅ Soal `offers` (harga):** blok `offers` **sudah diisi** dengan harga yang benar-benar tertera di halaman checkout OrderHero — **Rp 50.000**. Isinya: `"price": "50000"`, `"priceCurrency": "IDR"`, `"availability": "https://schema.org/InStock"`, plus `seller` Toko Papua Online dan `url` ke halaman checkout.
 
-Setelah harga final diketahui, tambahkan di dalam node `["Product", "Book"]` (beri koma setelah blok `"audience"`), dan ganti `"0"` dengan harga sebenarnya tanpa titik/koma (Rp 99.000 → `"99000"`):
+**Kenapa `50000`, bukan `52850`?** Di halaman checkout, **Rp 2.850** adalah **Biaya Transaksi** — bukan harga produk. Google meminta harga produk itu sendiri, jadi yang dicantumkan adalah Subtotal: **Rp 50.000**. Kalau biaya transaksi ikut dimasukkan, harga yang tampil di Google akan menyesatkan.
 
-```json
-"offers": {
-  "@type": "Offer",
-  "url": "https://tokopapuaonline.orderhero.id/landing/laporan-kekerasan-papua",
-  "price": "0",
-  "priceCurrency": "IDR",
-  "availability": "https://schema.org/InStock",
-  "itemCondition": "https://schema.org/NewCondition"
-}
-```
+**Cara memeriksa harganya sendiri:** buka [halaman checkout](https://tokopapuaonline.orderhero.id/landing/laporan-kekerasan-papua) dan lihat **Ringkasan Pesanan** — baris produk dan Subtotal menampilkan **Rp 50.000**.
+
+Kalau harga produk berubah: ubah `"price"` di `index.html` (angka saja, tanpa titik/koma — Rp 75.000 → `"75000"`), lalu perbarui `index-html-source.txt` dan ZIP paketnya.
 
 ---
 
