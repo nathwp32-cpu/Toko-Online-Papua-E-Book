@@ -21,9 +21,9 @@ tidak perlu menjalankan perintah terminal (metode A sepenuhnya klik-klik di brow
 - [Bagian 3 — Upload Berkas ke Repositori](#bagian-3--upload-berkas-ke-repositori)
 - [Bagian 4 — Commit & Periksa Hasil Upload](#bagian-4--commit--periksa-hasil-upload)
 - [Bagian 5 — Aktifkan GitHub Pages](#bagian-5--aktifkan-github-pages)
-- [Bagian 6 — Tunggu & Verifikasi Situs Live](#bagian-6--tunggu--verifikasi-situs-live) · [6.6 robots/sitemap](#66-memverifikasi-robotstxt--sitemapxml) · [6.7 tombol Bagikan](#67-memverifikasi-tombol-bagikan-share) · [6.8 chatbot](#68-memverifikasi-chatbot-widget-chat-melayang) · [6.9 ucapan terima kasih](#69-memverifikasi-ucapan-terima-kasih-chatbot)
-- [Bagian 7 — Memperbarui Situs di Kemudian Hari](#bagian-7--memperbarui-situs-di-kemudian-hari) · [7.5 robots/sitemap](#75-memperbarui-robotstxt--sitemapxml) · [7.6 tombol Bagikan](#76-mengubah-teks--tautan-pada-tombol-bagikan) · [7.7 isi chatbot](#77-mengubah-daftar-pertanyaan--jawaban-chatbot) · [7.8 ucapan terima kasih](#78-mengubah-ucapan-terima-kasih-chatbot)
-- [Bagian 8 — Pemecahan Masalah (Troubleshooting)](#bagian-8--pemecahan-masalah-troubleshooting) · [8.11 robots/sitemap](#811-robotstxt-atau-sitemapxml-bermasalah) · [8.12 tombol Bagikan](#812-tombol-bagikan-bermasalah) · [8.13 chatbot](#813-chatbot-bermasalah) · [8.14 ucapan terima kasih](#814-ucapan-terima-kasih-bermasalah)
+- [Bagian 6 — Tunggu & Verifikasi Situs Live](#bagian-6--tunggu--verifikasi-situs-live) · [6.6 robots/sitemap](#66-memverifikasi-robotstxt--sitemapxml) · [6.7 tombol Bagikan](#67-memverifikasi-tombol-bagikan-share) · [6.8 chatbot](#68-memverifikasi-chatbot-widget-chat-melayang) · [6.9 ucapan terima kasih](#69-memverifikasi-ucapan-terima-kasih-chatbot) · [6.10 footer lanskap](#610-memverifikasi-footer-lanskap-mobile)
+- [Bagian 7 — Memperbarui Situs di Kemudian Hari](#bagian-7--memperbarui-situs-di-kemudian-hari) · [7.5 robots/sitemap](#75-memperbarui-robotstxt--sitemapxml) · [7.6 tombol Bagikan](#76-mengubah-teks--tautan-pada-tombol-bagikan) · [7.7 isi chatbot](#77-mengubah-daftar-pertanyaan--jawaban-chatbot) · [7.8 ucapan terima kasih](#78-mengubah-ucapan-terima-kasih-chatbot) · [7.9 footer lanskap](#79-mengubah-tata-letak-footer-lanskap-mobile)
+- [Bagian 8 — Pemecahan Masalah (Troubleshooting)](#bagian-8--pemecahan-masalah-troubleshooting) · [8.11 robots/sitemap](#811-robotstxt-atau-sitemapxml-bermasalah) · [8.12 tombol Bagikan](#812-tombol-bagikan-bermasalah) · [8.13 chatbot](#813-chatbot-bermasalah) · [8.14 ucapan terima kasih](#814-ucapan-terima-kasih-bermasalah) · [8.15 footer lanskap](#815-footer-lanskap-mobile-bermasalah)
 - [Bagian 9 — FAQ & Daftar Periksa](#bagian-9--faq--daftar-periksa)
 
 ---
@@ -42,6 +42,7 @@ tidak perlu menjalankan perintah terminal (metode A sepenuhnya klik-klik di brow
 | 8 | Uji tombol **Bagikan** pada kartu produk (WhatsApp, Facebook, X, Telegram, salin tautan) | [Bagian 6.7](#67-memverifikasi-tombol-bagikan-share) |
 | 9 | Uji **chatbot** — buka widget, coba tombol pilihan cepat, tutup dengan Esc/klik luar | [Bagian 6.8](#68-memverifikasi-chatbot-widget-chat-melayang) |
 | 10 | Uji **ucapan terima kasih** chatbot + penutup alur bantuan | [Bagian 6.9](#69-memverifikasi-ucapan-terima-kasih-chatbot) |
+| 11 | Periksa **footer lanskap** di HP (kolom berjajar ke samping, tanpa scroll horizontal) | [Bagian 6.10](#610-memverifikasi-footer-lanskap-mobile) |
 
 > **Inti yang paling sering salah:** pastikan berkas `index.html` berada **di tingkat paling
 > atas** repositori (sejajar dengan folder `images/`), **bukan** di dalam subfolder. Ini
@@ -542,6 +543,7 @@ Buka situs Anda dan periksa satu per satu:
 | 6 | **Tombol Beli** | Tombol hijau toska bertuliskan **🛒 Beli** di setiap kartu |
 | 7 | **Klik tombol Beli** | Tab baru terbuka mengarah ke halaman checkout |
 | 8 | **Footer tampil** | Footer gelap dengan nama toko dan tautan |
+| 8b | **Footer lanskap (HP)** | Di HP kolom footer (*Tentang*, *Jelajahi*, *Bantuan*) **berjajar ke samping** dalam 3 kolom, bukan bertumpuk; tidak ada scroll horizontal; tidak tertutup tab bar (**Bagian 6.10**) |
 | 9 | **Warna & tata letak** | Skema warna teal/hijau toska, teks terbaca, tidak ada elemen bertumpuk |
 | 10 | **`robots.txt` terbuka** | `https://tokopapuaonline.github.io/Toko-Online-Papua-E-Book/robots.txt` tampil sebagai teks |
 | 11 | **`sitemap.xml` terbuka** | `https://tokopapuaonline.github.io/Toko-Online-Papua-E-Book/sitemap.xml` tampil sebagai XML valid |
@@ -590,6 +592,8 @@ yang benar-benar bisa menghasilkan penjualan.
    - **Bottom tab bar** muncul di bagian bawah layar
      (Home / Produk / Keranjang / Lainnya).
    - Grid produk menjadi **2 kolom**.
+   - **Footer lanskap** — gulir ke paling bawah: kolom *Tentang*, *Jelajahi*, dan *Bantuan*
+     tampak **berdampingan ke samping** (3 kolom), bukan bertumpuk satu per satu.
    - **Tidak ada halaman yang bisa digeser ke kiri/kanan** (tidak ada scroll horizontal).
    - Semua tombol **Beli** dapat ditekan dengan nyaman.
 
@@ -810,6 +814,56 @@ Ujinya singkat — cukup di panel chat yang sudah Anda buka.
 
 > Bila balasan terima kasih tidak muncul, lihat
 > [Bagian 8.14](#814-ucapan-terima-kasih-bermasalah).
+
+---
+
+### 6.10 Memverifikasi footer lanskap (mobile)
+
+Footer di layar HP disusun **lanskap**: kolom *Tentang*, *Jelajahi*, dan *Bantuan*
+berjajar ke samping dalam tiga kolom. Berikut cara memastikannya tampil benar.
+
+**Langkah**
+
+1. Buat perubahan pada [Bagian 6.4](#64-memverifikasi-tampilan-mobile-hp) terlebih dahulu
+   (mode perangkat **390 × 844**) — tata letak lanskap **hanya muncul di lebar ≤ 767 px**.
+2. Gulir ke paling bawah halaman.
+3. Hitung kolom: harus **tiga blok berdampingan** dalam satu baris, bukan bertumpuk.
+
+| # | Yang diperiksa | Hasil yang diharapkan |
+|---|---|---|
+| 1 | Jumlah kolom | **3 kolom berjajar ke samping** (Tentang · Jelajahi · Bantuan) |
+| 2 | Posisi kiri tiap kolom | Berbeda satu sama lain (tidak semua di `x = 0`) |
+| 3 | Baris pertama tiap kolom | Sama tinggi (blok sejajar dalam satu baris) |
+| 4 | **Scroll horizontal** | **Tidak ada** — halaman tidak bisa digeser ke kiri/kanan |
+| 5 | Teks terpotong | Tidak ada — kata terpanjang ("komprehensif") tetap utuh |
+| 6 | Baris hak cipta | Tidak tertutup bottom tab bar (jarak ≈ 79 px) |
+| 7 | Tombol chat melayang | Tidak menutupi baris hak cipta (jarak ≈ 12 px) |
+| 8 | Lebar 360 px & 430 px | Tetap 3 kolom, tetap rapi, tanpa scroll horizontal |
+| 9 | Desktop 1280 × 900 | Footer **sama seperti sebelumnya** (gap 40 px, teks 13 px) |
+
+**Cara cepat memeriksa lewat console browser (opsional)**
+
+Tekan **F12** → tab **Console** → tempel baris berikut → Enter:
+
+```js
+const g=document.querySelector('.foot-grid');
+console.log(getComputedStyle(g).gridTemplateColumns,   // harus 3 nilai px, mis. "124.844px 108.578px 108.562px"
+  document.documentElement.scrollWidth <= innerWidth  // harus true (tidak ada scroll horizontal)
+);
+```
+
+- Bila nilai pertama hanya berisi **satu** angka (mis. `390px`), lapisan lanskap belum aktif —
+  lihat [Bagian 8.15](#815-footer-lanskap-mobile-bermasalah).
+- Bila nilai kedua `false`, ada elemen yang meluber keluar layar.
+
+**Tabel ringkas hasil pengukuran yang sudah diverifikasi**
+
+| Lebar viewport | Jumlah kolom | Posisi kiri kolom (px) | Scroll horizontal | Jarak hak cipta ↔ tab bar |
+|---|---|---|---|---|
+| 360 px | 3 | 12 · 138 · 249 | tidak ada | 79 px |
+| 390 px | 3 | 12 · 149 · 269 | tidak ada | 79 px |
+| 430 px | 3 | 12 · 163 · 297 | tidak ada | 79 px |
+| 1280 px (desktop) | 3 | 74 · 582 · 914 | tidak ada | (tab bar tidak tampil) |
 
 ---
 
@@ -1102,6 +1156,72 @@ Setelah menyunting, unggah ulang `index.html` (lihat
 [Bagian 7.4](#74-memastikan-perubahan-sudah-terbit)), lalu uji dengan langkah pada
 [Bagian 6.9](#69-memverifikasi-ucapan-terima-kasih-chatbot).
 
+**B. Footer Lanskap**
+
+### 7.9 Mengubah tata letak footer lanskap (mobile)
+
+Seluruh aturan footer lanskap berada dalam **satu blok** `@media (max-width:767px)` di
+dalam `<style>`, tepat sebelum komentar `/* ============ TABBAR (mobile) ============ */`.
+
+**A. Mengubah jumlah kolom**
+
+```css
+.foot-grid{
+  grid-template-columns:minmax(0,1.15fr) minmax(0,1fr) minmax(0,1fr);
+  gap:12px;
+}
+```
+
+- **Dua kolom:** `minmax(0,1fr) minmax(0,1fr)` — pertimbangkan menaikkan `font-size` ke 12 px.
+- **Empat kolom:** `minmax(0,1fr) minmax(0,1fr) minmax(0,1fr) minmax(0,1fr)` — **wajib**
+  turunkan `font-size` ke ± 10 px, karena pada 360 px tiap kolom hanya mendapat ± 82 px.
+- **Pertahankan `minmax(0, …)`**: angka `0` di depannya adalah yang mengizinkan kolom
+  mengecil di bawah lebar kontennya. Bila diganti menjadi `1fr 1fr 1fr` biasa, footer bisa
+  memicu scroll horizontal.
+
+**B. Mengubah lebar kolom**
+
+Ubah perbandingan angka `fr`-nya. `1.15fr 1fr 1fr` berarti kolom pertama (Tentang) sedikit
+lebih lebar karena memuat paragraf deskripsi. `1.4fr 1fr 1fr` membuatnya lebih lebar lagi.
+
+**C. Mengubah jarak antar kolom**
+
+```css
+.foot-grid{ gap:12px; }   /* naikkan ke 16px bila terasa terlalu rapat */
+```
+
+**D. Mengubah jarak aman dari bawah**
+
+```css
+.site-footer{padding:24px 12px calc(140px + env(safe-area-inset-bottom))}
+```
+
+Angka **140px** adalah ruang kosong di bawah baris hak cipta agar tidak tertutup bottom
+tab bar (60 px) dan tombol chat melayang (± 128 px dari dasar). Bila tombol chat Anda geser
+lebih rendah, naikkan angka ini.
+
+**E. Mengubah ukuran teks**
+
+```css
+.foot-about p{font-size:11px}
+.foot-col h3{font-size:10px}
+.foot-col a,.foot-col span{font-size:11px}
+.foot-bottom{font-size:9.5px}
+```
+
+> ⚠️ Bila mengecilkan `font-size` di bawah 10 px, teks bisa menjadi terlalu kecil untuk
+> dibaca di HP. Lebih baik **mengurangi jumlah kolom** daripada mengecilkan huruf terus.
+
+**F. Yang JANGAN diubah**
+
+- Jangan menyentuh `.foot-grid` di dalam `@media (min-width:768px)` — itulah footer desktop
+  (`1.6fr 1fr 1fr`, gap 40 px) yang harus tetap sama.
+- Jangan menghapus komentar penanda blok; komentar itu memudahkan pencarian bila perlu
+  menyesuaikan lagi nanti.
+
+Cara mengujinya ada di [Bagian 6.10](#610-memverifikasi-footer-lanskap-mobile); bila
+bermasalah, lihat [Bagian 8.15](#815-footer-lanskap-mobile-bermasalah).
+
 ---
 
 ## Bagian 8 — Pemecahan Masalah (Troubleshooting)
@@ -1315,6 +1435,10 @@ memastikan apakah masalahnya benar-benar di situs Anda atau hanya cache.
 | `terima kasih` dijawab dengan jawaban cadangan | `index.html` versi lama masih terunggah / di cache | Unggah ulang `index.html` terbaru, lalu hard refresh (Bagian 8.14) |
 | Balasan terima kasih tanpa tombol saran lanjutan | `id` pada `CHAT_THANKS_FOLLOW` tidak cocok dengan `CHAT_KB` | Perbaiki `id`-nya (Bagian 7.8) |
 | Ucapan terima kasih tidak muncul di akhir alur bantuan | `CHAT_THANKS_CLOSE` kosong, atau bagian `+ CHAT_THANKS_CLOSE` terhapus | Kembalikan `index.html` dari ZIP (Bagian 8.14) |
+| Footer HP masih bertumpuk satu kolom | Lapisan `@media (max-width:767px)` untuk footer terhapus / browser masih memuat berkas lama | Muat ulang `index.html` dari ZIP, lalu hard refresh (Bagian 8.15) |
+| Footer lanskap menyebabkan scroll horizontal | `minmax(0,…)` pada `.foot-grid` hilang sehingga kolom tidak bisa mengecil | Kembalikan `minmax(0,1.15fr) minmax(0,1fr) minmax(0,1fr)` (Bagian 7.9) |
+| Baris hak cipta tertutup bottom tab bar | Padding bawah footer kurang dari tinggi tab bar | Naikkan nilai `140px` pada `padding` footer (Bagian 8.15) |
+| Footer desktop ikut berubah / rusak | Aturan footer tidak di-scope ke `max-width:767px` | Bungkus kembali dalam media query (Bagian 7.9) |
 
 ### 8.11 `robots.txt` atau `sitemap.xml` bermasalah
 
@@ -1504,6 +1628,61 @@ Caranya ada di [Bagian 7.8](#78-mengubah-ucapan-terima-kasih-chatbot).
 > Ucapan terima kasih berjalan sepenuhnya di dalam berkas — tidak ada koneksi jaringan,
 > akun, atau kunci API yang bisa menjadi penyebab kegagalan.
 
+### 8.15 Footer lanskap (mobile) bermasalah
+
+**Gejala A — di HP kolom footer masih bertumpuk satu per satu (tidak lanskap)**
+
+Lapisan aturan `@media (max-width:767px)` untuk footer kemungkinan terhapus, atau
+`index.html` yang termuat masih versi lama.
+
+1. Pastikan Anda benar-benar berada di **lebar ≤ 767 px**. Tata letak lanskap **sengaja
+   tidak aktif** di desktop.
+2. Buka **F12 → Console**, jalankan:
+
+```js
+console.log(getComputedStyle(document.querySelector('.foot-grid')).gridTemplateColumns);
+```
+
+Bila hasilnya **satu** nilai (mis. `390px`), aturan tiga kolom tidak aktif. Bila hasilnya
+**tiga** nilai (mis. `124.844px 108.578px 108.562px`), aturan bekerja — berarti masalahnya
+ada pada penerbitan atau cache.
+
+3. Muat ulang `index.html` dari ZIP paket, lalu **hard refresh** (Ctrl+Shift+R /
+   Cmd+Shift+R). Cara mengembalikan aturannya ada di
+   [Bagian 7.9](#79-mengubah-tata-letak-footer-lanskap-mobile).
+
+**Gejala B — muncul scroll horizontal di HP setelah footer diubah**
+
+Penyebabnya biasanya `minmax(0, …)` pada `.foot-grid` hilang, sehingga kolom tidak boleh
+mengecil dan kata terpanjang (mis. "komprehensif") memaksa footer melebar melampaui layar.
+
+- Kembalikan `grid-template-columns:minmax(0,1.15fr) minmax(0,1fr) minmax(0,1fr);`.
+- Pastikan baris `.foot-about,.foot-col{min-width:0;overflow-wrap:break-word}` masih ada.
+- Periksa dengan `document.documentElement.scrollWidth <= innerWidth` di Console — harus `true`.
+
+**Gejala C — baris hak cipta tertutup bottom tab bar**
+
+Tinggi tab bar 60 px, sedangkan tombol chat melayang berada sampai ± 128 px dari dasar
+layar. Padding bawah footer harus lebih besar dari keduanya. Nilai baku yang dipakai:
+**`140px`** (dihitung bersama `env(safe-area-inset-bottom)` untuk iPhone). Menaikkan angka
+ini tidak menimbulkan efek samping — hanya menambah ruang kosong di dalam area gelap.
+
+**Gejala D — teks footer terpotong atau tumpang tindih di HP sempit (360 px)**
+
+Kemungkinan ukuran teks terlalu besar untuk lebar kolom. Turunkan nilainya:
+**`.foot-col a,.foot-col span{font-size:11px}`** (tautan) dan
+**`.foot-col h3{font-size:10px}`** (judul kolom). Bila masih sempit, kurangi jumlah kolom
+menjadi dua (`minmax(0,1fr) minmax(0,1fr)`).
+
+**Gejala E — footer desktop ikut berubah atau rusak**
+
+Aturan footer lanskap harus selalu berada **di dalam** `@media (max-width:767px)`. Aturan
+footer desktop ada di dalam `@media (min-width:768px)` dan **tidak boleh disentuh**.
+Lihat [Bagian 7.9](#79-mengubah-tata-letak-footer-lanskap-mobile).
+
+> Perubahan footer hanya berupa CSS di dalam `index.html` — tidak ada berkas baru, tidak
+> ada gambar tambahan, dan tidak ada pustaka eksternal yang bisa gagal dimuat.
+
 ---
 
 ## Bagian 9 — FAQ & Daftar Periksa
@@ -1645,6 +1824,21 @@ terima kasih menyusul. Jadi pertanyaan biasa tetap dijawab seperti semula; hanya
 bantuan (Cara membeli, Cara mencari buku, Cara memesan) yang kini **ditutup** dengan
 kalimat terima kasih, sesuai permintaan.
 
+**T: Bisakah footer di HP dibuat menyamping, bukan bertumpuk ke bawah?**
+J: Sudah begitu sejak paket ini. Di HP kolom footer (*Tentang*, *Jelajahi*, *Bantuan*)
+**berjajar ke samping dalam tiga kolom**; tampilan desktop tidak berubah. Cara mengubah
+jumlah kolom/jaraknya ada di [Bagian 7.9](#79-mengubah-tata-letak-footer-lanskap-mobile),
+ dan cara memeriksanya di [Bagian 6.10](#610-memverifikasi-footer-lanskap-mobile).
+
+**T: Apakah footer lanskap membuat halaman bisa digeser ke samping di HP?**
+J: Tidak. Sudah diukur pada lebar **360, 390, dan 430 px**: `scrollWidth` selalu sama
+dengan lebar layar, jadi **tidak ada scroll horizontal**. Kuncinya `minmax(0, …)` pada
+`.foot-grid` — jangan dihapus (lihat [Bagian 8.15](#815-footer-lanskap-mobile-bermasalah)).
+
+**T: Apakah baris hak cipta di footer tertutup bottom tab bar atau tombol chat?**
+J: Tidak. Padding bawah footer di HP sengaja dinaikkan menjadi **140 px**, sehingga baris
+hak cipta berjarak **± 79 px** dari tab bar dan **± 12 px** dari tombol chat.
+
 **T: Bolehkah saya memperbarui isi situs nanti?**
 J: Ya, kapan saja — lihat [Bagian 7](#bagian-7--memperbarui-situs-di-kemudian-hari).
 
@@ -1740,6 +1934,14 @@ J: Ya, kapan saja — lihat [Bagian 7](#bagian-7--memperbarui-situs-di-kemudian-
 - [ ] **Ketik `resep rendang`** → tetap muncul **jawaban cadangan** seperti semula
       (bukan balasan terima kasih).
 - [ ] **Ketik `cara membeli`** → tetap dijawab sebagai topik pembelian, bukan ucapan terima kasih.
+- [ ] **Footer lanskap di HP** — gulir ke paling bawah: kolom *Tentang*, *Jelajahi*,
+      *Bantuan* tampak **berdampingan ke samping** (3 kolom), bukan bertumpuk.
+- [ ] **Tidak ada scroll horizontal** di HP setelah footer lanskap aktif.
+- [ ] Tidak ada kata terpotong di footer (kata "komprehensif" tetap utuh).
+- [ ] Baris hak cipta footer **tidak tertutup** bottom tab bar (jarak ± 79 px).
+- [ ] Baris hak cipta footer **tidak tertutup** tombol chat melayang (jarak ± 12 px).
+- [ ] Di **360 px** dan **430 px** footer tetap 3 kolom dan tetap rapi.
+- [ ] Di **desktop 1280 × 900**, footer tampil **sama seperti sebelumnya** (gap 40 px, teks 13 px).
 
 ---
 

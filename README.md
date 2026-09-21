@@ -57,7 +57,7 @@ halaman yang tepat.
 | Banner | Carousel 16:9 sudut 12 px | Carousel tinggi 392 px sudut 16 px |
 | Kategori | 4 kotak ikon bulat | Pil horizontal dengan ikon + label |
 | Grid produk | 2 kolom | 3 kolom (≥ 1100 px: 4 kolom) |
-| Footer | Bertumpuk satu kolom | 3 kolom sejajar, tema gelap |
+| Footer | **Lanskap: 3 kolom berjajar ke samping** (lihat **Bagian 10**) | 3 kolom sejajar, tema gelap |
 
 Diverifikasi pada **390 × 844** (mobile) dan **1280 × 900** (desktop), tanpa
 overflow horizontal pada keduanya.
@@ -86,6 +86,10 @@ overflow horizontal pada keduanya.
   **tanpa API eksternal, tanpa kunci API, tanpa layanan pihak ketiga**. Chatbot juga
   membalas **ucapan terima kasih** dengan ramah dan menutup alur bantuan (cara membeli /
   mencari / memesan) memakai kalimat terima kasih (lihat **Bagian 9**).
+- **Footer lanskap di mobile** — di layar HP kolom footer (*Tentang*, *Jelajahi*, *Bantuan*)
+  **berjajar ke samping** dalam tiga kolom, bukan bertumpuk vertikal. Padding bawah footer
+  dinaikkan agar baris hak cipta tidak tertutup bottom tab bar maupun tombol chat melayang.
+  Tampilan desktop tidak berubah (lihat **Bagian 10**).
 - **Aksesibilitas** — `aria-label`, `aria-pressed`, `aria-hidden`, `role="status"`,
   navigasi papan tuntas keyboard, dan atribut `lang="id"`.
 
@@ -417,7 +421,90 @@ masing-masing harus menjawab topiknya.
 
 ---
 
-## 10. Langkah Selanjutnya — Panduan Upload Lengkap
+## 10. Footer Lanskap (Khusus Mobile)
+
+Pada layar HP, kolom-kolom footer **berjajar ke samping (lanskap)** — bukan bertumpuk
+vertikal satu per satu. Tata letak ini di-scope ke `@media (max-width:767px)` sehingga
+**tampilan desktop sama sekali tidak berubah**.
+
+| | Mobile (≤ 767 px) | Desktop (≥ 768 px) |
+|---|---|---|
+| Kolom | **3 kolom berjajar ke samping** | 3 kolom sejajar (tidak berubah) |
+| Lebar kolom | `1.15fr 1fr 1fr` (≈ 125 / 109 / 109 px pada 390 px) | `1.6fr 1fr 1fr` (≈ 468 / 292 / 292 px pada 1280 px) |
+| Jarak antar kolom (`gap`) | 12 px | 40 px |
+| Padding footer | `24px 12px 140px` | `44px 0 34px` |
+| Ukuran teks kolom | 11 px | 13 px |
+| Baris hak cipta | Tersusun **vertikal** (2 baris) | Satu baris, kiri–kanan |
+
+### Cara kerja
+
+Tata letak lama di mobile adalah `grid-template-columns:1fr` — satu kolom, sehingga blok
+*Tentang*, *Jelajahi*, dan *Bantuan* bertumpuk dari atas ke bawah dan footer menjadi sangat
+tinggi. Aturan baru menggantinya dengan **tiga kolom berjajar**:
+
+```css
+@media (max-width:767px){
+  .site-footer{padding:24px 12px calc(140px + env(safe-area-inset-bottom))}
+  .foot-grid{
+    grid-template-columns:minmax(0,1.15fr) minmax(0,1fr) minmax(0,1fr);
+    gap:12px;
+    align-items:start;
+  }
+  /* … */
+}
+```
+
+`minmax(0, …)` dipakai agar kolom **boleh mengecil di bawah lebar kontennya** — tanpa ini,
+kata terpanjang (mis. "komprehensif") akan memaksa kolom melebar dan memicu scroll
+horizontal. Ditambah `overflow-wrap:break-word` pada tiap blok sebagai pengaman.
+
+### Jarak aman dari elemen tetap
+
+Padding bawah footer di mobile dinaikkan menjadi **140 px** (sebelumnya 84 px) supaya baris
+hak cipta berada jauh di atas dua elemen tetap:
+
+- **Bottom tab bar** (tinggi 60 px, menempel di dasar layar)
+- **Tombol chat melayang** (54 × 54 px, `bottom:74px` dari dasar)
+
+Hasil pengukuran setelah perubahan: jarak baris hak cipta ke tab bar **79 px**, dan ke
+tombol chat **12 px** pada lebar 360 / 390 / 430 px. Nilai `env(safe-area-inset-bottom)`
+ditambahkan agar aman di iPhone dengan *home indicator*.
+
+### Mengubahnya
+
+Semua aturan ada di satu blok `@media (max-width:767px)` di dalam `<style>`, tepat
+sebelum komentar `/* ============ TABBAR (mobile) ============ */`:
+
+| Yang ingin diubah | Ubah baris |
+|---|---|
+| Jumlah kolom | `grid-template-columns:minmax(0,1.15fr) minmax(0,1fr) minmax(0,1fr)` — tambah/kurangi angka `fr` |
+| Lebar kolom pertama | Angka `1.15fr` |
+| Jarak antar kolom | `gap:12px` |
+| Jarak aman bawah | `padding:24px 12px calc(140px + env(safe-area-inset-bottom))` |
+| Ukuran teks link | `.foot-col a,.foot-col span{font-size:11px}` |
+
+> ⚠️ Bila menambah kolom, **kurangi** ukuran `fr` tiap kolom (mis. `1fr 1fr 1fr 1fr`) dan
+turunkan `font-size` ke ± 10 px — pada 360 px, empat kolom hanya memberi ± 82 px per
+kolom.
+
+### Cara menguji
+
+1. Buka situs di HP, atau di browser desktop tekan **F12** → mode perangkat → **390 × 844**.
+2. Gulir ke paling bawah. Ketiga blok (*Tentang*, *Jelajahi*, *Bantuan*) harus tampak
+   **berdampingan ke samping**, bukan bertumpuk.
+3. Periksa **tidak ada scroll horizontal** (halaman tidak bisa digeser ke kiri/kanan).
+4. Pastikan tidak ada kata yang terpotong; kata terpanjang ("komprehensif") harus utuh.
+5. Pastikan baris hak cipta **tidak tertutup** bottom tab bar maupun tombol chat melayang.
+6. Perbesar ke **360 px** dan **430 px** — tata letak harus tetap tiga kolom dan tetap rapi.
+7. Beralih ke **1280 × 900** — footer harus **persis sama** seperti sebelumnya
+   (kolom `1.6fr 1fr 1fr`, gap 40 px, teks 13 px).
+
+> Footer tidak menambah berkas baru dan tidak memuat pustaka eksternal — hanya CSS di
+> dalam `index.html`.
+
+---
+
+## 11. Langkah Selanjutnya — Panduan Upload Lengkap
 
 Panduan upload ke GitHub Pages yang **sangat rinci** ada di **`panduan-upload-github.md`**.
 Isinya 9 bagian:
@@ -429,9 +516,9 @@ Isinya 9 bagian:
 | 3 | **Upload berkas** — (a) lewat web GitHub: *Add file ▾ → Upload files*, drag & drop isi folder + memastikan folder `images/` ikut; (b) lewat **GitHub Desktop**: install → sign in → add local repository → publish → push |
 | 4 | **Commit & periksa hasil** — memastikan 11 berkas + folder `images/` tampil di repositori |
 | 5 | **Aktifkan GitHub Pages** — *Settings → Pages → Source: Deploy from a branch → Branch `main` → Folder `/ (root)` → Save*, lalu cara menemukan URL situs |
-| 6 | **Tunggu & verifikasi situs live** — 1–2 menit, cek gambar tampil, cek tombol **Beli** mengarah ke link checkout, cek **tombol Bagikan** membuka lima pilihan media & salin tautan (**Bagian 6.7**), cek **chatbot** membuka/menutup & menjawab (**Bagian 6.8**), cek tampilan mobile & desktop, dan cek `robots.txt` + `sitemap.xml` **Bagian 6.6** |
+| 6 | **Tunggu & verifikasi situs live** — 1–2 menit, cek gambar tampil, cek tombol **Beli** mengarah ke link checkout, cek **tombol Bagikan** membuka lima pilihan media & salin tautan (**Bagian 6.7**), cek **chatbot** membuka/menutup & menjawab (**Bagian 6.8**), cek tampilan mobile (termasuk **footer lanskap**, Bagian 6.10) & desktop, dan cek `robots.txt` + `sitemap.xml` **Bagian 6.6** |
 | 7 | **Update di kemudian hari** — edit langsung di GitHub atau unggah ulang, mengganti gambar, menambah produk, memastikan perubahan terbit |
-| 8 | **Troubleshooting lengkap** — 404, gambar tidak muncul, CSS/JS tidak jalan, tampil sebagai kode mentah, `.nojekyll` hilang, repo Private, salah folder root, cache browser, mode incognito, `robots.txt`/`sitemap.xml`, tombol Bagikan, dan **chatbot** |
+| 8 | **Troubleshooting lengkap** — 404, gambar tidak muncul, CSS/JS tidak jalan, tampil sebagai kode mentah, `.nojekyll` hilang, repo Private, salah folder root, cache browser, mode incognito, `robots.txt`/`sitemap.xml`, tombol Bagikan, **chatbot**, dan **footer lanskap mobile** |
 | 9 | **FAQ & daftar periksa** — pertanyaan umum + checklist langkah demi langkah |
 
 ### Ringkasan alur upload
@@ -443,6 +530,7 @@ Isinya 9 bagian:
 5. Tunggu 1–2 menit, situs aktif di `https://tokopapuaonline.github.io/Toko-Online-Papua-E-Book/`.
 6. Uji tombol **Beli** (harus membuka halaman checkout) dan tombol **Bagikan** (lima pilihan media + salin tautan).
 7. Uji **chatbot**: klik tombol bulat di pojok kanan bawah, coba kelima tombol pilihan cepat, lalu tutup dengan **Esc** atau klik di luar panel.
+8. Uji **footer lanskap** di HP: gulir ke bawah — kolom footer harus berjajar ke samping, tanpa scroll horizontal, dan tidak tertutup bottom tab bar.
 
 > **Paling sering salah:** pastikan `index.html` berada di tingkat paling atas repositori
 > (sejajar dengan folder `images/`), bukan di dalam subfolder.

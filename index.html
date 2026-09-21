@@ -383,6 +383,36 @@ a.btn-buy:focus-visible{outline:2px solid var(--teal-dark);outline-offset:2px}
   justify-content:space-between;
 }
 
+/* ============ FOOTER LANSKAP (khusus mobile) ============
+   Kolom-kolom footer berjajar ke SAMPING (multi-kolom), bukan
+   bertumpuk vertikal. Di-scope ke max-width:767px sehingga
+   tampilan desktop sama sekali tidak terpengaruh.            */
+@media (max-width:767px){
+  .site-footer{padding:24px 12px calc(140px + env(safe-area-inset-bottom))}
+  .foot-grid{
+    grid-template-columns:minmax(0,1.15fr) minmax(0,1fr) minmax(0,1fr);
+    gap:12px;
+    align-items:start;
+  }
+  .foot-about,.foot-col{min-width:0;overflow-wrap:break-word}
+  .foot-brand{flex-wrap:wrap;gap:7px;margin-bottom:8px}
+  .foot-brand img{height:22px}
+  .foot-brand span{font-size:11.5px}
+  .foot-about p{font-size:11px;line-height:1.55;max-width:none}
+  .foot-col h3{font-size:10px;letter-spacing:.05em;margin-bottom:7px}
+  .foot-col ul{gap:5px}
+  .foot-col a,.foot-col span{font-size:11px;line-height:1.35;display:inline-block}
+  .foot-bottom{
+    margin-top:16px;
+    padding-top:12px;
+    font-size:9.5px;
+    line-height:1.45;
+    flex-direction:column;
+    gap:3px;
+    justify-content:flex-start;
+  }
+}
+
 /* ============ TABBAR (mobile) ============ */
 .tabbar{
   position:fixed;
