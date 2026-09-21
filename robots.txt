@@ -2,23 +2,27 @@
 #  ROBOTS.TXT — Toko Papua Online
 #  Landing page e-book "Laporan Resmi Tindak Kekerasan di Papua
 #  (Gugus Tugas UGM)"
+#  Domain: https://tokopapuaonline.com/
 # ============================================================
 #
-#  ⚠️  WAJIB DIGANTI SEBELUM SUBMIT KE GOOGLE:
-#      Ganti "USERNAME" dan "NAMA-REPO" pada baris Sitemap
-#      di bawah dengan username GitHub & nama repository Anda.
+#  File ini SUDAH dikonfigurasi untuk domain kustom
+#  https://tokopapuaonline.com/ — tidak ada placeholder yang
+#  perlu diganti.
 #
-#      Contoh:
-#      Sitemap: https://tokopapua.github.io/landing-laporan-papua/sitemap.xml
+#  ⚠️  KALAU DOMAIN BERUBAH:
+#      Ganti alamat pada baris "Sitemap:" di bawah ini, lalu
+#      sesuaikan juga sitemap.xml dan index.html.
 #
-#  Cara cepat (Linux/macOS/Git Bash):
-#      sed -i 's/USERNAME/tokopapua/g; s/NAMA-REPO/landing-laporan-papua/g' robots.txt
+#      Cara cepat (Linux/macOS/Git Bash):
+#          sed -i 's|https://tokopapuaonline.com/|https://domain-baru.com/|g' robots.txt
 #
-#  Cara cepat (Windows PowerShell):
-#      (Get-Content robots.txt) -replace 'USERNAME','tokopapua' -replace 'NAMA-REPO','landing-laporan-papua' | Set-Content robots.txt
+#      Cara cepat (Windows PowerShell):
+#          (Get-Content robots.txt) -replace 'https://tokopapuaonline.com/','https://domain-baru.com/' | Set-Content robots.txt
 #
-#  Catatan: setelah punya domain sendiri, ganti seluruh URL
-#  di file ini dengan domain tersebut.
+#  ⚠️  PENTING:
+#      Jangan pernah menambahkan "Disallow: /" tanpa pengecualian.
+#      Baris itu akan membuat Google berhenti mengindeks seluruh
+#      situs Anda, termasuk halaman jualan ini.
 # ============================================================
 
 # ── Semua crawler diizinkan mengakses seluruh halaman ──
@@ -32,4 +36,4 @@ Allow: /
 # Disallow:
 
 # ── Lokasi sitemap ──
-Sitemap: https://USERNAME.github.io/NAMA-REPO/sitemap.xml
+Sitemap: https://tokopapuaonline.com/sitemap.xml

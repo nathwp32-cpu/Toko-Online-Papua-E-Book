@@ -18,11 +18,12 @@ Paket ini siap diunggah langsung ke GitHub Pages tanpa proses build apa pun.
 | `.nojekyll` | File kosong, menandai GitHub Pages agar **tidak** memproses situs lewat Jekyll |
 | `images/cover.webp` | Gambar sampul e-book (salinan lokal, siap dipakai sebagai cadangan offline) |
 | `index-html-source.txt` | Salinan teks dari `index.html` — untuk disalin-tempel bila perlu |
-| `sitemap.xml` | Daftar URL situs untuk Google — **wajib diganti domainnya** (lihat bagian *SEO*) |
-| `robots.txt` | Izin crawler + penunjuk lokasi sitemap — **wajib diganti domainnya** (lihat bagian *SEO*) |
-| `CNAME` | **Tidak disertakan** — hanya dibuat kalau sudah punya domain kustom (lihat bagian *Domain Kustom*) |
+| `sitemap.xml` | Daftar URL situs untuk Google — sudah menunjuk domain `https://tokopapuaonline.com/` |
+| `robots.txt` | Izin crawler + penunjuk lokasi sitemap — sudah menunjuk domain kustom |
+| `CNAME` | **Sudah disertakan** — berisi `tokopapuaonline.com`. **Jangan dihapus** (lihat bagian *Domain Kustom*) |
+| `panduan-setup-dns.md` | Panduan lengkap setup DNS, Custom domain GitHub, HTTPS, dan troubleshooting (Bahasa Indonesia) |
 
-> **Catatan `CNAME`:** file ini **belum dibuat** karena belum ada domain kustom. Situs akan memakai alamat bawaan GitHub Pages (`https://<username>.github.io/<nama-repo>/`). Cara menambahkannya nanti ada di bagian *Domain Kustom* di bawah.
+> **Catatan `CNAME`:** file ini sudah berisi `tokopapuaonline.com`, jadi situs siap dilayani di domain kustom tersebut. File ini **wajib tetap ada di root repository** — kalau terhapus, domain akan menampilkan 404. Panduan lengkapnya ada di **`panduan-setup-dns.md`**.
 
 ---
 
@@ -35,7 +36,8 @@ Paket ini siap diunggah langsung ke GitHub Pages tanpa proses build apa pun.
 - **Gambar sampul:** URL absolut dari CDN OrderHero — **tidak perlu upload gambar apa pun**
 - **Teknologi:** HTML5 + Tailwind CSS (CDN) + Google Fonts *Plus Jakarta Sans*
 - **Tema warna:** slate gelap (`#070B14`) dengan aksen merah (`#DC2626`) dan amber (`#F59E0B`)
-- **SEO:** `<link rel="canonical">`, meta `description`, `keywords`, dan `robots` sudah tertanam di `index.html`; dilengkapi `sitemap.xml` + `robots.txt`
+- **SEO:** `<link rel="canonical">` + meta `description`, `keywords`, `robots`, Open Graph, dan Twitter Card tertanam di `index.html`; dilengkapi `sitemap.xml` + `robots.txt`
+- **Domain:** `https://tokopapuaonline.com/` (file `CNAME` sudah disertakan dalam paket)
 - **Struktur halaman:**
   1. Navbar sticky
   2. Hero (sampul e-book + statistik + 2 CTA)
@@ -56,12 +58,12 @@ Paket ini siap diunggah langsung ke GitHub Pages tanpa proses build apa pun.
 1. Masuk ke [github.com](https://github.com) → klik **New repository**.
 2. Isi nama repo, misal `landing-laporan-papua` → pilih **Public** → **Create repository**.
 3. Di halaman repo, klik **Add file** → **Upload files**.
-4. **Drag & drop** seluruh isi paket: `index.html`, `README.md`, `panduan-upload-github.md`, `.nojekyll`, dan folder `images/`.
+4. **Drag & drop** seluruh isi paket: `index.html`, `README.md`, `panduan-upload-github.md`, `panduan-setup-dns.md`, `sitemap.xml`, `robots.txt`, `.nojekyll`, **`CNAME`**, dan folder `images/`.
 5. Klik **Commit changes**.
 6. Masuk ke **Settings** → menu kiri **Pages**.
 7. Pada **Source**, pilih **Deploy from a branch**.
 8. Pilih **Branch: `main`** dan **Folder: `/ (root)`** → klik **Save**.
-9. Tunggu 1–2 menit, lalu buka `https://<username>.github.io/<nama-repo>/`.
+9. Isi **Custom domain** dengan `tokopapuaonline.com` → **Save** (lihat `panduan-setup-dns.md`), lalu tunggu 1–2 menit dan buka `https://tokopapuaonline.com/`.
 
 ### Opsi B — Lewat terminal (Git)
 
@@ -107,46 +109,30 @@ Gambar sampul dimuat langsung dari server OrderHero. Bila suatu saat server ters
 
 Paket ini sudah menyertakan `sitemap.xml` dan `robots.txt`, plus tag SEO dasar di dalam `index.html` (canonical, description, keywords, robots, Open Graph, dan Twitter Card).
 
-### ⚠️ Langkah WAJIB: ganti placeholder domain
+### ✅ Domain sudah dikonfigurasi — tidak ada placeholder lagi
 
-`index.html`, `sitemap.xml`, dan `robots.txt` memakai **placeholder** yang harus diganti dengan alamat GitHub Pages Anda yang sebenarnya:
+Paket ini sudah diatur untuk domain kustom **`https://tokopapuaonline.com/`**. Placeholder `USERNAME` / `NAMA-REPO` **sudah diganti semua** di ketiga file:
 
-- `USERNAME` → username GitHub Anda
-- `NAMA-REPO` → nama repository Anda
+| File | Nilai yang tertanam |
+|------|---------------------|
+| `index.html` | `<link rel="canonical" href="https://tokopapuaonline.com/">` dan `<meta property="og:url" content="https://tokopapuaonline.com/">` |
+| `sitemap.xml` | `<loc>https://tokopapuaonline.com/</loc>` |
+| `robots.txt` | `Sitemap: https://tokopapuaonline.com/sitemap.xml` |
+| `CNAME` | `tokopapuaonline.com` |
 
-Misal username Anda `tokopapua` dan nama repo `landing-laporan-papua`, maka alamat situsnya:
-`https://tokopapua.github.io/landing-laporan-papua/`
-
-**Cara 1 — satu perintah di terminal (Linux/macOS/Git Bash):**
+**Cara memastikan tidak ada sisa placeholder** — jalankan di folder yang sama:
 
 ```bash
-sed -i 's/USERNAME/tokopapua/g; s/NAMA-REPO/landing-laporan-papua/g' index.html sitemap.xml robots.txt
+grep -rn "USERNAME\|NAMA-REPO" index.html sitemap.xml robots.txt
+# Output yang benar: tidak ada apa-apa
 ```
 
-**Cara 2 — Windows PowerShell:**
-
-```powershell
-foreach ($f in 'index.html','sitemap.xml','robots.txt') {
-  (Get-Content $f) -replace 'USERNAME','tokopapua' -replace 'NAMA-REPO','landing-laporan-papua' | Set-Content $f
-}
-```
-
-**Cara 3 — manual lewat web GitHub:** buka tiap file → klik ikon pensil → ganti `USERNAME` dan `NAMA-REPO` → **Commit changes**.
-
-Setelah diganti, pastikan tiga tempat ini sudah benar:
-
-| File | Yang dicek |
-|------|-----------|
-| `index.html` | `<link rel="canonical" href="https://…/">` dan `<meta property="og:url" …>` |
-| `sitemap.xml` | Baris `<loc>https://…/</loc>` |
-| `robots.txt` | Baris `Sitemap: https://…/sitemap.xml` |
-
-> **Punya domain sendiri nanti?** Ganti seluruh URL GitHub Pages di ketiga file itu dengan domain Anda (misal `https://tokopapuaonline.com/`) — jangan menambahkan URL baru, tapi **menggantinya**, agar tidak ada duplikasi.
+> **Kalau nanti domainnya berubah:** ganti seluruh alamat `https://tokopapuaonline.com/` di keempat file itu dengan domain baru — **menggantinya**, bukan menambah URL baru, supaya Google tidak menganggapnya konten ganda. Perintah cepatnya ada di `panduan-setup-dns.md` bagian 8.1.
 
 ### Submit Sitemap ke Google Search Console
 
 1. Buka [search.google.com/search-console](https://search.google.com/search-console) → login dengan akun Google.
-2. Klik **Add property** → pilih **URL prefix** → masukkan alamat lengkap situs Anda, misal `https://tokopapua.github.io/landing-laporan-papua/` → **Continue**.
+2. Klik **Add property** → pilih **URL prefix** → masukkan alamat lengkap situs Anda: `https://tokopapuaonline.com/` → **Continue**.
 3. **Verifikasi kepemilikan.** Untuk GitHub Pages, cara termudah adalah **HTML tag**:
    - Pilih metode **HTML tag**, salin meta tag yang diberikan Google.
    - Tempelkan di dalam `<head>` pada `index.html` (misal tepat di bawah baris `<meta name="robots" …>`).
@@ -159,22 +145,33 @@ Setelah diganti, pastikan tiga tempat ini sudah benar:
 ### Mempercepat & memeriksa hasil indeks
 
 - **Request indexing:** di menu **URL Inspection**, tempel alamat halaman Anda → klik **Request Indexing**. Ini meminta Google merayapi halaman itu lebih cepat dari jadwal normal.
-- **Cek robots.txt:** buka `https://<username>.github.io/<nama-repo>/robots.txt` — pastikan baris `Sitemap:` menunjuk alamat yang benar.
-- **Cek sitemap terbaca:** buka `https://<username>.github.io/<nama-repo>/sitemap.xml` — harus tampil sebagai XML yang valid, bukan halaman 404.
+- **Cek robots.txt:** buka `https://tokopapuaonline.com/robots.txt` — pastikan baris `Sitemap:` menunjuk alamat yang benar.
+- **Cek sitemap terbaca:** buka `https://tokopapuaonline.com/sitemap.xml` — harus tampil sebagai XML yang valid, bukan halaman 404.
 - **Lihat performa:** menu **Performance** di Search Console menampilkan kata kunci yang membuat halaman Anda muncul beserta jumlah kliknya.
 
 ---
 
-## 🌐 Domain Kustom (Opsional — Nanti)
+## 🌐 Domain Kustom — `tokopapuaonline.com` (Sudah Disiapkan)
 
-Belum ada file `CNAME` karena belum ada domain kustom. Kalau nanti Anda punya domain sendiri (misal `tokopapuaonline.com`):
+Semua file sudah dikonfigurasi untuk domain kustom ini. File **`CNAME`** sudah ada di dalam paket dan berisi satu baris: `tokopapuaonline.com`.
 
-1. Buat file baru bernama **`CNAME`** (tanpa ekstensi) di folder yang sama.
-2. Isinya **satu baris saja**: `tokopapuaonline.com`
-3. Upload ke repo, lalu buka **Settings → Pages → Custom domain** dan isi nama domain tersebut.
-4. Di penyedia domain, arahkan DNS ke GitHub Pages (4 A record untuk domain utama, atau `CNAME` ke `<username>.github.io` untuk subdomain).
-5. **Ganti juga domain di `sitemap.xml`, `robots.txt`, dan `<link rel="canonical">` pada `index.html`** menjadi domain baru Anda.
-6. Di Google Search Console, tambahkan properti baru untuk domain tersebut dan submit ulang `sitemap.xml`.
+### Yang perlu Anda lakukan
+
+| # | Langkah | Di mana |
+|---|---------|---------|
+| 1 | Buat **4 A record** `@` → `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153` | Dashboard DNS registrar |
+| 2 | Buat **1 CNAME** `www` → `<username>.github.io` | Dashboard DNS registrar |
+| 3 | Isi **Settings → Pages → Custom domain** dengan `tokopapuaonline.com` → **Save** | Repository GitHub |
+| 4 | Centang **Enforce HTTPS** setelah sertifikat terbit | Repository GitHub |
+| 5 | Tambahkan properti baru `https://tokopapuaonline.com/` di Search Console dan submit `sitemap.xml` | Google Search Console |
+
+**Panduan rinci langkah demi langkah — termasuk tabel record DNS, verifikasi `nslookup`/`dig`, estimasi waktu propagasi, dan troubleshooting lengkap — ada di file `panduan-setup-dns.md`.**
+
+### ⚠️ Jangan hapus file `CNAME`
+
+File `CNAME` adalah satu-satunya penanda yang memberi tahu GitHub Pages bahwa situs Anda dilayani di `tokopapuaonline.com`. Tanpa file itu, domain akan menampilkan **404**. Jangan mengubah namanya, jangan memindahkannya ke sub-folder, dan pastikan isinya tetap satu baris: `tokopapuaonline.com`.
+
+> Kalau `CNAME` terlanjur terhapus: buat file baru bernama `CNAME` di root repository, isi dengan `tokopapuaonline.com`, lalu **Commit changes**. Situs akan pulih dalam 1–2 menit.
 
 ---
 
@@ -201,7 +198,11 @@ git push
 - [ ] Semua tombol beli mengarah ke `https://tokopapuaonline.orderhero.id/landing/laporan-kekerasan-papua`
 - [ ] Sampul e-book tampil di bagian hero
 - [ ] Tampilan sudah dicek di layar HP dan laptop
-- [ ] Placeholder `USERNAME` / `NAMA-REPO` sudah diganti di `index.html`, `sitemap.xml`, dan `robots.txt`
+- [ ] File **`CNAME`** ada di root repository dan berisi `tokopapuaonline.com`
+- [ ] DNS domain sudah diarahkan ke GitHub (4 A record + CNAME `www`) — panduan di `panduan-setup-dns.md`
+- [ ] **Settings → Pages → Custom domain** = `tokopapuaonline.com` dan **Enforce HTTPS** sudah dicentang
+- [ ] Tidak ada sisa placeholder `USERNAME` / `NAMA-REPO` di `index.html`, `sitemap.xml`, `robots.txt`
+- [ ] `https://tokopapuaonline.com/` bisa dibuka dan tampil gembok aman 🔒
 - [ ] `sitemap.xml` dan `robots.txt` bisa diakses lewat browser (bukan 404)
 - [ ] Sitemap sudah disubmit di Google Search Console
 

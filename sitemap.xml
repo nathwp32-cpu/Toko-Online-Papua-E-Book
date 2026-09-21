@@ -2,27 +2,36 @@
 <!--
   ============================================================
   SITEMAP — Toko Papua Online
+  Domain: https://tokopapuaonline.com/
   ============================================================
-  ⚠️  WAJIB DIGANTI SEBELUM SUBMIT KE GOOGLE:
-      Ganti SEMUA "USERNAME" dan "NAMA-REPO" di bawah ini
-      dengan username GitHub dan nama repository Anda.
+  File ini SUDAH dikonfigurasi untuk domain kustom
+  https://tokopapuaonline.com/ — tidak ada placeholder yang
+  perlu diganti.
 
-      Contoh: jika username GitHub Anda "tokopapua" dan nama
-      repo "landing-laporan-papua", maka URL menjadi:
-      https://tokopapua.github.io/landing-laporan-papua/
+  ⚠️  KALAU DOMAIN BERUBAH:
+      Ganti SEMUA alamat "https://tokopapuaonline.com/" di bawah
+      ini dengan domain baru Anda.
 
       Cara cepat (Linux/macOS/Git Bash):
-          sed -i 's/USERNAME/tokopapua/g; s/NAMA-REPO/landing-laporan-papua/g' sitemap.xml
+          sed -i 's|https://tokopapuaonline.com/|https://domain-baru.com/|g' sitemap.xml
 
       Cara cepat (Windows PowerShell):
-          (Get-Content sitemap.xml) -replace 'USERNAME','tokopapua' -replace 'NAMA-REPO','landing-laporan-papua' | Set-Content sitemap.xml
+          (Get-Content sitemap.xml) -replace 'https://tokopapuaonline.com/','https://domain-baru.com/' | Set-Content sitemap.xml
+
+      Jangan lupa ganti juga domain di robots.txt dan di
+      <link rel="canonical"> serta <meta property="og:url">
+      pada index.html.
 
   CATATAN:
-  - Jangan lupa ganti juga domain di robots.txt dan di
-    <link rel="canonical"> pada index.html.
-  - <lastmod> = tanggal halaman terakhir diubah (format YYYY-MM-DD).
+  - <lastmod>    = tanggal halaman terakhir diubah (format YYYY-MM-DD).
   - <changefreq> = seberapa sering isi berubah.
   - <priority>   = prioritas relatif (0.0 – 1.0).
+
+  MENAMBAH HALAMAN BARU:
+  - Duplikat satu blok <url> sampai </url> di bawah, lalu ganti
+    <loc> dengan alamat halaman baru (misal
+    https://tokopapuaonline.com/katalog/). Sesuaikan
+    <priority>-nya: halaman utama 1.0, halaman lain 0.6 sampai 0.8.
   ============================================================
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
@@ -30,7 +39,7 @@
 
   <!-- ═══ HALAMAN UTAMA: Landing page e-book Laporan Resmi Papua ═══ -->
   <url>
-    <loc>https://USERNAME.github.io/NAMA-REPO/</loc>
+    <loc>https://tokopapuaonline.com/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
