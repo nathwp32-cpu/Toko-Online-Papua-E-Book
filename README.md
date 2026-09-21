@@ -18,6 +18,8 @@ Paket ini siap diunggah langsung ke GitHub Pages tanpa proses build apa pun.
 | `.nojekyll` | File kosong, menandai GitHub Pages agar **tidak** memproses situs lewat Jekyll |
 | `images/cover.webp` | Gambar sampul e-book (salinan lokal, siap dipakai sebagai cadangan offline) |
 | `index-html-source.txt` | Salinan teks dari `index.html` — untuk disalin-tempel bila perlu |
+| `sitemap.xml` | Daftar URL situs untuk Google — **wajib diganti domainnya** (lihat bagian *SEO*) |
+| `robots.txt` | Izin crawler + penunjuk lokasi sitemap — **wajib diganti domainnya** (lihat bagian *SEO*) |
 | `CNAME` | **Tidak disertakan** — hanya dibuat kalau sudah punya domain kustom (lihat bagian *Domain Kustom*) |
 
 > **Catatan `CNAME`:** file ini **belum dibuat** karena belum ada domain kustom. Situs akan memakai alamat bawaan GitHub Pages (`https://<username>.github.io/<nama-repo>/`). Cara menambahkannya nanti ada di bagian *Domain Kustom* di bawah.
@@ -33,6 +35,7 @@ Paket ini siap diunggah langsung ke GitHub Pages tanpa proses build apa pun.
 - **Gambar sampul:** URL absolut dari CDN OrderHero — **tidak perlu upload gambar apa pun**
 - **Teknologi:** HTML5 + Tailwind CSS (CDN) + Google Fonts *Plus Jakarta Sans*
 - **Tema warna:** slate gelap (`#070B14`) dengan aksen merah (`#DC2626`) dan amber (`#F59E0B`)
+- **SEO:** `<link rel="canonical">`, meta `description`, `keywords`, dan `robots` sudah tertanam di `index.html`; dilengkapi `sitemap.xml` + `robots.txt`
 - **Struktur halaman:**
   1. Navbar sticky
   2. Hero (sampul e-book + statistik + 2 CTA)
@@ -100,6 +103,68 @@ Gambar sampul dimuat langsung dari server OrderHero. Bila suatu saat server ters
 
 ---
 
+## 🔎 SEO — Sitemap, robots.txt & Google Search Console
+
+Paket ini sudah menyertakan `sitemap.xml` dan `robots.txt`, plus tag SEO dasar di dalam `index.html` (canonical, description, keywords, robots, Open Graph, dan Twitter Card).
+
+### ⚠️ Langkah WAJIB: ganti placeholder domain
+
+`index.html`, `sitemap.xml`, dan `robots.txt` memakai **placeholder** yang harus diganti dengan alamat GitHub Pages Anda yang sebenarnya:
+
+- `USERNAME` → username GitHub Anda
+- `NAMA-REPO` → nama repository Anda
+
+Misal username Anda `tokopapua` dan nama repo `landing-laporan-papua`, maka alamat situsnya:
+`https://tokopapua.github.io/landing-laporan-papua/`
+
+**Cara 1 — satu perintah di terminal (Linux/macOS/Git Bash):**
+
+```bash
+sed -i 's/USERNAME/tokopapua/g; s/NAMA-REPO/landing-laporan-papua/g' index.html sitemap.xml robots.txt
+```
+
+**Cara 2 — Windows PowerShell:**
+
+```powershell
+foreach ($f in 'index.html','sitemap.xml','robots.txt') {
+  (Get-Content $f) -replace 'USERNAME','tokopapua' -replace 'NAMA-REPO','landing-laporan-papua' | Set-Content $f
+}
+```
+
+**Cara 3 — manual lewat web GitHub:** buka tiap file → klik ikon pensil → ganti `USERNAME` dan `NAMA-REPO` → **Commit changes**.
+
+Setelah diganti, pastikan tiga tempat ini sudah benar:
+
+| File | Yang dicek |
+|------|-----------|
+| `index.html` | `<link rel="canonical" href="https://…/">` dan `<meta property="og:url" …>` |
+| `sitemap.xml` | Baris `<loc>https://…/</loc>` |
+| `robots.txt` | Baris `Sitemap: https://…/sitemap.xml` |
+
+> **Punya domain sendiri nanti?** Ganti seluruh URL GitHub Pages di ketiga file itu dengan domain Anda (misal `https://tokopapuaonline.com/`) — jangan menambahkan URL baru, tapi **menggantinya**, agar tidak ada duplikasi.
+
+### Submit Sitemap ke Google Search Console
+
+1. Buka [search.google.com/search-console](https://search.google.com/search-console) → login dengan akun Google.
+2. Klik **Add property** → pilih **URL prefix** → masukkan alamat lengkap situs Anda, misal `https://tokopapua.github.io/landing-laporan-papua/` → **Continue**.
+3. **Verifikasi kepemilikan.** Untuk GitHub Pages, cara termudah adalah **HTML tag**:
+   - Pilih metode **HTML tag**, salin meta tag yang diberikan Google.
+   - Tempelkan di dalam `<head>` pada `index.html` (misal tepat di bawah baris `<meta name="robots" …>`).
+   - Commit & tunggu 1–2 menit sampai situs ter-*update*, lalu klik **Verify**.
+   - *(Alternatif: pilih metode **HTML file**, unduh file verifikasinya, unggah ke root repository.)*
+4. Setelah terverifikasi, buka menu **Sitemaps** di panel kiri.
+5. Pada kolom **Add a new sitemap**, isi `sitemap.xml` → klik **Submit**.
+6. Status akan muncul sebagai **Success**. Google biasanya memerlukan **beberapa hari hingga 2 minggu** untuk mulai mengindeks.
+
+### Mempercepat & memeriksa hasil indeks
+
+- **Request indexing:** di menu **URL Inspection**, tempel alamat halaman Anda → klik **Request Indexing**. Ini meminta Google merayapi halaman itu lebih cepat dari jadwal normal.
+- **Cek robots.txt:** buka `https://<username>.github.io/<nama-repo>/robots.txt` — pastikan baris `Sitemap:` menunjuk alamat yang benar.
+- **Cek sitemap terbaca:** buka `https://<username>.github.io/<nama-repo>/sitemap.xml` — harus tampil sebagai XML yang valid, bukan halaman 404.
+- **Lihat performa:** menu **Performance** di Search Console menampilkan kata kunci yang membuat halaman Anda muncul beserta jumlah kliknya.
+
+---
+
 ## 🌐 Domain Kustom (Opsional — Nanti)
 
 Belum ada file `CNAME` karena belum ada domain kustom. Kalau nanti Anda punya domain sendiri (misal `tokopapuaonline.com`):
@@ -108,6 +173,8 @@ Belum ada file `CNAME` karena belum ada domain kustom. Kalau nanti Anda punya do
 2. Isinya **satu baris saja**: `tokopapuaonline.com`
 3. Upload ke repo, lalu buka **Settings → Pages → Custom domain** dan isi nama domain tersebut.
 4. Di penyedia domain, arahkan DNS ke GitHub Pages (4 A record untuk domain utama, atau `CNAME` ke `<username>.github.io` untuk subdomain).
+5. **Ganti juga domain di `sitemap.xml`, `robots.txt`, dan `<link rel="canonical">` pada `index.html`** menjadi domain baru Anda.
+6. Di Google Search Console, tambahkan properti baru untuk domain tersebut dan submit ulang `sitemap.xml`.
 
 ---
 
@@ -134,6 +201,9 @@ git push
 - [ ] Semua tombol beli mengarah ke `https://tokopapuaonline.orderhero.id/landing/laporan-kekerasan-papua`
 - [ ] Sampul e-book tampil di bagian hero
 - [ ] Tampilan sudah dicek di layar HP dan laptop
+- [ ] Placeholder `USERNAME` / `NAMA-REPO` sudah diganti di `index.html`, `sitemap.xml`, dan `robots.txt`
+- [ ] `sitemap.xml` dan `robots.txt` bisa diakses lewat browser (bukan 404)
+- [ ] Sitemap sudah disubmit di Google Search Console
 
 ---
 

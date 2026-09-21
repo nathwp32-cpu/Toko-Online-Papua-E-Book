@@ -1,0 +1,35 @@
+# ============================================================
+#  ROBOTS.TXT — Toko Papua Online
+#  Landing page e-book "Laporan Resmi Tindak Kekerasan di Papua
+#  (Gugus Tugas UGM)"
+# ============================================================
+#
+#  ⚠️  WAJIB DIGANTI SEBELUM SUBMIT KE GOOGLE:
+#      Ganti "USERNAME" dan "NAMA-REPO" pada baris Sitemap
+#      di bawah dengan username GitHub & nama repository Anda.
+#
+#      Contoh:
+#      Sitemap: https://tokopapua.github.io/landing-laporan-papua/sitemap.xml
+#
+#  Cara cepat (Linux/macOS/Git Bash):
+#      sed -i 's/USERNAME/tokopapua/g; s/NAMA-REPO/landing-laporan-papua/g' robots.txt
+#
+#  Cara cepat (Windows PowerShell):
+#      (Get-Content robots.txt) -replace 'USERNAME','tokopapua' -replace 'NAMA-REPO','landing-laporan-papua' | Set-Content robots.txt
+#
+#  Catatan: setelah punya domain sendiri, ganti seluruh URL
+#  di file ini dengan domain tersebut.
+# ============================================================
+
+# ── Semua crawler diizinkan mengakses seluruh halaman ──
+User-agent: *
+Allow: /
+
+# Tidak ada folder yang perlu diblokir pada situs ini.
+# (Tambahkan baris "Disallow: /nama-folder/" di bawah ini
+#  bila nanti ada folder yang tidak ingin diindeks.)
+#
+# Disallow:
+
+# ── Lokasi sitemap ──
+Sitemap: https://USERNAME.github.io/NAMA-REPO/sitemap.xml

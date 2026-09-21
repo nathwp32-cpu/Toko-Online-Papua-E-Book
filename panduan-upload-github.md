@@ -15,10 +15,11 @@ Tidak perlu bisa programming. Ikuti saja urutannya.
 3. [Upload File Lewat Web GitHub (Drag & Drop)](#3-upload-file-lewat-web-github-drag--drop)
 4. [Mengaktifkan GitHub Pages](#4-mengaktifkan-github-pages)
 5. [Mengecek Situs Sudah Tampil](#5-mengecek-situs-sudah-tampil)
-6. [Cara Update File di Kemudian Hari](#6-cara-update-file-di-kemudian-hari)
-7. [Perintah Git untuk Pengguna Terminal](#7-perintah-git-untuk-pengguna-terminal)
-8. [Menghubungkan Domain Sendiri (Opsional)](#8-menghubungkan-domain-sendiri-opsional)
-9. [Troubleshooting — Kalau Ada Masalah](#9-troubleshooting--kalau-ada-masalah)
+6. [SEO — Sitemap, Robots & Google Search Console](#6-seo--sitemap-robots--google-search-console)
+7. [Cara Update File di Kemudian Hari](#7-cara-update-file-di-kemudian-hari)
+8. [Perintah Git untuk Pengguna Terminal](#8-perintah-git-untuk-pengguna-terminal)
+9. [Menghubungkan Domain Sendiri (Opsional)](#9-menghubungkan-domain-sendiri-opsional)
+10. [Troubleshooting — Kalau Ada Masalah](#10-troubleshooting--kalau-ada-masalah)
 
 ---
 
@@ -29,7 +30,7 @@ Tidak perlu bisa programming. Ikuti saja urutannya.
 | Kebutuhan | Keterangan |
 |-----------|------------|
 | **Akun GitHub** | Gratis. Daftar di [github.com/signup](https://github.com/signup) kalau belum punya |
-| **File landing page** | `index.html`, `README.md`, `panduan-upload-github.md`, `.nojekyll`, dan folder `images/` (berisi `cover.webp`) |
+| **File landing page** | `index.html`, `README.md`, `panduan-upload-github.md`, `sitemap.xml`, `robots.txt`, `.nojekyll`, dan folder `images/` (berisi `cover.webp`) |
 | **Browser** | Chrome, Firefox, Edge, atau Safari (terbaru) |
 | **Koneksi internet** | Stabil, terutama saat upload |
 
@@ -42,6 +43,8 @@ landing-laporan-papua/
 ├── index.html                  ← file utama, wajib ada
 ├── README.md
 ├── panduan-upload-github.md
+├── sitemap.xml                 ← daftar URL untuk Google (ganti placeholder-nya!)
+├── robots.txt                  ← izin crawler + penunjuk sitemap (ganti placeholder-nya!)
 ├── .nojekyll
 └── images/
     └── cover.webp              ← sampul e-book (cadangan offline)
@@ -98,7 +101,7 @@ Setelah dibuat, Anda akan melihat halaman kosong dengan petunjuk `…or push an 
 
 Selesai. Semua file kini ada di repository Anda.
 
-> **Kalau `.nojekyll` tidak ikut ter-upload:** drag & drop hanya file itu sendirian, atau gunakan cara alternatif di bagian [Troubleshooting](#9-troubleshooting--kalau-ada-masalah).
+> **Kalau `.nojekyll` tidak ikut ter-upload:** drag & drop hanya file itu sendirian, atau gunakan cara alternatif di bagian [Troubleshooting](#10-troubleshooting--kalau-ada-masalah).
 
 ---
 
@@ -157,7 +160,74 @@ Repository jenis ini hanya boleh **satu** per akun.
 
 ---
 
-## 6. Cara Update File di Kemudian Hari
+## 6. SEO — Sitemap, Robots & Google Search Console
+
+Landing page ini sudah dibekali perangkat SEO dasar supaya bisa ditemukan Google:
+
+| File | Fungsi |
+|------|--------|
+| `sitemap.xml` | Daftar URL situs Anda — inilah yang dibaca Google untuk menemukan halaman |
+| `robots.txt` | Memberi izin kepada crawler dan menunjuk lokasi sitemap |
+| `index.html` | Sudah memuat `<link rel="canonical">`, meta `description`, `keywords`, `robots`, Open Graph, dan Twitter Card |
+
+### ⚠️ Langkah WAJIB — ganti placeholder domain
+
+`sitemap.xml`, `robots.txt`, dan `index.html` masih memakai placeholder. Ganti lebih dulu:
+
+- `USERNAME` → username GitHub Anda
+- `NAMA-REPO` → nama repository Anda
+
+Contoh: username `tokopapua` + repo `landing-laporan-papua` → `https://tokopapua.github.io/landing-laporan-papua/`
+
+**Cara cepat — satu perintah (Linux/macOS/Git Bash), dijalankan di folder yang sama:**
+
+```bash
+sed -i 's/USERNAME/tokopapua/g; s/NAMA-REPO/landing-laporan-papua/g' index.html sitemap.xml robots.txt
+```
+
+**Windows PowerShell:**
+
+```powershell
+foreach ($f in 'index.html','sitemap.xml','robots.txt') {
+  (Get-Content $f) -replace 'USERNAME','tokopapua' -replace 'NAMA-REPO','landing-laporan-papua' | Set-Content $f
+}
+```
+
+**Cara manual lewat web GitHub:** buka tiap file → klik ikon pensil ✏️ → ganti `USERNAME` dan `NAMA-REPO` → **Commit changes**.
+
+Setelah diganti, pastikan tiga tempat ini sudah benar:
+
+| File | Yang harus dicek |
+|------|------------------|
+| `index.html` | `<link rel="canonical" href="https://…/">` dan `<meta property="og:url" …>` |
+| `sitemap.xml` | Baris `<loc>https://…/</loc>` |
+| `robots.txt` | Baris `Sitemap: https://…/sitemap.xml` |
+
+> **Sudah punya domain sendiri?** Ganti seluruh URL GitHub Pages di ketiga file itu dengan domain Anda — **menggantinya**, bukan menambah URL baru, supaya Google tidak menganggapnya konten ganda.
+
+### Submit sitemap ke Google Search Console
+
+1. Buka [search.google.com/search-console](https://search.google.com/search-console), login dengan akun Google.
+2. Klik **Add property** → pilih **URL prefix** → isi alamat situs Anda, misal `https://tokopapua.github.io/landing-laporan-papua/` → **Continue**.
+3. **Verifikasi kepemilikan.** Untuk GitHub Pages, cara termudah adalah **HTML tag**:
+   - Pilih metode **HTML tag**, lalu salin meta tag yang diberikan Google.
+   - Tempelkan di dalam `<head>` pada `index.html` (misal tepat di bawah baris `<meta name="robots" …>`).
+   - Commit, tunggu 1–2 menit sampai situs ter-*update*, lalu klik **Verify**.
+   - *Alternatif:* pilih metode **HTML file**, unduh file verifikasinya, lalu unggah ke root repository.
+4. Setelah terverifikasi, buka menu **Sitemaps** di panel kiri.
+5. Di kolom **Add a new sitemap**, isi `sitemap.xml` → klik **Submit**.
+6. Status akan muncul sebagai **Success**. Google biasanya butuh **beberapa hari sampai 2 minggu** untuk mulai mengindeks.
+
+### Mempercepat & memantau hasil indeks
+
+- **Request indexing:** buka menu **URL Inspection** → tempel alamat halaman Anda → klik **Request Indexing**.
+- **Cek robots.txt:** buka `https://<username>.github.io/<nama-repo>/robots.txt` — baris `Sitemap:` harus menunjuk alamat yang benar.
+- **Cek sitemap terbaca:** buka `https://<username>.github.io/<nama-repo>/sitemap.xml` — harus tampil XML yang valid, bukan halaman 404.
+- **Pantau performa:** menu **Performance** di Search Console menampilkan kata kunci yang mendatangkan klik.
+
+---
+
+## 7. Cara Update File di Kemudian Hari
 
 ### Cara A — Lewat web GitHub (paling cepat untuk perubahan kecil)
 
@@ -175,7 +245,7 @@ Repository jenis ini hanya boleh **satu** per akun.
 
 ### Cara C — Lewat terminal Git
 
-Lihat [bagian 7](#7-perintah-git-untuk-pengguna-terminal) di bawah.
+Lihat [bagian 8](#8-perintah-git-untuk-pengguna-terminal) di bawah.
 
 ### Melihat riwayat perubahan
 
@@ -183,11 +253,11 @@ Klik tab **Commits** di repository untuk melihat siapa mengubah apa dan kapan. K
 
 ---
 
-## 7. Perintah Git untuk Pengguna Terminal
+## 8. Perintah Git untuk Pengguna Terminal
 
 Kalau Anda lebih nyaman memakai terminal (Command Prompt, PowerShell, Terminal macOS, atau Git Bash), ikuti langkah ini.
 
-### 7.1 Cek Git sudah terpasang
+### 8.1 Cek Git sudah terpasang
 
 ```bash
 git --version
@@ -195,7 +265,7 @@ git --version
 
 Kalau muncul `git version 2.x.x`, berarti siap. Kalau belum ada, unduh di [git-scm.com](https://git-scm.com/downloads).
 
-### 7.2 Inisialisasi repository lokal
+### 8.2 Inisialisasi repository lokal
 
 Masuk dulu ke folder yang berisi `index.html`:
 
@@ -225,7 +295,7 @@ git commit -m "Landing page e-book Toko Papua Online"
 git branch -M main
 ```
 
-### 7.3 Hubungkan ke GitHub
+### 8.3 Hubungkan ke GitHub
 
 Buka repository Anda di GitHub, klik tombol hijau **Code**, salin URL-nya (yang berakhiran `.git`), lalu:
 
@@ -236,7 +306,7 @@ git remote add origin https://github.com/<username>/<nama-repo>.git
 git remote -v
 ```
 
-### 7.4 Kirim ke GitHub
+### 8.4 Kirim ke GitHub
 
 ```bash
 git push -u origin main
@@ -250,7 +320,7 @@ Anda akan diminta login. Untuk saat ini GitHub **tidak menerima password akun** 
 4. Klik **Generate token**, lalu **salin** tokennya (hanya ditampilkan sekali)
 5. Saat `git push` meminta password, tempelkan token itu (bukan password akun)
 
-### 7.5 Perintah untuk update berikutnya
+### 8.5 Perintah untuk update berikutnya
 
 ```bash
 # Lihat perubahan yang terjadi
@@ -265,7 +335,7 @@ git commit -m "Update: ganti harga dan perbaikan teks CTA"
 git push
 ```
 
-### 7.6 Perintah bantu yang sering dipakai
+### 8.6 Perintah bantu yang sering dipakai
 
 ```bash
 git log --oneline -5        # lihat 5 commit terakhir
@@ -274,7 +344,7 @@ git pull                    # ambil perubahan terbaru dari GitHub
 git restore index.html      # batalkan perubahan yang belum di-commit
 ```
 
-### 7.7 Sudah punya repo di GitHub tapi belum punya file lokal
+### 8.7 Sudah punya repo di GitHub tapi belum punya file lokal
 
 ```bash
 git clone https://github.com/<username>/<nama-repo>.git
@@ -287,11 +357,11 @@ git push
 
 ---
 
-## 8. Menghubungkan Domain Sendiri (Opsional)
+## 9. Menghubungkan Domain Sendiri (Opsional)
 
 Lewat GitHub Pages, situs Anda bisa memakai domain sendiri seperti `tokopapuaonline.com`.
 
-### 8.1 Lewat pengaturan GitHub (disarankan)
+### 9.1 Lewat pengaturan GitHub (disarankan)
 
 1. Buka **Settings** → **Pages**.
 2. Di kolom **Custom domain**, isi domain Anda, misal `tokopapuaonline.com` → **Save**.
@@ -300,8 +370,10 @@ Lewat GitHub Pages, situs Anda bisa memakai domain sendiri seperti `tokopapuaonl
    - **Domain utama** (`tokopapuaonline.com`): tambahkan 4 **A record** ke `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
    - **Subdomain** (`www.tokopapuaonline.com`): tambahkan **CNAME** ke `<username>.github.io`
 5. Tunggu propagasi DNS (5 menit – 24 jam), lalu centang **Enforce HTTPS** agar situs aman (https).
+6. **Ganti domain di tiga file SEO:** `sitemap.xml`, `robots.txt`, dan `<link rel="canonical">` pada `index.html` — ganti URL GitHub Pages dengan domain baru Anda.
+7. Di Google Search Console, klik **Add property** untuk domain baru, verifikasi, lalu submit ulang `sitemap.xml`.
 
-### 8.2 Lewat file `CNAME` manual
+### 9.2 Lewat file `CNAME` manual
 
 Kalau ingin lebih manual, buat file bernama **`CNAME`** (tanpa ekstensi, huruf besar semua) di folder yang sama, isinya satu baris:
 
@@ -312,10 +384,12 @@ tokopapuaonline.com
 Upload ke repo, lalu isi **Custom domain** di Settings → Pages dengan nama yang sama.
 
 > Paket ini **belum menyertakan file `CNAME`** karena Anda belum punya domain kustom. Setelah domainnya ada, baru dibuat.
+>
+> **Jangan lupa:** setelah domain kustom aktif, perbarui juga `sitemap.xml`, `robots.txt`, dan `<link rel="canonical">` di `index.html` supaya menunjuk domain baru — bukan alamat GitHub Pages lagi.
 
 ---
 
-## 9. Troubleshooting — Kalau Ada Masalah
+## 10. Troubleshooting — Kalau Ada Masalah
 
 ### ❌ Halaman 404 Not Found
 
@@ -366,7 +440,23 @@ Kalau file ini tidak ada, situs biasanya **tetap jalan** — hanya berisiko pada
 
 ### ❌ Gagal `git push` karena autentikasi
 
-GitHub tidak lagi menerima password akun untuk operasi Git. Buat **Personal Access Token** (lihat [bagian 7.4](#74-kirim-ke-github)) lalu gunakan token itu sebagai password.
+GitHub tidak lagi menerima password akun untuk operasi Git. Buat **Personal Access Token** (lihat [bagian 8.4](#84-kirim-ke-github)) lalu gunakan token itu sebagai password.
+
+### ❌ Sitemap atau robots.txt error / 404
+
+| Penyebab | Solusi |
+|----------|--------|
+| File belum diunggah | Unggah `sitemap.xml` dan `robots.txt` ke **root** repository (sejajar `index.html`) |
+| Sitemap ditolak Search Console | Pastikan `USERNAME` dan `NAMA-REPO` sudah diganti, dan URL di `<loc>` sama persis dengan alamat situs Anda |
+| Data sitemap belum terbaca | Buka `https://<username>.github.io/<nama-repo>/sitemap.xml` di browser — kalau tampil XML, berarti sudah benar |
+| Alamat di canonical/`og:url` masih placeholder | Ganti di `index.html`; kalau tidak, Google bisa menganggap alamatnya berbeda |
+
+### ❌ Halaman tidak muncul di Google setelah disubmit
+
+1. Google butuh waktu — biasanya **beberapa hari sampai 2 minggu** untuk indeks pertama.
+2. Buka **URL Inspection** di Search Console → tempel alamat halaman → klik **Request Indexing**.
+3. Pastikan `robots.txt` **tidak** memblokir, dan meta `robots` di `index.html` berisi `index, follow`.
+4. Situs baru sering belum punya tautan masuk; bagikan linknya di media sosial atau grup agar Google menemukannya lebih cepat.
 
 ### ❌ Tombol beli tidak membuka halaman OrderHero
 
@@ -390,6 +480,9 @@ Ganti seluruh tautan lama `https://orderhero.id` dengan alamat di atas, lalu com
 - [ ] Sampul e-book tampil di hero
 - [ ] Semua tombol beli mengarah ke halaman OrderHero Toko Papua Online
 - [ ] Tampilan sudah dicek di HP dan laptop
+- [ ] Placeholder `USERNAME` / `NAMA-REPO` sudah diganti di `index.html`, `sitemap.xml`, dan `robots.txt`
+- [ ] `sitemap.xml` dan `robots.txt` bisa dibuka di browser (bukan 404)
+- [ ] Sitemap sudah disubmit di Google Search Console dan berstatus **Success**
 - [ ] Sudah dibuat catatan: cara update = edit file → **Commit changes**
 
 ---

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ============================================================
+  SITEMAP — Toko Papua Online
+  ============================================================
+  ⚠️  WAJIB DIGANTI SEBELUM SUBMIT KE GOOGLE:
+      Ganti SEMUA "USERNAME" dan "NAMA-REPO" di bawah ini
+      dengan username GitHub dan nama repository Anda.
+
+      Contoh: jika username GitHub Anda "tokopapua" dan nama
+      repo "landing-laporan-papua", maka URL menjadi:
+      https://tokopapua.github.io/landing-laporan-papua/
+
+      Cara cepat (Linux/macOS/Git Bash):
+          sed -i 's/USERNAME/tokopapua/g; s/NAMA-REPO/landing-laporan-papua/g' sitemap.xml
+
+      Cara cepat (Windows PowerShell):
+          (Get-Content sitemap.xml) -replace 'USERNAME','tokopapua' -replace 'NAMA-REPO','landing-laporan-papua' | Set-Content sitemap.xml
+
+  CATATAN:
+  - Jangan lupa ganti juga domain di robots.txt dan di
+    <link rel="canonical"> pada index.html.
+  - <lastmod> = tanggal halaman terakhir diubah (format YYYY-MM-DD).
+  - <changefreq> = seberapa sering isi berubah.
+  - <priority>   = prioritas relatif (0.0 – 1.0).
+  ============================================================
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- ═══ HALAMAN UTAMA: Landing page e-book Laporan Resmi Papua ═══ -->
+  <url>
+    <loc>https://USERNAME.github.io/NAMA-REPO/</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+</urlset>
