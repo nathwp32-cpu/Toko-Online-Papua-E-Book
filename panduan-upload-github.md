@@ -5,7 +5,7 @@ toko **Toko Papua Online** dari paket ZIP ini ke GitHub Pages hingga situsnya ak
 dapat dibuka publik.
 
 Hasil akhir: halaman toko aktif pada alamat
-`https://<username-github-anda>.github.io/<nama-repo>/`
+`https://tokopapuaonline.github.io/Toko-Online-Papua-E-Book/`
 
 **Perkiraan waktu:** 5–10 menit untuk pengguna baru, 3–5 menit bila sudah punya akun GitHub.
 **Tingkat kesulitan:** Pemula — tidak perlu pengetahuan pemrograman, tidak perlu Git,
@@ -38,6 +38,8 @@ tidak perlu menjalankan perintah terminal (metode A sepenuhnya klik-klik di brow
 | 4 | Commit & pastikan semua berkas tampil | [Bagian 4](#bagian-4--commit--periksa-hasil-upload) |
 | 5 | Aktifkan GitHub Pages (branch `main`, folder `/ (root)`) | [Bagian 5](#bagian-5--aktifkan-github-pages) |
 | 6 | Tunggu 1–2 menit, buka situs, verifikasi | [Bagian 6](#bagian-6--tunggu--verifikasi-situs-live) |
+| 7 | Periksa `robots.txt` & `sitemap.xml` (alamat sudah terisi, siap pakai) | [Bagian 6.6](#66-memverifikasi-robotstxt--sitemapxml) |
+| 8 | Uji tombol **Bagikan** pada kartu produk (WhatsApp, Facebook, X, Telegram, salin tautan) | [Bagian 6.7](#67-memverifikasi-tombol-bagikan-share) |
 
 > **Inti yang paling sering salah:** pastikan berkas `index.html` berada **di tingkat paling
 > atas** repositori (sejajar dengan folder `images/`), **bukan** di dalam subfolder. Ini
@@ -49,19 +51,21 @@ tidak perlu menjalankan perintah terminal (metode A sepenuhnya klik-klik di brow
 
 ### 1.1 Isi paket
 
-Paket ZIP bernama **`toko-papua-online-store-paket-github.zip`** berisi **9 berkas**:
+Paket ZIP bernama **`toko-papua-online-store-paket-github.zip`** berisi **11 berkas**:
 
 | # | Berkas | Keterangan | Ukuran |
 |---|---|---|---|
-| 1 | `index.html` | Halaman toko utama (mobile + desktop, satu berkas) | ± 50 KB |
-| 2 | `README.md` | Ringkasan proyek | ± 6,5 KB |
-| 3 | `panduan-upload-github.md` | Berkas panduan ini | ± 6,6 KB |
+| 1 | `index.html` | Halaman toko utama (mobile + desktop, satu berkas) — termasuk tombol **Beli** dan tombol **Bagikan** pada setiap kartu produk | ± 62 KB |
+| 2 | `README.md` | Ringkasan proyek | ± 11 KB |
+| 3 | `panduan-upload-github.md` | Berkas panduan ini | ± 58 KB |
 | 4 | `.nojekyll` | Berkas kosong (0 byte) penanda untuk GitHub Pages | 0 byte |
 | 5 | `images/logo.webp` | Logo toko (header & footer) | ± 112 KB |
 | 6 | `images/banner-1.webp` | Banner promo carousel 1 | ± 44 KB |
 | 7 | `images/banner-2.webp` | Banner promo carousel 2 | ± 97 KB |
 | 8 | `images/produk-1.webp` | Sampul produk 1 | ± 95 KB |
 | 9 | `images/produk-2.webp` | Sampul produk 2 | ± 34 KB |
+| 10 | `robots.txt` | Aturan crawler + baris `Sitemap:` menunjuk ke `sitemap.xml` | ± 1,5 KB |
+| 11 | `sitemap.xml` | Peta situs (Sitemap 0.9, UTF-8) berisi URL halaman toko | ± 1,6 KB |
 
 ### 1.2 Ekstrak di Windows
 
@@ -126,6 +130,8 @@ toko-papua-online-store-paket-github/     <- nama folder bisa berbeda, tidak mas
 ├── index.html                            <- HARUS di level paling atas
 ├── README.md
 ├── panduan-upload-github.md
+├── robots.txt
+├── sitemap.xml
 ├── .nojekyll                             <- berkas tersembunyi, 0 byte
 └── images/                               <- HARUS sejajar dengan index.html
     ├── logo.webp
@@ -210,7 +216,8 @@ Bila tidak terlihat di sana, berarti berkas belum terunggah — ulangi Cara 2 di
    - **Email** — gunakan email aktif (untuk verifikasi).
    - **Password** — minimal 8 karakter, kombinasikan huruf & angka.
    - **Username** — nama unik Anda; **catat ini**, karena akan dipakai di alamat situs
-     (`https://<username>.github.io/...`). Gunakan huruf kecil, angka, dan tanda hubung.
+     (alamat situs selalu dimulai dengan username Anda, diikuti `.github.io`). Gunakan
+     huruf kecil, angka, dan tanda hubung.
    - **Country/Region** — pilih **Indonesia**.
 4. Selesaikan verifikasi (teka-teki gambar atau kode yang dikirim ke email).
 5. Buka email dari GitHub, klik tautan verifikasi untuk mengaktifkan akun.
@@ -236,16 +243,21 @@ Bila tidak terlihat di sana, berarti berkas belum terunggah — ulangi Cara 2 di
 
 3. Klik tombol **Create repository** di bagian bawah.
 
-**Rekomendasi nama repositori:**
+**Nama repositori yang dipakai paket ini:**
 
 | Nama repo | Alamat situs hasil | Catatan |
 |---|---|---|
-| `toko-papua-online` | `https://<username>.github.io/toko-papua-online/` | **Disarankan** — jelas & mudah diingat |
-| `store` | `https://<username>.github.io/store/` | Singkat |
-| `<username>.github.io` | `https://<username>.github.io/` | Situs di akar; hanya boleh **satu** repo dengan nama ini |
+| `Toko-Online-Papua-E-Book` | `https://tokopapuaonline.github.io/Toko-Online-Papua-E-Book/` | **Ini yang sudah dipakai** — alamatnya sudah terisi di `robots.txt` & `sitemap.xml` |
+| `toko-papua-online` | `https://tokopapuaonline.github.io/toko-papua-online/` | Alternatif — jelas & mudah diingat |
+| `store` | `https://tokopapuaonline.github.io/store/` | Alternatif — singkat |
 
-> **Aturan penamaan:** gunakan huruf kecil, angka, dan tanda hubung (`-`). Hindari spasi,
-> huruf besar, dan karakter khusus. Nama repo akan menjadi bagian dari alamat situs Anda.
+> **Aturan penamaan:** huruf besar, huruf kecil, angka, tanda hubung (`-`), dan titik (`.`)
+> diperbolehkan — **tetapi huruf besar/kecil berpengaruh** pada alamat situs
+> (`Toko-Online-Papua-E-Book` berbeda dengan `toko-online-papua-e-book`). Hindari spasi dan
+> karakter khusus. Nama repo menjadi bagian dari alamat situs Anda.
+>
+> **Bila Anda memakai nama repo selain `Toko-Online-Papua-E-Book`:** perbarui alamat di
+> `robots.txt` dan `sitemap.xml` agar cocok — lihat [Bagian 7.5](#75-memperbarui-robotstxt--sitemapxml).
 
 > **Mengapa Visibility harus Public?** GitHub Pages gratis hanya dapat diterbitkan dari
 > repositori **Public**. Pada repositori **Private**, opsi penerbitan situs tidak tersedia
@@ -283,7 +295,7 @@ Tersedia **dua metode**. Pilih salah satu:
    - **macOS:** klik di area kosong folder → tekan **Command + A**.
 
    Yang harus terpilih: `index.html`, `README.md`, `panduan-upload-github.md`,
-   `.nojekyll` (bila terlihat), dan folder **`images`**.
+   `robots.txt`, `sitemap.xml`, `.nojekyll` (bila terlihat), dan folder **`images`**.
 
    > **Penting — jangan menyeret folder pembungkusnya.** Yang diseret adalah *isi* folder
    > (berkas-berkas di dalamnya), bukan folder hasil ekstrak itu sendiri. Bila Anda
@@ -298,6 +310,8 @@ Tersedia **dua metode**. Pilih salah satu:
    - `index.html`
    - `README.md`
    - `panduan-upload-github.md`
+   - `robots.txt`
+   - `sitemap.xml`
    - `.nojekyll` *(mungkin tidak muncul — lihat catatan di bawah)*
    - `images/logo.webp`
    - `images/banner-1.webp`
@@ -415,6 +429,8 @@ Halaman repositori harus menampilkan daftar seperti ini (urutan bisa berbeda):
 | `README.md` | Berkas |
 | `index.html` | Berkas |
 | `panduan-upload-github.md` | Berkas |
+| `robots.txt` | Berkas |
+| `sitemap.xml` | Berkas |
 
 Klik folder **`images`** untuk memastikan kelima gambar ada di dalamnya:
 `logo.webp`, `banner-1.webp`, `banner-2.webp`, `produk-1.webp`, `produk-2.webp`.
@@ -425,6 +441,7 @@ Klik folder **`images`** untuk memastikan kelima gambar ada di dalamnya:
 - [ ] Folder `images` terlihat **sejajar** dengan `index.html`.
 - [ ] Di dalam `images/` terdapat **5 gambar** dengan nama yang benar.
 - [ ] `README.md` dan `panduan-upload-github.md` ikut terunggah.
+- [ ] `robots.txt` dan `sitemap.xml` ikut terunggah (di level paling atas).
 - [ ] `.nojekyll` terlihat (bila tidak, lihat [Bagian 1.6](#16-memastikan-berkas-nojekyll-tidak-hilang)).
 - [ ] Kolom **branch** di atas daftar berkas menunjukkan **main**.
 
@@ -468,9 +485,10 @@ untuk menelusuri perubahan di kemudian hari.
    **Settings → Pages**, lalu **muat ulang (refresh)** halaman tersebut setelah
    beberapa detik. Akan muncul kotak biru berisi:
 
-   > **Your site is live at `https://<username>.github.io/<nama-repo>/`**
+   > **Your site is live at `https://tokopapuaonline.github.io/Toko-Online-Papua-E-Book/`**
 
-   Alamat di kotak itulah **URL situs Anda**. Klik **Visit site** untuk membukanya,
+   Alamat di kotak itulah **URL situs Anda**. Untuk paket ini alamatnya sudah pasti dan sudah
+   tertulis di dalam `robots.txt` serta `sitemap.xml`. Klik **Visit site** untuk membukanya,
    atau salin alamatnya.
 
 > **Bila tombol Save tidak muncul atau opsi Pages tidak ada:** pastikan repositori
@@ -479,17 +497,14 @@ untuk menelusuri perubahan di kemudian hari.
 
 ### 5.1 Cara menemukan URL situs Anda
 
-URL situs selalu berpola:
+**URL situs paket ini:**
 
 ```
-https://<username-github-anda>.github.io/<nama-repo>/
+https://tokopapuaonline.github.io/Toko-Online-Papua-E-Book/
 ```
 
-**Contoh:** bila username GitHub Anda `namasaya` dan nama repo `toko-papua-online`:
-
-```
-https://namasaya.github.io/toko-papua-online/
-```
+Bila Anda memakai nama repositori yang berbeda, alamatnya menyesuaikan pola:
+nama akun Anda + `.github.io/` + nama repositori + `/`.
 
 Anda juga dapat melihat URL-nya kapan saja lewat **Settings → Pages**, atau lewat tab
 **Actions** → alur *pages-build-deployment* (bagian **deploy**).
@@ -526,6 +541,10 @@ Buka situs Anda dan periksa satu per satu:
 | 7 | **Klik tombol Beli** | Tab baru terbuka mengarah ke halaman checkout |
 | 8 | **Footer tampil** | Footer gelap dengan nama toko dan tautan |
 | 9 | **Warna & tata letak** | Skema warna teal/hijau toska, teks terbaca, tidak ada elemen bertumpuk |
+| 10 | **`robots.txt` terbuka** | `https://tokopapuaonline.github.io/Toko-Online-Papua-E-Book/robots.txt` tampil sebagai teks |
+| 11 | **`sitemap.xml` terbuka** | `https://tokopapuaonline.github.io/Toko-Online-Papua-E-Book/sitemap.xml` tampil sebagai XML valid |
+| 12 | **Tombol Bagikan tampil** | Ikon bagikan muncul di **setiap** kartu produk, tepat di samping tombol Beli |
+| 13 | **Klik tombol Bagikan** | Panel muncul dengan 5 pilihan: **WhatsApp, Facebook, X/Twitter, Telegram, Salin tautan** |
 
 ### 6.3 Memverifikasi tombol "Beli" mengarah ke link checkout
 
@@ -576,6 +595,109 @@ yang benar-benar bisa menghasilkan penjualan.
    - Grid produk menjadi **3–4 kolom**.
    - **Bottom tab bar tidak tampil** (memang disembunyikan di desktop).
    - **Tidak ada scroll horizontal.**
+
+---
+
+### 6.6 Memverifikasi `robots.txt` & `sitemap.xml`
+
+Dua berkas ini membantu mesin pencari mengenali situs Anda. Keduanya **tidak memengaruhi
+tampilan halaman**, tetapi sebaiknya diperiksa sekali setelah situs live.
+
+**A. Alamat situs sudah terisi — tidak ada yang perlu diganti**
+
+Kedua berkas **sudah memuat URL GitHub Pages yang sebenarnya**, jadi paket ini siap diunggah
+apa adanya:
+
+| Berkas | Isi alamat |
+|---|---|
+| `robots.txt` | `Sitemap: https://tokopapuaonline.github.io/Toko-Online-Papua-E-Book/sitemap.xml` |
+| `sitemap.xml` | `<loc>https://tokopapuaonline.github.io/Toko-Online-Papua-E-Book/</loc>` |
+
+Anda **tidak perlu** mengganti apa pun. Langsung lanjut ke langkah B untuk memeriksanya.
+
+**Bila di kemudian hari nama repositori berubah**, perbarui alamat di **kedua** berkas agar
+tetap sama persis. Cara mengedit lewat web GitHub: buka berkasnya → klik ikon **pensil**
+(*Edit this file*) → ubah teksnya → **Commit changes**. Perhatikan huruf besar/kecil: nama
+repositori ini ditulis persis `Toko-Online-Papua-E-Book`.
+
+**B. Buka berkasnya di browser**
+
+1. `https://tokopapuaonline.github.io/Toko-Online-Papua-E-Book/robots.txt`
+   - **Diharapkan:** tampil sebagai teks biasa, memuat baris `User-agent: *`, `Allow: /`,
+     dan satu baris `Sitemap:` yang menunjuk ke
+     `https://tokopapuaonline.github.io/Toko-Online-Papua-E-Book/sitemap.xml`.
+   - Bila muncul **404**, lihat [Bagian 8.1](#81-situs-menampilkan-halaman-404).
+2. `https://tokopapuaonline.github.io/Toko-Online-Papua-E-Book/sitemap.xml`
+   - **Diharapkan:** tampil sebagai XML, dimulai dengan
+     `<?xml version="1.0" encoding="UTF-8"?>` dan memuat satu blok `<url>` berisi
+     `<loc>https://tokopapuaonline.github.io/Toko-Online-Papua-E-Book/</loc>`.
+   - Bila browser menampilkan pesan kesalahan XML (*"This page contains the following
+     errors"*), berarti ada karakter yang rusak saat menyunting — salin ulang berkasnya dari
+     ZIP paket dan pastikan tidak menghapus tanda `<` `>` maupun garis miring.
+
+**C. Memastikan tidak ada kesalahan ketik pada alamat**
+
+- Alamat di `robots.txt` dan di `sitemap.xml` harus **sama persis**.
+- Tidak boleh ada sisa tanda `<` atau `>` pada alamat.
+- Tidak boleh ada spasi di dalam alamat.
+- **Huruf besar/kecil berpengaruh.** Nama repositori ini ditulis persis
+  `Toko-Online-Papua-E-Book`; alamat `toko-online-papua-e-book` adalah alamat yang **berbeda**
+  dan akan menghasilkan 404.
+
+> **Catatan:** bila situs Anda nanti dipindahkan ke alamat lain, cukup perbarui kedua berkas
+> ini — lihat [Bagian 7](#bagian-7--memperbarui-situs-di-kemudian-hari).
+
+---
+
+### 6.7 Memverifikasi tombol Bagikan (Share)
+
+Setiap kartu produk memiliki **tombol Bagikan** (ikon bagikan) di sebelah tombol Beli.
+Tombol ini untuk membagikan produk ke media sosial, sehingga pembeli lain bisa menemukan
+toko Anda.
+
+**A. Pastikan tombolnya tampil**
+
+1. Buka situs Anda.
+2. Lihat setiap kartu produk di grid.
+   - **Diharapkan:** di samping tombol hijau toska **🛒 Beli** ada tombol persegi putih
+     berisi **ikon bagikan** (tiga titik yang terhubung garis).
+   - Tombol ini harus ada di **semua** kartu produk, bukan hanya satu.
+3. Periksa juga di HP: kedua tombol tetap sejajar dan tidak saling menumpuk.
+
+**B. Uji panel bagikan**
+
+1. Klik tombol **Bagikan** pada salah satu kartu produk.
+2. **Diharapkan:** muncul panel dari bawah layar (di PC: di tengah layar) berisi:
+   - Judul panel **"Bagikan produk"**.
+   - Nama produk yang dipilih (mis. *E-Book Belanda di Irian Jaya…*).
+   - **5 pilihan:** WhatsApp · Facebook · X / Twitter · Telegram · Salin tautan.
+3. Cek masing-masing pilihan satu per satu:
+
+| Pilihan | Yang diharapkan saat diklik |
+|---|---|
+| **WhatsApp** | Tab baru terbuka ke `wa.me` berisi pesan berisi **nama produk + alamat situs** |
+| **Facebook** | Tab baru terbuka ke jendela berbagi Facebook dengan tautan halaman situs |
+| **X / Twitter** | Tab baru terbuka ke jendela tulis X berisi **nama produk + tautan** |
+| **Telegram** | Tab baru terbuka ke `t.me/share` berisi **tautan + nama produk** |
+| **Salin tautan** | Tautan tersalin ke papan klip + muncul notifikasi *"Tautan produk disalin"* |
+
+   > Bila tab baru **tidak** terbuka, kemungkinan pemblokir pop-up aktif. Lihat baris
+   > *"Tombol Beli tidak berfungsi"* pada [Bagian 8.10](#810-tabel-ringkas-masalah--solusi).
+
+4. **Uji Salin tautan:** klik **Salin tautan** → tempelkan (Ctrl+V / Cmd+V) di kolom
+   pesan atau catatan mana pun. Yang tersalin harus berupa
+   **nama produk + alamat situs** `https://tokopapuaonline.github.io/Toko-Online-Papua-E-Book/`.
+
+**C. Pastikan panel bisa ditutup dengan 3 cara**
+
+| Cara | Yang dilakukan |
+|---|---|
+| Klik di luar | Klik area gelap di sekitar panel |
+| Tombol **×** | Klik tombol silang di pojok kanan atas panel |
+| Tombol **Esc** | Tekan tombol `Esc` di papan tombol |
+
+Ketiganya harus menutup panel. Setelah panel tertutup, pastikan tombol
+**🛒 Beli** tetap berfungsi seperti biasa (buka halaman checkout di tab baru).
 
 ---
 
@@ -648,8 +770,8 @@ var PRODUCTS = [
 2. Edit `index.html`, salin satu objek di dalam `PRODUCTS`, letakkan di bawahnya,
    lalu ubah seluruh nilainya (terutama `id` harus unik dan `img` menunjuk berkas baru).
 3. Simpan / commit perubahan.
-4. Tunggu 1–2 menit. Kartu produk baru akan muncul otomatis — filter, pencarian, dan
-   keranjang menyesuaikan sendiri tanpa perubahan kode lain.
+4. Tunggu 1–2 menit. Kartu produk baru akan muncul otomatis — filter, pencarian,
+   keranjang, **dan tombol Bagikan** menyesuaikan sendiri tanpa perubahan kode lain.
 
 ### 7.4 Memastikan perubahan sudah terbit
 
@@ -660,6 +782,86 @@ var PRODUCTS = [
    Anda tidak melihat versi lama dari cache browser.
 5. Bila perubahan masih belum tampak setelah 5 menit, lihat
    [Bagian 8.8](#88-cache-browser-menampilkan-versi-lama).
+
+### 7.5 Memperbarui `robots.txt` & `sitemap.xml`
+
+Kedua berkas ini juga bisa diubah kapan saja, baik lewat web GitHub maupun dengan
+mengunggah ulang.
+
+**Bila Anda mengganti nama repositori**, atau memindahkan situs ke alamat lain, perbarui
+alamat di **kedua** berkas (sekarang keduanya sudah terisi alamat paket ini):
+
+| Berkas | Baris yang diubah |
+|---|---|
+| `robots.txt` | `Sitemap: https://tokopapuaonline.github.io/Toko-Online-Papua-E-Book/sitemap.xml` |
+| `sitemap.xml` | `<loc>https://tokopapuaonline.github.io/Toko-Online-Papua-E-Book/</loc>` |
+
+> Jangan lupa huruf besar/kecilnya harus sama persis di **kedua** berkas.
+
+**Cara lewat web GitHub:**
+
+1. Buka berkasnya di repositori → klik ikon **pensil** (*Edit this file*).
+2. Ubah alamatnya.
+3. **Commit changes**.
+4. Tunggu 1–2 menit, lalu buka kembali alamat berkas itu di browser dan muat ulang.
+
+**Bila Anda menambah halaman baru** (misalnya `tentang.html`), tambahkan satu blok `<url>`
+baru di dalam `sitemap.xml`, tepat sebelum baris `</urlset>`:
+
+```xml
+  <url>
+    <loc>https://tokopapuaonline.github.io/Toko-Online-Papua-E-Book/tentang.html</loc>
+    <lastmod>2026-09-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+```
+
+> Perbarui juga tanggal `<lastmod>` setiap kali halaman berubah, agar mesin pencari tahu
+> isinya baru.
+
+### 7.6 Mengubah teks & tautan pada tombol Bagikan
+
+Tombol Bagikan membagikan **alamat situs + nama produk**. Alamat situs yang dibagikan
+diatur pada satu baris di dalam `index.html`:
+
+```js
+var PAGE_URL = 'https://tokopapuaonline.github.io/Toko-Online-Papua-E-Book/';
+```
+
+**Kapan perlu diubah:** bila Anda mengganti **nama repositori** atau memindahkan situs ke
+alamat lain. Samakan nilainya dengan alamat situs yang baru (harus diakhiri garis miring `/`).
+
+**Cara mengubahnya lewat web GitHub:**
+
+1. Buka `index.html` di repositori → klik ikon **pensil** (*Edit this file*).
+2. Cari baris `var PAGE_URL = ...` (gunakan **Ctrl + F** / **Cmd + F**).
+3. Ganti alamatnya, lalu **Commit changes**.
+4. Tunggu 1–2 menit, lalu buka situs dengan **hard refresh** dan uji tombol Bagikan.
+
+**Mengubah teks ajakan.** Tepat di bawah baris `PAGE_URL` ada fungsi `shareTextFor` yang
+menyusun kalimat yang dikirim ke media sosial:
+
+```js
+function shareTextFor(p) {
+  if (!p) { return 'Toko Papua Online E-Book\n' + PAGE_URL; }
+  return p.title + ' - ' + rupiah(p.price) +
+    '\n\nBeli e-book ini di Toko Papua Online:\n' + PAGE_URL;
+}
+```
+
+Ubah teks `'Beli e-book ini di Toko Papua Online:'` bila ingin kalimat ajakan yang berbeda.
+Biarkan bagian `p.title` dan `PAGE_URL` apa adanya agar nama produk dan alamat situs tetap
+ikut terbagikan.
+
+**Menambah atau menghapus media sosial.** Kelima pilihan ada di dalam blok
+`<div class="share-grid">` pada bagian **SHARE SHEET** di `index.html`. Setiap pilihan
+adalah satu elemen `<a class="share-item ...">` (atau `<button>` untuk *Salin tautan*).
+Saat mengubahnya, pastikan atribut `id` dan `data-share-go` tidak diubah, karena keduanya
+dipakai oleh JavaScript.
+
+> **Catatan:** tombol Bagikan **tidak menambah berkas baru** ke paket. Seluruh ikonnya
+> memakai inline SVG sprite yang sudah ada di `index.html`.
 
 ---
 
@@ -685,8 +887,9 @@ here"* atau halaman 404 buatan GitHub.
    (huruf kecil semua, bukan `Index.html` atau `index.HTML`). Ganti nama bila perlu lewat
    ikon **⋯ → Rename**.
 6. **Repo Private** — lihat [Bagian 8.6](#86-repositori-private--situs-tidak-dapat-diterbitkan).
-7. **Alamat salah tulis** — pastikan formatnya
-   `https://<username>.github.io/<nama-repo>/` dan ada garis miring `/` di akhir.
+7. **Alamat salah tulis** — paket ini memakai alamat
+   `https://tokopapuaonline.github.io/Toko-Online-Papua-E-Book/`. Pastikan huruf besar/kecilnya
+   persis sama dan ada garis miring `/` di akhir.
 8. **Alur penerbitan gagal** — buka tab **Actions**, cek apakah *pages build and
    deployment* berstatus ❌. Klik alurnya untuk melihat pesan kesalahan.
 
@@ -715,7 +918,7 @@ muncul ikon gambar rusak.
    dari ZIP asli.
 
 **Cara memeriksa cepat:** ketik langsung alamat gambar di browser, misalnya
-`https://<username>.github.io/<nama-repo>/images/logo.webp`.
+`https://tokopapuaonline.github.io/Toko-Online-Papua-E-Book/images/logo.webp`.
 - **Gambar tampil** → berarti gambar ada; masalahnya ada pada jalur di `index.html`
   atau pada cache (lakukan hard refresh).
 - **Muncul 404** → berkas gambar memang tidak ada / berada di jalur yang salah di
@@ -761,7 +964,7 @@ seolah-olah sebagai halaman utama.
    (atau sebaliknya). Ubah ke **`/ (root)`**.
 4. **Anda membuka URL berkas, bukan URL situs** — misalnya membuka
    `.../README.md`. GitHub akan menampilkan isi berkas. Gunakan URL
-   `https://<username>.github.io/<nama-repo>/` (tanpa nama berkas di akhir).
+   `https://tokopapuaonline.github.io/Toko-Online-Papua-E-Book/` (tanpa nama berkas di akhir).
 
 ### 8.5 Berkas `.nojekyll` hilang
 
@@ -821,7 +1024,7 @@ masih menampilkan versi lama.
      *Clear data*.
    - **Safari (macOS):** Develop → *Empty Caches* (aktifkan menu Develop lebih dulu).
 4. **Tambah parameter pada URL** untuk memaksa versi baru, misalnya
-   `https://<username>.github.io/<nama-repo>/?v=2`.
+   `https://tokopapuaonline.github.io/Toko-Online-Papua-E-Book/?v=2`.
 
 ### 8.9 Cara memeriksa lewat mode incognito
 
@@ -862,7 +1065,99 @@ memastikan apakah masalahnya benar-benar di situs Anda atau hanya cache.
 | Halaman 404 padahal berkas ada | Folder **/docs** dipilih | Ubah ke **/ (root)** (Bagian 8.7) |
 | Perubahan tidak muncul | Cache browser / penerbitan belum selesai | Hard refresh, bersihkan cache, cek tab Actions (Bagian 8.8) |
 | Masih bingung masalahnya di mana | Tidak bisa dibedakan cache vs repositori | Buka di mode incognito (Bagian 8.9) |
+| `robots.txt` / `sitemap.xml` tampil 404 | Kedua berkas belum terunggah, atau berada di subfolder | Unggah ke level paling atas (Bagian 8.11) |
+| `sitemap.xml` tampil dengan pesan kesalahan XML | Tanda `<` `>` atau garis miring rusak saat mengedit | Perbaiki formatnya (Bagian 8.11) |
 | Tombol Beli tidak berfungsi | Blokir pop-up aktif di browser | Izinkan pop-up untuk situs Anda, lalu klik ulang |
+| Tombol Bagikan tidak tampil | `index.html` versi lama masih di cache repositori | Unggah ulang `index.html` terbaru, lalu hard refresh (Bagian 8.12) |
+| Panel Bagikan tidak terbuka | JavaScript diblokir / berkas rusak saat disunting | Aktifkan JS; muat ulang berkas dari ZIP (Bagian 8.12) |
+
+### 8.11 `robots.txt` atau `sitemap.xml` bermasalah
+
+**Gejala A — membuka alamat berkas menampilkan halaman 404**
+
+Berarti berkasnya belum ada di repositori, atau berada di tempat yang salah.
+
+1. Buka halaman utama repositori Anda di GitHub.
+2. Pastikan `robots.txt` dan `sitemap.xml` **terlihat di daftar berkas tingkat atas**,
+   sejajar dengan `index.html`.
+3. Bila tidak ada: kembali ke [Bagian 3](#bagian-3--upload-berkas-ke-repositori) dan
+   unggah keduanya.
+4. Bila berada di dalam subfolder: pindahkan ke akar. Cara termudah — buka berkasnya →
+   klik ikon **pensil** → ubah **nama berkas** menjadi `robots.txt` (tanpa awalan folder) →
+   **Commit changes**; lalu hapus berkas lama di subfolder.
+5. Tunggu 1–2 menit dan buka ulang alamatnya.
+
+**Gejala B — `sitemap.xml` terbuka tetapi menampilkan pesan kesalahan XML**
+
+Browser menampilkan kalimat seperti *"This page contains the following errors"* beserta
+keterangan posisi baris. Penyebabnya hampir selalu ada karakter yang rusak saat mengedit.
+
+Periksa hal-hal berikut:
+
+| Yang diperiksa | Benar | Salah |
+|---|---|---|
+| Baris pembuka | `<?xml version="1.0" encoding="UTF-8"?>` | baris ini terhapus / berubah |
+| Tag pembuka & penutup | `<urlset …>` … `</urlset>` | salah satunya hilang |
+| Blok URL | `<url>` … `</url>` berpasangan | hanya ada `<url>` tanpa penutup |
+| Alamat situs | `https://tokopapuaonline.github.io/Toko-Online-Papua-E-Book/` | huruf besar/kecil tidak sama, atau masih ada sisa tanda `<` `>` |
+| Tanda ampersand | ditulis `&amp;` bila perlu | ada `&` berdiri sendiri |
+
+**Cara memperbaiki:** buka berkasnya di GitHub → klik pensil (*Edit this file*) → bandingkan
+dengan tabel di atas → **Commit changes** → tunggu 1–2 menit → muat ulang di browser.
+
+> **Cara paling aman:** salin ulang isi asli `sitemap.xml` dari dalam ZIP paket (berkas ini
+tidak pernah berubah), karena alamat di dalamnya sudah benar.
+
+**Gejala C — berkas tampil normal, tetapi mesin pencari belum mengindeks**
+
+Wajar. Pengindeksan butuh waktu (hari sampai minggu) dan tidak bisa dipaksa. Yang penting
+kedua berkas sudah dapat dibuka di browser dan alamatnya sudah cocok satu sama lain.
+
+---
+
+### 8.12 Tombol Bagikan bermasalah
+
+**Gejala A — tombol Bagikan tidak muncul di kartu produk**
+
+Berarti `index.html` di repositori masih versi lama (sebelum fitur Bagikan ditambahkan),
+atau browser Anda masih menampilkan versi dari cache.
+
+1. Buka halaman repositori di GitHub → klik **`index.html`**.
+2. Tekan **Ctrl + F** / **Cmd + F**, cari teks `btn-share`.
+   - **Bila ditemukan:** berkas di repositori sudah benar → masalahnya **cache browser**.
+     Lakukan **hard refresh** (**Ctrl + Shift + R** / **Cmd + Shift + R**) atau buka di
+     **mode incognito** — lihat [Bagian 8.9](#89-cara-memeriksa-lewat-mode-incognito).
+   - **Bila tidak ditemukan:** berkas di repositori masih lama → unggah ulang `index.html`
+     dari ZIP paket terbaru (lihat [Bagian 7.1](#71-mengubah-teks--struktur-halaman)),
+     lalu tunggu 1–2 menit.
+
+**Gejala B — tombol tampak, tetapi panel tidak terbuka saat diklik**
+
+1. Pastikan **JavaScript aktif** di browser (lihat [Bagian 8.3](#83-css--javascript-tidak-jalan-halaman-tampil-polos-tanpa-gaya)).
+2. Muat ulang halaman dengan **hard refresh** — panel digerakkan oleh JavaScript, jadi bila
+   berkasnya terpotong saat disunting, tombol akan tampak tetapi tidak bereaksi.
+3. Bila Anda pernah menyunting `index.html` secara manual, kembalikan berkas itu dari ZIP
+   paket (pilih **Add file ▾ → Upload files** dan unggah `index.html` yang baru).
+
+**Gejala C — panel terbuka, tetapi media sosial tidak mau terbuka**
+
+| Kemungkinan | Cara memastikan | Solusi |
+|---|---|---|
+| Pemblokir pop-up | Muncul ikon/peringatan pemblokir di address bar | Izinkan pop-up untuk situs Anda, lalu klik ulang |
+| Pemblokir iklan/privasi agresif | Panel terbuka, tetapi tidak ada tab baru | Nonaktifkan pemblokir untuk situs Anda, lalu uji ulang |
+| Sedang dalam mode incognito dengan blokir ketat | Hanya di mode incognito | Uji di mode normal |
+
+> **Catatan:** pada minggu-minggu awal setelah situs terbit, jendela berbagi Facebook atau X
+> kadang menampilkan peringatan bahwa tautannya belum terbaca. Ini normal dan akan hilang
+> dengan sendirinya setelah halaman dikenali — tidak perlu tindakan apa pun.
+
+**Gejala D — tombol "Salin tautan" menampilkan notifikasi gagal**
+
+1. Pastikan halaman dibuka lewat **alamat `https://…`** (GitHub Pages selalu `https`), bukan
+   dibuka langsung dari berkas di komputer. Penyalinan otomatis memerlukan koneksi aman.
+2. Klik sekali lagi di area halaman, lalu coba tombol **Salin tautan** kembali.
+3. Bila tetap gagal, salin manual: klik kanan pada kartu produk → *Copy link address*, atau
+   tempel alamat situs yang tertulis di [Bagian 6](#bagian-6--tunggu--verifikasi-situs-live).
 
 ---
 
@@ -906,6 +1201,23 @@ halaman checkout sendiri (sudah diuji 2026-09-21 — beberapa varian slug mengar
 halaman Not Found). Ubah `url` pada objek `laporan-kekerasan-papua` begitu tautan
 checkout khususnya tersedia.
 
+**T: Ada tombol Bagikan di kartu produk — apa fungsinya?**
+J: Tombol itu untuk membagikan produk ke media sosial: **WhatsApp, Facebook, X/Twitter,
+Telegram**, atau **Salin tautan**. Yang terkirim adalah **nama produk + alamat situs**,
+jadi penerima langsung tahu produk apa yang sedang dibagikan. Tombol ini otomatis muncul
+di **setiap** kartu produk — lihat penjelasan fiturnya pada **Bagian 8** di `README.md`,
+dan cara memeriksanya di [Bagian 6.7](#67-memverifikasi-tombol-bagikan-share).
+
+**T: Apakah tombol Bagikan perlu diatur atau disambungkan ke akun media sosial saya?**
+J: Tidak. Tidak ada akun, kunci API, atau pengaturan tambahan. Tautan dibagikan lewat
+jendela berbagi resmi masing-masing layanan, dan pengirim tetap memakai akun media sosial
+masing-masing saat mengirim.
+
+**T: Bisakah saya mengubah alamat yang dibagikan atau menambah media sosial lain?**
+J: Bisa. Alamat yang dibagikan diatur di baris `var PAGE_URL = '...'` di dalam
+`index.html`. Langkah lengkapnya ada di
+[Bagian 7.6](#76-mengubah-teks--tautan-pada-tombol-bagikan).
+
 **T: Apakah halaman ini bisa dibuka di HP?**
 J: Ya. Halaman sudah responsif penuh — diuji pada **390 × 844** (HP) dan **1280 × 900**
 (PC), tanpa scroll horizontal pada keduanya.
@@ -913,6 +1225,25 @@ J: Ya. Halaman sudah responsif penuh — diuji pada **390 × 844** (HP) dan **12
 **T: Apakah perlu internet khusus atau server tambahan?**
 J: Tidak. Paket ini berisi HTML/CSS/JavaScript dan gambar statis, tanpa dependensi
 eksternal, tanpa proses build, dan tanpa panggilan ke layanan pihak ketiga.
+
+**T: Ada dua berkas tambahan, `robots.txt` dan `sitemap.xml`. Apakah wajib diunggah?**
+J: Tidak wajib untuk tampilan halaman — keduanya tidak memengaruhi cara halaman dirender.
+Namun keduanya sudah termasuk dalam paket, jadi cukup seret ikut saat mengunggah. Fungsinya
+membantu mesin pencari mengenali situs Anda. Detail: [Bagian 6.6](#66-memverifikasi-robotstxt--sitemapxml).
+
+**T: Apakah saya harus mengganti isi `robots.txt` dan `sitemap.xml`?**
+J: Tidak. Keduanya **sudah terisi** dengan URL GitHub Pages paket ini
+(`https://tokopapuaonline.github.io/Toko-Online-Papua-E-Book/`), jadi cukup diunggah apa
+adanya — tidak ada placeholder yang perlu diganti.
+
+**T: Saya ingin memakai nama repositori lain. Apakah alamat di kedua berkas masih benar?**
+J: Tidak lagi. Bila nama repo berbeda, alamat situs Anda juga berbeda, jadi perbarui dulu
+alamat di `robots.txt` dan `sitemap.xml` agar cocok dengan nama repo Anda — cara:
+[Bagian 7.5](#75-memperbarui-robotstxt--sitemapxml).
+
+**T: Apakah `robots.txt` bisa membuat situs saya tersembunyi dari Google?**
+J: Tidak. Berkas ini justru berbunyi `User-agent: *` dan `Allow: /`, artinya **semua crawler
+diizinkan** mengindeks seluruh isi situs.
 
 **T: Bisakah saya memakai nama repositori lain?**
 J: Bisa. Nama repo hanya mempengaruhi bagian akhir URL situs Anda. Ikuti aturan penamaan
@@ -966,6 +1297,7 @@ J: Ya, kapan saja — lihat [Bagian 7](#bagian-7--memperbarui-situs-di-kemudian-
 - [ ] `index.html` terlihat di **halaman utama** repositori.
 - [ ] Folder `images` terlihat sejajar dengan `index.html`.
 - [ ] `README.md` dan `panduan-upload-github.md` terlihat.
+- [ ] `robots.txt` dan `sitemap.xml` terlihat.
 - [ ] `.nojekyll` terlihat *(opsional)*.
 - [ ] Branch yang aktif adalah **main**.
 
@@ -979,7 +1311,7 @@ J: Ya, kapan saja — lihat [Bagian 7](#bagian-7--memperbarui-situs-di-kemudian-
 **Memverifikasi situs live**
 
 - [ ] Sudah menunggu **1–2 menit**.
-- [ ] URL `https://<username>.github.io/<nama-repo>/` sudah dibuka.
+- [ ] URL `https://tokopapuaonline.github.io/Toko-Online-Papua-E-Book/` sudah dibuka.
 - [ ] Halaman toko tampil (bukan 404).
 - [ ] Logo, kedua banner, dan kedua sampul produk **tampil semua**.
 - [ ] Grid produk tampil dengan harga `Rp 50.000`.
@@ -994,6 +1326,16 @@ J: Ya, kapan saja — lihat [Bagian 7](#bagian-7--memperbarui-situs-di-kemudian-
 - [ ] Tampilan **desktop (1280 × 900)** rapi: menu navigasi & tombol keranjang muncul,
       grid 3–4 kolom, tanpa scroll horizontal.
 - [ ] Footer tampil dan tidak ada elemen bertumpuk atau terpotong.
+- [ ] `robots.txt` terbuka di browser dan memuat baris `Sitemap:`.
+- [ ] `sitemap.xml` terbuka di browser tanpa pesan kesalahan XML.
+- [ ] `robots.txt` dan `sitemap.xml` **sudah terisi** dengan alamat
+      `https://tokopapuaonline.github.io/Toko-Online-Papua-E-Book/` (tanpa placeholder).
+- [ ] Tombol **Bagikan** (ikon bagikan) terlihat di **setiap** kartu produk.
+- [ ] **Klik tombol Bagikan** → panel muncul dengan 5 pilihan: WhatsApp, Facebook,
+      X/Twitter, Telegram, dan **Salin tautan**.
+- [ ] **Klik Salin tautan** → muncul notifikasi *"Tautan produk disalin"*.
+- [ ] Panel Bagikan dapat ditutup lewat **klik di luar area**, tombol **×**, dan tombol **Esc**.
+- [ ] Setelah panel Bagikan ditutup, tombol **🛒 Beli** tetap berfungsi seperti biasa.
 
 ---
 

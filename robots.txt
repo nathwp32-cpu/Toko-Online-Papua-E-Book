@@ -1,0 +1,30 @@
+# ===========================================================================
+#  robots.txt - Toko Papua Online
+#  Halaman web toko: e-book sejarah & laporan riset Papua.
+#
+#  URL situs: https://tokopapuaonline.github.io/Toko-Online-Papua-E-Book/
+# ===========================================================================
+
+# Izinkan SEMUA crawler / mesin pencari mengindeks seluruh isi situs.
+User-agent: *
+Allow: /
+
+# ---------------------------------------------------------------------------
+#  BARIS SITEMAP  ->  menunjukkan lokasi berkas sitemap.xml
+#
+#  Alamat di bawah SUDAH TERISI dengan URL GitHub Pages yang sebenarnya.
+#  Tidak ada placeholder yang perlu Anda ganti.
+#
+#  Bila nama repositori diubah, perbarui alamat di DUA tempat agar tetap sama:
+#    1) baris Sitemap: di bawah ini
+#    2) <loc> di dalam berkas sitemap.xml
+#
+#  Perhatikan huruf besar/kecil. Nama repositori ini ditulis persis:
+#    Toko-Online-Papua-E-Book
+# ---------------------------------------------------------------------------
+Sitemap: https://tokopapuaonline.github.io/Toko-Online-Papua-E-Book/sitemap.xml
+
+# ---------------------------------------------------------------------------
+#  Catatan: berkas ini tidak menghalangi berkas apa pun. Semua gambar di
+#  folder images/ serta index.html boleh diindeks.
+# ---------------------------------------------------------------------------

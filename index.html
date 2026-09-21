@@ -734,6 +734,100 @@ a.btn-buy:focus-visible{outline:2px solid var(--teal-dark);outline-offset:2px}
   *{animation-duration:.001ms !important;transition-duration:.001ms !important}
   .slides{transition:none}
 }
+
+/* ============ TOMBOL BAGIKAN PADA KARTU (aditif) ============ */
+.card-actions{display:flex;align-items:stretch;gap:6px;margin-top:auto}
+.card-actions .btn-buy{flex:1 1 auto;width:auto;margin-top:0}
+.btn-share{
+  flex:0 0 auto;
+  width:34px;min-height:34px;
+  border:1px solid var(--line);
+  border-radius:var(--r-btn);
+  background:#fff;
+  color:var(--ink-2);
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:0;
+  transition:background .15s ease,border-color .15s ease,color .15s ease;
+}
+.btn-share svg{width:14px;height:14px}
+.btn-share:hover{background:var(--teal-soft);border-color:var(--teal-line);color:var(--teal)}
+.btn-share:focus-visible{outline:2px solid var(--teal-dark);outline-offset:2px}
+
+/* ============ MENU BAGIKAN / SHARE SHEET (aditif) ============ */
+.sheet{
+  position:fixed;
+  inset:0;
+  z-index:80;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  background:rgba(9,14,17,.55);
+  backdrop-filter:blur(2px);
+  opacity:0;
+  visibility:hidden;
+  transition:opacity .22s ease, visibility .22s ease;
+}
+.sheet.is-on{opacity:1;visibility:visible}
+.sheet-card{
+  background:#fff;
+  width:100%;
+  max-width:460px;
+  max-height:88vh;
+  overflow-y:auto;
+  border-radius:16px 16px 0 0;
+  padding:16px;
+  transform:translateY(24px);
+  transition:transform .28s cubic-bezier(.4,0,.2,1);
+  box-shadow:var(--shadow-pop);
+}
+.sheet.is-on .sheet-card{transform:translateY(0)}
+.sheet-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.sheet-head h3{font-size:14px;font-weight:700}
+.sheet-sub{
+  font-size:11.5px;color:var(--gray);margin:8px 0 14px;line-height:1.5;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
+.share-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.share-item{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+  border:1px solid var(--line);background:#fff;border-radius:11px;
+  padding:11px 4px;min-height:78px;
+  font-size:9.5px;font-weight:600;color:var(--ink-2);text-align:center;line-height:1.25;
+  transition:background .15s ease,border-color .15s ease;
+}
+.share-ico{
+  width:34px;height:34px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--soft);color:var(--ink-2);
+}
+.share-ico svg{width:19px;height:19px}
+.share-item:hover{background:var(--soft);border-color:var(--teal-line)}
+.share-item:focus-visible{outline:2px solid var(--teal-dark);outline-offset:2px}
+.s-wa .share-ico{background:rgba(37,211,102,.13);color:#128c47}
+.s-fb .share-ico{background:rgba(24,119,242,.12);color:#1877f2}
+.s-x .share-ico{background:rgba(15,20,25,.08);color:#0f1419}
+.s-tg .share-ico{background:rgba(34,158,217,.13);color:#1d8fc4}
+.s-cp .share-ico{background:var(--teal-soft);color:var(--teal)}
+.sheet-note{font-size:10px;color:var(--gray);margin-top:12px;line-height:1.5;text-align:center}
+/* Notifikasi singkat (toast) tetap terlihat di atas panel bagikan,
+   dan dipindah ke atas layar agar tidak menutupi tombol pilihan media. */
+.sheet.is-on ~ .toast{z-index:90;bottom:auto;top:18px;transform:translate(-50%,-14px)}
+.sheet.is-on ~ .toast.is-on{transform:translate(-50%,0)}
+
+@media (min-width:768px){
+  .card-actions{gap:8px}
+  .btn-share{width:42px;min-height:42px}
+  .btn-share svg{width:16px;height:16px}
+  .sheet{align-items:center}
+  .sheet-card{border-radius:16px;max-width:520px;padding:22px}
+  .sheet-head h3{font-size:16px}
+  .sheet-sub{font-size:12.5px;margin:10px 0 18px}
+  .share-grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+  .share-item{min-height:92px;font-size:11px;padding:14px 8px;border-radius:12px}
+  .share-ico{width:40px;height:40px}
+  .share-ico svg{width:22px;height:22px}
+  .sheet-note{font-size:11px}
+}
 </style>
 </head>
 <body>
@@ -760,6 +854,12 @@ a.btn-buy:focus-visible{outline:2px solid var(--teal-dark);outline-offset:2px}
   <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol>
   <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></symbol>
   <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+  <symbol id="i-share" viewBox="0 0 24 24"><circle cx="18" cy="5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="19" r="2.6"/><path d="m8.4 13.3 7.2 4.2"/><path d="m15.6 6.5-7.2 4.2"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2zm0 18.13c-1.53 0-3.03-.41-4.34-1.19l-.31-.18-3.12.82.83-3.04-.2-.32a8.2 8.2 0 0 1-1.26-4.31c0-4.54 3.7-8.23 8.24-8.23 4.53 0 8.22 3.69 8.22 8.23 0 4.54-3.69 8.22-8.22 8.22zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.16.25-.64.81-.79.98-.14.16-.29.19-.53.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.15.16-.25.25-.41.08-.16.04-.31-.02-.43-.06-.12-.55-1.33-.75-1.82-.2-.48-.4-.41-.55-.42h-.47c-.16 0-.43.06-.65.31-.22.25-.85.83-.85 2.02 0 1.19.87 2.34.99 2.5.12.16 1.71 2.61 4.14 3.66.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.1.47-.07 1.44-.59 1.64-1.16.2-.57.2-1.06.14-1.16-.06-.1-.22-.16-.47-.28z"/></symbol>
+  <symbol id="i-fb" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.5 1.5-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.45 2.91h-2.33V22C18.34 21.24 22 17.08 22 12.06z"/></symbol>
+  <symbol id="i-tw" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M17.53 3h3.02l-6.6 7.54L21.75 21h-5.9l-4.62-6.04L5.95 21H2.93l7.05-8.06L2.25 3h6.05l4.18 5.52L17.53 3zm-1.06 16.2h1.67L7.6 4.72H5.81l10.66 14.48z"/></symbol>
+  <symbol id="i-tg" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M21.94 4.3 18.9 19.1c-.23 1.02-.84 1.27-1.7.79l-4.7-3.47-2.27 2.19c-.25.25-.46.46-.94.46l.34-4.77 8.68-7.84c.38-.34-.08-.52-.58-.19L6.99 13.1l-4.6-1.44c-1-.31-1.02-1 .21-1.48L20.7 3.1c.83-.31 1.56.2 1.24 1.2z"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><path d="M10.5 13.5a4.5 4.5 0 0 0 6.36 0l2.5-2.5a4.5 4.5 0 0 0-6.36-6.36l-1.4 1.4"/><path d="M13.5 10.5a4.5 4.5 0 0 0-6.36 0l-2.5 2.5a4.5 4.5 0 0 0 6.36 6.36l1.4-1.4"/></symbol>
 </svg>
 
 <div class="shell">
@@ -980,6 +1080,42 @@ a.btn-buy:focus-visible{outline:2px solid var(--teal-dark);outline-offset:2px}
   </div>
 </div>
 
+<!-- ===== SHARE SHEET ===== -->
+<div class="sheet" id="shareSheet" role="dialog" aria-modal="true" aria-labelledby="shareTitle" aria-hidden="true">
+  <div class="sheet-card">
+    <div class="sheet-head">
+      <h3 id="shareTitle">Bagikan produk</h3>
+      <button class="icon-btn" id="shareClose" type="button" aria-label="Tutup menu bagikan">
+        <svg aria-hidden="true"><use href="#i-x"/></svg>
+      </button>
+    </div>
+    <p class="sheet-sub" id="shareProd"></p>
+    <div class="share-grid">
+      <a class="share-item s-wa" id="shWa" href="#" target="_blank" rel="noopener noreferrer" data-share-go="wa">
+        <span class="share-ico"><svg aria-hidden="true"><use href="#i-wa"/></svg></span>
+        WhatsApp
+      </a>
+      <a class="share-item s-fb" id="shFb" href="#" target="_blank" rel="noopener noreferrer" data-share-go="fb">
+        <span class="share-ico"><svg aria-hidden="true"><use href="#i-fb"/></svg></span>
+        Facebook
+      </a>
+      <a class="share-item s-x" id="shX" href="#" target="_blank" rel="noopener noreferrer" data-share-go="x">
+        <span class="share-ico"><svg aria-hidden="true"><use href="#i-tw"/></svg></span>
+        X / Twitter
+      </a>
+      <a class="share-item s-tg" id="shTg" href="#" target="_blank" rel="noopener noreferrer" data-share-go="tg">
+        <span class="share-ico"><svg aria-hidden="true"><use href="#i-tg"/></svg></span>
+        Telegram
+      </a>
+      <button class="share-item s-cp" id="shCopy" type="button">
+        <span class="share-ico"><svg aria-hidden="true"><use href="#i-link"/></svg></span>
+        Salin tautan
+      </button>
+    </div>
+    <p class="sheet-note">Tautan yang dibagikan menuju halaman toko beserta nama produk ini.</p>
+  </div>
+</div>
+
 <!-- ===== TOAST ===== -->
 <div class="toast" id="toast" role="status" aria-live="polite">
   <svg aria-hidden="true"><use href="#i-check"/></svg><span id="toastText">Selesai</span>
@@ -1094,12 +1230,18 @@ a.btn-buy:focus-visible{outline:2px solid var(--teal-dark);outline-offset:2px}
           '<div class="card-body">' +
             '<h3 class="card-title" data-open="' + esc(p.id) + '">' + esc(p.title) + '</h3>' +
             '<div class="card-price">' + rupiah(p.price) + '</div>' +
-            '<a class="btn-buy" href="' + esc(checkoutUrlFor(p)) + '"' +
-              ' target="_blank" rel="noopener noreferrer" data-buy="' + esc(p.id) + '"' +
-              ' data-checkout="' + esc(checkoutUrlFor(p)) + '"' +
-              ' aria-label="Beli ' + esc(p.short) + ' (buka halaman checkout di tab baru)">' +
-              icon('i-cart') + ' Beli' +
-            '</a>' +
+            '<div class="card-actions">' +
+              '<a class="btn-buy" href="' + esc(checkoutUrlFor(p)) + '"' +
+                ' target="_blank" rel="noopener noreferrer" data-buy="' + esc(p.id) + '"' +
+                ' data-checkout="' + esc(checkoutUrlFor(p)) + '"' +
+                ' aria-label="Beli ' + esc(p.short) + ' (buka halaman checkout di tab baru)">' +
+                icon('i-cart') + ' Beli' +
+              '</a>' +
+              '<button class="btn-share" type="button" data-share="' + esc(p.id) + '"' +
+                ' aria-label="Bagikan ' + esc(p.short) + ' ke media sosial">' +
+                icon('i-share') +
+              '</button>' +
+            '</div>' +
           '</div>' +
         '</article>';
     }).join('');
@@ -1241,8 +1383,78 @@ a.btn-buy:focus-visible{outline:2px solid var(--teal-dark);outline-offset:2px}
     window.open(checkoutUrlFor(current ? productById(current) : null), '_blank', 'noopener,noreferrer');
   });
 
+  /* ---------- bagikan (share) ---------- */
+  /* URL halaman toko yang dibagikan. Samakan dengan alamat GitHub Pages bila
+     nama repositori diubah. */
+  var PAGE_URL = 'https://tokopapuaonline.github.io/Toko-Online-Papua-E-Book/';
+  var shareSheet = $('shareSheet'), shareProdEl = $('shareProd'), shareProduct = null;
+
+  function shareTextFor(p) {
+    if (!p) { return 'Toko Papua Online E-Book\n' + PAGE_URL; }
+    return p.title + ' - ' + rupiah(p.price) +
+      '\n\nBeli e-book ini di Toko Papua Online:\n' + PAGE_URL;
+  }
+
+  function openShare(id) {
+    var p = productById(id);
+    if (!p) { return; }
+    shareProduct = p;
+    shareProdEl.textContent = p.title;
+    var txt = encodeURIComponent(shareTextFor(p));
+    var u = encodeURIComponent(PAGE_URL);
+    var t = encodeURIComponent(p.title);
+    $('shWa').href = 'https://wa.me/?text=' + txt;
+    $('shFb').href = 'https://www.facebook.com/sharer/sharer.php?u=' + u + '&quote=' + txt;
+    $('shX').href = 'https://twitter.com/intent/tweet?text=' + t + '&url=' + u;
+    $('shTg').href = 'https://t.me/share/url?url=' + u + '&text=' + t;
+    shareSheet.classList.add('is-on');
+    shareSheet.setAttribute('aria-hidden', 'false');
+    $('shareClose').focus();
+  }
+
+  function closeShare() {
+    shareSheet.classList.remove('is-on');
+    shareSheet.setAttribute('aria-hidden', 'true');
+  }
+
+  function legacyCopy(txt) {
+    var ta = document.createElement('textarea');
+    ta.value = txt;
+    ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed';
+    ta.style.top = '-1000px';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (err) { ok = false; }
+    document.body.removeChild(ta);
+    return ok;
+  }
+  function copyText(txt) {
+    if (!(navigator.clipboard && navigator.clipboard.writeText)) {
+      return Promise.resolve(legacyCopy(txt));
+    }
+    return navigator.clipboard.writeText(txt).then(function () { return true; }, function () { return legacyCopy(txt); });
+  }
+
+  $('shareClose').addEventListener('click', closeShare);
+  shareSheet.addEventListener('click', function (e) { if (e.target === shareSheet) { closeShare(); } });
+  Array.prototype.forEach.call(shareSheet.querySelectorAll('[data-share-go]'), function (a) {
+    a.addEventListener('click', function () { closeShare(); });
+  });
+  $('shCopy').addEventListener('click', function () {
+    copyText(shareTextFor(shareProduct)).then(function (ok) {
+      toast(ok ? 'Tautan produk disalin' : 'Tidak dapat menyalin otomatis');
+    });
+  });
+
   /* ---------- interaksi katalog (delegasi) ---------- */
   grid.addEventListener('click', function (e) {
+    /* Tombol Bagikan pada setiap kartu produk (aditif) */
+    var sh = e.target.closest('[data-share]');
+    if (sh) { openShare(sh.getAttribute('data-share')); return; }
     /* Tombol Beli kini <a> yang membuka checkout di tab baru; keranjang tetap
        terisi sebagai cadangan bila tautan tidak dapat dibuka. */
     var buy = e.target.closest('[data-buy]');
@@ -1343,7 +1555,7 @@ a.btn-buy:focus-visible{outline:2px solid var(--teal-dark);outline-offset:2px}
 
   /* ---------- escape ---------- */
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') { closeAll(); }
+    if (e.key === 'Escape') { closeShare(); closeAll(); }
   });
 
   /* ---------- init ---------- */
