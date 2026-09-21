@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ===========================================================================
+   sitemap.xml - Toko Papua Online
+   Halaman web toko (e-book sejarah & laporan riset Papua).
+
+   Format  : Sitemap Protocol 0.9  (http://www.sitemaps.org/schemas/sitemap/0.9)
+   Encoding: UTF-8
+
+  ===========================================================================
+   ALAMAT SITUS SUDAH TERISI
+  ===========================================================================
+   Nilai <loc> di bawah ini sudah diisi dengan URL GitHub Pages yang
+   sebenarnya. Tidak ada placeholder yang perlu Anda ganti.
+
+   Bila nama repositori berubah, cukup perbarui nilai <loc> di bawah ini,
+   lalu samakan juga baris Sitemap: di dalam berkas robots.txt.
+
+   Perhatikan huruf besar/kecil. Nama repositori ini ditulis persis:
+     Toko-Online-Papua-E-Book
+  ===========================================================================
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Halaman utama toko (index.html) -->
+  <url>
+    <loc>https://tokopapuaonline.github.io/Toko-Online-Papua-E-Book/</loc>
+    <lastmod>2026-09-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+</urlset>
