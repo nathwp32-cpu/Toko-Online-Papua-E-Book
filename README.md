@@ -37,6 +37,7 @@ Paket ini siap diunggah langsung ke GitHub Pages tanpa proses build apa pun.
 - **Teknologi:** HTML5 + Tailwind CSS (CDN) + Google Fonts *Plus Jakarta Sans*
 - **Tema warna:** slate gelap (`#070B14`) dengan aksen merah (`#DC2626`) dan amber (`#F59E0B`)
 - **SEO:** `<link rel="canonical">` + meta `description`, `keywords`, `robots`, Open Graph, dan Twitter Card tertanam di `index.html`; dilengkapi `sitemap.xml` + `robots.txt`
+- **Schema.org JSON-LD:** blok `application/ld+json` berisi `Organization` + `WebSite` + node gabungan `["Product", "Book"]` untuk e-book (lihat bagian *Schema.org JSON-LD*)
 - **Domain:** `https://tokopapuaonline.com/` (file `CNAME` sudah disertakan dalam paket)
 - **Struktur halaman:**
   1. Navbar sticky
@@ -148,6 +149,38 @@ grep -rn "USERNAME\|NAMA-REPO" index.html sitemap.xml robots.txt
 - **Cek robots.txt:** buka `https://tokopapuaonline.com/robots.txt` — pastikan baris `Sitemap:` menunjuk alamat yang benar.
 - **Cek sitemap terbaca:** buka `https://tokopapuaonline.com/sitemap.xml` — harus tampil sebagai XML yang valid, bukan halaman 404.
 - **Lihat performa:** menu **Performance** di Search Console menampilkan kata kunci yang membuat halaman Anda muncul beserta jumlah kliknya.
+
+### Schema.org JSON-LD & Google Rich Results Test
+
+`index.html` memuat blok `<script type="application/ld+json">` dengan **tiga entitas**:
+
+| Entitas | Isi |
+|---------|-----|
+| `Organization` | Toko Papua Online — nama, URL, logo/sampul, bahasa, wilayah layanan |
+| `WebSite` | Situs + relasi ke Organization sebagai publisher |
+| `["Product", "Book"]` | E-book-nya: nama, deskripsi, gambar sampul, URL, brand & publisher **Toko Papua Online**, penulis/penyusun **Gugus Tugas Papua UGM**, `bookFormat` EBook, `inLanguage` id-ID, 135 halaman, cakupan 2010-01/2022-03, serta `BuyAction` ke halaman checkout |
+
+**⚠️ `offers` sengaja belum diisi.** Halaman ini tidak mencantumkan harga (harga hanya tampil di halaman checkout OrderHero), sedangkan Google mewajibkan `price` berupa angka konkret pada `offers`. Menebak harga berisiko menampilkan harga keliru ke calon pembeli, jadi lebih aman dikosongkan sampai harga final diketahui.
+
+Begitu harga sudah pasti, tambahkan blok ini **di dalam** node `["Product", "Book"]` (setelah `"audience"`, beri koma di akhir blok `audience`), lalu ganti `"0"` dengan harga sebenarnya — tulis angka saja, tanpa titik atau koma (misal Rp 99.000 ditulis `"99000"`):
+
+```json
+"offers": {
+  "@type": "Offer",
+  "url": "https://tokopapuaonline.orderhero.id/landing/laporan-kekerasan-papua",
+  "price": "0",
+  "priceCurrency": "IDR",
+  "availability": "https://schema.org/InStock",
+  "itemCondition": "https://schema.org/NewCondition"
+}
+```
+
+**Cara menguji di Google Rich Results Test:**
+
+1. Buka [search.google.com/test/rich-results](https://search.google.com/test/rich-results).
+2. Tempel `https://tokopapuaonline.com/` → klik **Test URL** (atau pilih tab **Code** lalu tempel isi `index.html` untuk menguji sebelum upload).
+3. Yang diharapkan: **Organization** dan **WebSite** terbaca tanpa error. Node **Product/Book** juga terdeteksi; sampai `offers` diisi, Google akan menandai `offers` belum ada — itu wajar dan **tidak** membuat halaman gagal diindeks.
+4. Validasi struktur schema.org-nya di [validator.schema.org](https://validator.schema.org) — di sini blok JSON-LD harus lolos tanpa error.
 
 ---
 

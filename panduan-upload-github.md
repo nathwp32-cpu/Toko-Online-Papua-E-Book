@@ -236,6 +236,35 @@ grep -rn "USERNAME\|NAMA-REPO" index.html sitemap.xml robots.txt
 - **Cek sitemap terbaca:** buka `https://tokopapuaonline.com/sitemap.xml` — harus tampil XML yang valid, bukan halaman 404.
 - **Pantau performa:** menu **Performance** di Search Console menampilkan kata kunci yang mendatangkan klik.
 
+### Schema.org JSON-LD & Google Rich Results Test
+
+Di dalam `<head>` `index.html` sudah tertanam blok `<script type="application/ld+json">` berisi tiga entitas: `Organization` (Toko Papua Online), `WebSite`, dan satu node bertipe gabungan `["Product", "Book"]` untuk e-book-nya — lengkap dengan nama, deskripsi, gambar sampul, URL, brand/publisher Toko Papua Online, penulis Gugus Tugas Papua UGM, format EBook, bahasa `id-ID`, serta `BuyAction` ke halaman checkout.
+
+Anda tidak perlu mengubah apa pun di sini kecuali harga produk berubah (lihat catatan `offers` di bawah).
+
+**Cara menguji:**
+
+1. Buka **[search.google.com/test/rich-results](https://search.google.com/test/rich-results)**.
+2. Tempel `https://tokopapuaonline.com/` → klik **Test URL**.
+   - Belum di-upload? Pilih tab **Code**, lalu tempel seluruh isi `index.html` — hasilnya sama.
+3. Perhatikan hasilnya: **Organization** dan **WebSite** harus terbaca tanpa error. Node **Product/Book** juga akan terdeteksi.
+4. Untuk memvalidasi struktur schema.org-nya (bukan hanya aturan Google), buka **[validator.schema.org](https://validator.schema.org)** dan tempel URL atau kode yang sama.
+
+**⚠️ Soal `offers` (harga):** blok `offers` sengaja **belum** diisi karena halaman ini tidak mencantumkan harga — harga hanya tampil di halaman checkout OrderHero. Google mewajibkan `price` berupa angka konkret, dan menebak harga bisa menampilkan harga keliru ke calon pembeli. Rich Results Test akan menandai `offers` belum ada; itu **wajar** dan tidak menghalangi halaman diindeks.
+
+Setelah harga final diketahui, tambahkan di dalam node `["Product", "Book"]` (beri koma setelah blok `"audience"`), dan ganti `"0"` dengan harga sebenarnya tanpa titik/koma (Rp 99.000 → `"99000"`):
+
+```json
+"offers": {
+  "@type": "Offer",
+  "url": "https://tokopapuaonline.orderhero.id/landing/laporan-kekerasan-papua",
+  "price": "0",
+  "priceCurrency": "IDR",
+  "availability": "https://schema.org/InStock",
+  "itemCondition": "https://schema.org/NewCondition"
+}
+```
+
 ---
 
 ## 7. Cara Update File di Kemudian Hari
